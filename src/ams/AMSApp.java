@@ -68,28 +68,28 @@ public class AMSApp {
     public AMSDeviceManager GetDevManager_a( int nDevice) {
         AMSDeviceManager mngr = null;
         switch( nDevice) {
-            case 0: mngr = GetDevManager_0_a(); break;
-            case 1: mngr = GetDevManager_1_a(); break;
-            case 2: mngr = GetDevManager_2_a(); break;
-            case 3: mngr = GetDevManager_3_a(); break;
-            case 4: mngr = GetDevManager_4_a(); break;
-            case 5: mngr = GetDevManager_5_a(); break;
-            case 6: mngr = GetDevManager_6_a(); break;
-            case 7: mngr = GetDevManager_7_a(); break;
+            case AMSConstants.T_DEVICE1: mngr = GetDevManager_0_a(); break;
+            case AMSConstants.T_DEVICE2: mngr = GetDevManager_1_a(); break;
+            case AMSConstants.T_DEVICE3: mngr = GetDevManager_2_a(); break;
+            case AMSConstants.T_DEVICE4: mngr = GetDevManager_3_a(); break;
+            case AMSConstants.T_DEVICE5: mngr = GetDevManager_4_a(); break;
+            case AMSConstants.T_DEVICE6: mngr = GetDevManager_5_a(); break;
+            case AMSConstants.T_DEVICE7: mngr = GetDevManager_6_a(); break;
+            case AMSConstants.T_DEVICE8: mngr = GetDevManager_7_a(); break;
         }
         return mngr;
     }
     public AMSDeviceManager GetDevManager_t( int nDevice) {
         AMSDeviceManager mngr = null;
         switch( nDevice) {
-            case 0: mngr = GetDevManager_0_t(); break;
-            case 1: mngr = GetDevManager_1_t(); break;
-            case 2: mngr = GetDevManager_2_t(); break;
-            case 3: mngr = GetDevManager_3_t(); break;
-            case 4: mngr = GetDevManager_4_t(); break;
-            case 5: mngr = GetDevManager_5_t(); break;
-            case 6: mngr = GetDevManager_6_t(); break;
-            case 7: mngr = GetDevManager_7_t(); break;
+            case AMSConstants.T_DEVICE1: mngr = GetDevManager_0_t(); break;
+            case AMSConstants.T_DEVICE2: mngr = GetDevManager_1_t(); break;
+            case AMSConstants.T_DEVICE3: mngr = GetDevManager_2_t(); break;
+            case AMSConstants.T_DEVICE4: mngr = GetDevManager_3_t(); break;
+            case AMSConstants.T_DEVICE5: mngr = GetDevManager_4_t(); break;
+            case AMSConstants.T_DEVICE6: mngr = GetDevManager_5_t(); break;
+            case AMSConstants.T_DEVICE7: mngr = GetDevManager_6_t(); break;
+            case AMSConstants.T_DEVICE8: mngr = GetDevManager_7_t(); break;
         }
         return mngr;
     }
@@ -688,6 +688,25 @@ public class AMSApp {
         m_DeviceManager7_t.SetDAC( dac, dac_channel);
         m_DeviceManager7_t.SetRelay(relay, relay_channel);
         m_DeviceManager7_t.SetEnabled( false);
+        
+        //*******************************************************************
+        // Setting neighbours
+        m_DeviceManager0_a.SetNeighbourManager( m_DeviceManager0_t);
+        m_DeviceManager0_t.SetNeighbourManager( m_DeviceManager0_a);
+        m_DeviceManager1_a.SetNeighbourManager( m_DeviceManager1_t);
+        m_DeviceManager1_t.SetNeighbourManager( m_DeviceManager1_a);
+        m_DeviceManager2_a.SetNeighbourManager( m_DeviceManager2_t);
+        m_DeviceManager2_t.SetNeighbourManager( m_DeviceManager2_a);
+        m_DeviceManager3_a.SetNeighbourManager( m_DeviceManager3_t);
+        m_DeviceManager3_t.SetNeighbourManager( m_DeviceManager3_a);
+        m_DeviceManager4_a.SetNeighbourManager( m_DeviceManager4_t);
+        m_DeviceManager4_t.SetNeighbourManager( m_DeviceManager4_a);
+        m_DeviceManager5_a.SetNeighbourManager( m_DeviceManager5_t);
+        m_DeviceManager5_t.SetNeighbourManager( m_DeviceManager5_a);
+        m_DeviceManager6_a.SetNeighbourManager( m_DeviceManager6_t);
+        m_DeviceManager6_t.SetNeighbourManager( m_DeviceManager6_a);
+        m_DeviceManager7_a.SetNeighbourManager( m_DeviceManager7_t);
+        m_DeviceManager7_t.SetNeighbourManager( m_DeviceManager7_a);
     }
     
     

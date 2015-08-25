@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
  * @author yaroslav
  */
 public class AMSDeviceManager {
+    
     private Adam4017plus m_adc_current;
     private int m_nAdcCurrentChannel;
     /**
@@ -73,6 +74,13 @@ public class AMSDeviceManager {
     public Adam4068 GetRelay() { return m_relay;}
     public int GetRelayChannel() { return m_nRelayChannel;}
     
+    private AMSDeviceManager m_mngrNeighbour;
+    public void SetNeighbourManager( AMSDeviceManager neighbour) { m_mngrNeighbour = neighbour;}
+    
+    private boolean m_bBlockedByNeighbourIgnition;
+    public void BlockNeighbour() { m_mngrNeighbour.m_bBlockedByNeighbourIgnition = true;}
+    public void UnBlockNeighbour() { m_mngrNeighbour.m_bBlockedByNeighbourIgnition = false;}
+    
     /**
      * Пороговый ток, ток при котором прибор погаснет
      */
@@ -111,6 +119,9 @@ public class AMSDeviceManager {
         theApp = app;
         //logger.setLevel( AMSApp.LOG_LEVEL);
         
+        //по умолчанию сосед нас не блокирует
+        m_bBlockedByNeighbourIgnition = false;
+                
         //ADC_C
         m_adc_current = null;
         m_nAdcCurrentChannel = -1;
@@ -227,7 +238,11 @@ public class AMSDeviceManager {
         
         m_adc_current.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
         m_adc_voltage.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
-            
+
+        //снятие блокировки с соседнего прибора
+        if( dblDifference_mcA < 0.1 * dblGoalCurrent_mcA) {
+            UnBlockNeighbour();
+        }
         
         //применение воздействия
         double dblToDoOutVoltage_V = dblCurrentOutVoltage_V;
@@ -252,11 +267,16 @@ public class AMSDeviceManager {
         logger.info( "ActionC(): Todo out voltage    [V] = " + dblToDoOutVoltage_V);
         
         if( theApp.GetMainSwitcher() == true) {
-            if( m_bEnabled == true) {
-                m_dac.QueueSetChannelOutputValueCommand( m_nDacChannel, dblToDoOutVoltage_V);
+            if( m_bBlockedByNeighbourIgnition == false) {
+                if( m_bEnabled == true) {
+                    m_dac.QueueSetChannelOutputValueCommand( m_nDacChannel, dblToDoOutVoltage_V);
+                }
+                else {
+                    logger.info( "Управление заблокировано кнопкой включения контроля канала!");
+                }
             }
             else {
-                logger.info( "Управление заблокировано кнопкой включения контроля канала!");
+                logger.info( "Управление заблокировано включением соседнего канала испытуемого устройства!");
             }
         }
         else {

@@ -1756,46 +1756,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Включение канала анода для 1 устройства
      */
     private void btnDev1_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev1_Anode_OnActionPerformed
-        TurnOnAnoDevice( 0);
-        /*logger.debug( "Device1.Anode current control turned on!");
-        
-        if( theApp.GetRegime() == AMSApp.REGIME_PROCESSING) {
-            //РЕЖИМ КАЛИБРОВКИ.
-            
-            //Ставим на выход DAC выставленное в панели справа напряжение
-            String str_Dev1_Ano_DAC_channel = theApp.GetSettings().GetDev1().GetAnoDAC_chan();            
-            theApp.m_DAC_anodes_01.QueueSetChannelOutputValueCommand( Integer.parseInt( str_Dev1_Ano_DAC_channel),
-                    theApp.m_pMainWnd.pnlRegimeProcessing.m_dblDacAno1_0);
-            
-            //замыкаем реле
-            if( theApp.GetMainSwitcher() == true) {
-                String str_Dev1_Ano_REL_channel = theApp.GetSettings().GetDev1().GetAnoREL_chan();
-                theApp.m_Relay_anodes.QueueSetRelayStateBitCommand( 6, true);//Integer.parseInt( str_Dev1_Ano_REL_channel), true);
-                theApp.m_Relay_anodes.QueueRequestDataCommand();
-            }
-        
-            //на всякий случай убедимся что менеджер канала выключен
-            lblDev1_anode.setIcon( theApp.GetResources().getLittleIconOff());
-            theApp.GetDevManager_0_a().SetEnabled( false);
-        
-            return;
-        }
-        
-        //Подаём на выход DAC напряжения для поджига
-        String str_Dev1_Ano_DAC_channel = theApp.GetSettings().GetDev1().GetAnoDAC_chan();
-        theApp.m_DAC_anodes_01.QueueSetChannelOutputValueCommand( Integer.parseInt( str_Dev1_Ano_DAC_channel), Adam4024.CHANEL_REG_ON_DAC_VOLT);
-        
-        //замыкаем реле
-        if( theApp.GetMainSwitcher() == true) {
-            String str_Dev1_Ano_REL_channel = theApp.GetSettings().GetDev1().GetAnoREL_chan();
-            theApp.m_Relay_anodes.QueueSetRelayStateBitCommand( 6, true);//Integer.parseInt( str_Dev1_Ano_REL_channel), true);
-            theApp.m_Relay_anodes.QueueRequestDataCommand();
-        }
-        
-        //включаем менеджера канала
-        lblDev1_anode.setIcon( theApp.GetResources().getLittleIconOn());
-        theApp.GetDevManager_0_a().SetEnabled( true);
-        */
+        TurnOnAnoDevice( AMSConstants.T_DEVICE1);
     }//GEN-LAST:event_btnDev1_Anode_OnActionPerformed
 
     /**
@@ -1803,7 +1764,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev1_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev1_Anode_OffActionPerformed
-        TurnOffAnoDevice( 0);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE1);
         /*
         logger.debug( "Device1.Anode current control turned off!");
         if( theApp.GetRegime() == AMSApp.REGIME_PROCESSING) {
@@ -1839,7 +1800,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev2_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev2_Anode_OnActionPerformed
-        TurnOnAnoDevice( 1);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE2);
     }//GEN-LAST:event_btnDev2_Anode_OnActionPerformed
 
     /**
@@ -1847,7 +1808,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev2_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev2_Anode_OffActionPerformed
-        TurnOffAnoDevice( 1);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE2);
     }//GEN-LAST:event_btnDev2_Anode_OffActionPerformed
       
     /**
@@ -1855,7 +1816,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev3_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev3_Anode_OnActionPerformed
-        TurnOnAnoDevice( 2);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE3);
     }//GEN-LAST:event_btnDev3_Anode_OnActionPerformed
 
     /**
@@ -1863,7 +1824,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev3_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev3_Anode_OffActionPerformed
-        TurnOffAnoDevice( 2);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE3);
     }//GEN-LAST:event_btnDev3_Anode_OffActionPerformed
     
     /**
@@ -1871,7 +1832,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev4_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev4_Anode_OnActionPerformed
-        TurnOnAnoDevice( 3);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE4);
     }//GEN-LAST:event_btnDev4_Anode_OnActionPerformed
 
     /**
@@ -1879,7 +1840,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev4_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev4_Anode_OffActionPerformed
-        TurnOffAnoDevice( 3);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE4);
     }//GEN-LAST:event_btnDev4_Anode_OffActionPerformed
     
     /**
@@ -1887,7 +1848,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev5_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev5_Anode_OnActionPerformed
-        TurnOnAnoDevice( 4);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE5);
     }//GEN-LAST:event_btnDev5_Anode_OnActionPerformed
 
     /**
@@ -1895,7 +1856,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev5_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev5_Anode_OffActionPerformed
-        TurnOffAnoDevice( 4);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE5);
     }//GEN-LAST:event_btnDev5_Anode_OffActionPerformed
 
     /**
@@ -1903,7 +1864,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev6_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev6_Anode_OnActionPerformed
-        TurnOnAnoDevice( 5);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE6);
     }//GEN-LAST:event_btnDev6_Anode_OnActionPerformed
 
     /**
@@ -1911,7 +1872,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev6_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev6_Anode_OffActionPerformed
-        TurnOffAnoDevice( 5);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE6);
     }//GEN-LAST:event_btnDev6_Anode_OffActionPerformed
 
     /**
@@ -1919,7 +1880,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev7_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev7_Anode_OnActionPerformed
-        TurnOnAnoDevice( 6);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE7);
     }//GEN-LAST:event_btnDev7_Anode_OnActionPerformed
 
     /**
@@ -1927,7 +1888,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev7_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev7_Anode_OffActionPerformed
-        TurnOffAnoDevice( 6);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE7);
     }//GEN-LAST:event_btnDev7_Anode_OffActionPerformed
 
     /**
@@ -1935,7 +1896,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev8_Anode_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev8_Anode_OnActionPerformed
-        TurnOnAnoDevice( 7);
+        TurnOnAnoDevice( AMSConstants.T_DEVICE8);
     }//GEN-LAST:event_btnDev8_Anode_OnActionPerformed
 
     /**
@@ -1943,7 +1904,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev8_Anode_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev8_Anode_OffActionPerformed
-        TurnOffAnoDevice( 7);
+        TurnOffAnoDevice( AMSConstants.T_DEVICE8);
     }//GEN-LAST:event_btnDev8_Anode_OffActionPerformed
 
     /**
@@ -1988,6 +1949,9 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         //посылаем запрос на состояния реле
         relay.QueueRequestDataCommand();
+        
+        //заблокируем управление соседнего канала
+        theApp.GetDevManager_a(nDevice).BlockNeighbour();
     }
     
     /**
@@ -2026,6 +1990,9 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         //посылаем запрос на состояния реле
         relay.QueueRequestDataCommand();
+        
+        //разблокируем управление соседнего канала
+        theApp.GetDevManager_a(nDevice).UnBlockNeighbour();
     }
     
     /**
@@ -2347,7 +2314,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev1_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev1_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 0);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE1);
     }//GEN-LAST:event_btnDev1_Tubu_OnActionPerformed
 
     /**
@@ -2355,7 +2322,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev1_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev1_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 0);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE1);
     }//GEN-LAST:event_btnDev1_Tubu_OffActionPerformed
 
     /**
@@ -2363,7 +2330,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev2_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev2_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 1);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE2);
     }//GEN-LAST:event_btnDev2_Tubu_OnActionPerformed
 
     /**
@@ -2371,7 +2338,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev2_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev2_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 1);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE2);
     }//GEN-LAST:event_btnDev2_Tubu_OffActionPerformed
 
     /**
@@ -2379,7 +2346,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev3_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev3_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 2);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE3);
     }//GEN-LAST:event_btnDev3_Tubu_OnActionPerformed
 
     /**
@@ -2387,7 +2354,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev3_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev3_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 2);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE3);
     }//GEN-LAST:event_btnDev3_Tubu_OffActionPerformed
 
     /**
@@ -2395,7 +2362,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev4_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev4_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 3);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE4);
     }//GEN-LAST:event_btnDev4_Tubu_OnActionPerformed
 
     /**
@@ -2403,7 +2370,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */    
     private void btnDev4_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev4_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 3);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE4);
     }//GEN-LAST:event_btnDev4_Tubu_OffActionPerformed
 
     /**
@@ -2411,7 +2378,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev5_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev5_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 4);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE5);
     }//GEN-LAST:event_btnDev5_Tubu_OnActionPerformed
 
     /**
@@ -2419,7 +2386,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev5_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev5_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 4);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE5);
     }//GEN-LAST:event_btnDev5_Tubu_OffActionPerformed
 
     /**
@@ -2427,7 +2394,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev6_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev6_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 5);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE6);
     }//GEN-LAST:event_btnDev6_Tubu_OnActionPerformed
 
     /**
@@ -2435,7 +2402,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev6_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev6_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 5);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE6);
     }//GEN-LAST:event_btnDev6_Tubu_OffActionPerformed
 
     /**
@@ -2443,7 +2410,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */    
     private void btnDev7_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev7_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 6);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE7);
     }//GEN-LAST:event_btnDev7_Tubu_OnActionPerformed
 
     /**
@@ -2451,7 +2418,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev7_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev7_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 6);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE7);
     }//GEN-LAST:event_btnDev7_Tubu_OffActionPerformed
 
     /**
@@ -2459,7 +2426,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev8_Tubu_OnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev8_Tubu_OnActionPerformed
-        TurnOnTubuDevice( 7);
+        TurnOnTubuDevice( AMSConstants.T_DEVICE8);
     }//GEN-LAST:event_btnDev8_Tubu_OnActionPerformed
 
     /**
@@ -2467,7 +2434,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDev8_Tubu_OffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDev8_Tubu_OffActionPerformed
-        TurnOffTubuDevice( 7);
+        TurnOffTubuDevice( AMSConstants.T_DEVICE8);
     }//GEN-LAST:event_btnDev8_Tubu_OffActionPerformed
 
     /**
@@ -2511,6 +2478,9 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         //посылаем запрос на состояния реле
         relay.QueueRequestDataCommand();
+        
+        //заблокируем управление соседнего канала
+        theApp.GetDevManager_t(nDevice).BlockNeighbour();
     }
     
     /**
@@ -2549,6 +2519,9 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         //посылаем запрос на состояния реле
         relay.QueueRequestDataCommand();
+        
+        //разблокируем управление соседнего канала
+        theApp.GetDevManager_t(nDevice).UnBlockNeighbour();
     }
     
     /**
@@ -2586,6 +2559,9 @@ public class MainFrame3 extends javax.swing.JFrame {
                 logger.fatal( "При поочередном включении всех каналов анодов, при работе с соответствующим реле, произошла исключительная ситуация!", e);
                 return;
             }
+            
+            //Block neighbour device control
+            theApp.GetDevManager_a(nDevice).BlockNeighbour();
         }
     }//GEN-LAST:event_btnAllAnodesOnActionPerformed
 
