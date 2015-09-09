@@ -95,6 +95,7 @@ public class AMSDevicesSet {
             throw new Exception( "Ошибка при инициализации АЦП1!");
         }
         
+        /*
         //ADC2
         try {
             Adam4017plus adc2 = new Adam4017plus( theApp, AMSConstants.ADC2);
@@ -125,7 +126,7 @@ public class AMSDevicesSet {
             logger.fatal( "Caught exception on creating ADC4 class instances", ex);
             throw new Exception( "Ошибка при инициализации АЦП4!");
         }
-        
+        */
         
         //************************************************************
         //DAC1
@@ -139,6 +140,7 @@ public class AMSDevicesSet {
             throw new Exception( "Ошибка при инициализации ЦАП1!");
         }
         
+        /*
         //DAC2
         try {
             Adam4024 dac2 = new Adam4024( theApp, AMSConstants.DAC2);
@@ -171,7 +173,7 @@ public class AMSDevicesSet {
             logger.fatal( "Caught exception on creating DAC4 class instances", ex);
             throw new Exception( "Ошибка при инициализации ЦАП4!");
         }
-        
+        */
         
         //************************************************************
         //RELAY1
@@ -185,6 +187,7 @@ public class AMSDevicesSet {
             throw new Exception( "Ошибка при инициализации РЕЛЕ1!");
         }
         
+        /*
         //RELAY2
         try {
             Adam4068 rel2 = new Adam4068( theApp, AMSConstants.REL2);
@@ -195,6 +198,7 @@ public class AMSDevicesSet {
             logger.fatal( "Caught exception on creating REL2 class instances", ex);
             throw new Exception( "Ошибка при инициализации РЕЛЕ2!");
         }
+        */
         
         return true;
     }

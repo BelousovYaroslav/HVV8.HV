@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import org.apache.log4j.Logger;
@@ -116,14 +117,22 @@ public class PnlHandMode extends javax.swing.JPanel implements ActionListener {
                 
                 adc = mngr.GetADCCurrent();
                 nAdcChannel = mngr.GetAdcCurrentChannel();
-                double dblMeasuredCurrent = adc.GetAveragerChannel( nAdcChannel).GetAverage();            
+                double dblMeasuredCurrent = Double.NaN;            
+                try {
+                    dblMeasuredCurrent = adc.GetAveragerChannel( nAdcChannel).GetAverage();
+                } catch (Exception ex) {
+                    logger.error( "При получении осреднителя значений для канала АЦП произошёл Exception", ex);
+                }
                 
-                
-                if( !Double.isNaN( dblMeasuredCurrent))
-                    lblLed.setText( ( dblMeasuredCurrent < 300) ? "не горит" : "горит");
-                else
-                    lblLed.setText( "-");
-                
+                if( mngr.GetBlockState()) {
+                    lblLed.setText( "blocked");
+                }
+                else {
+                    if( !Double.isNaN( dblMeasuredCurrent))
+                        lblLed.setText( ( dblMeasuredCurrent < 300) ? "не горит" : "горит");
+                    else
+                        lblLed.setText( "-");
+                }
                 
                 String strMsg = "";
                 if( theApp.GetDevSerNums().GetDeviceSerialNumber( 1 + ( i / 2)).isEmpty())

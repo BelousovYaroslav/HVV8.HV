@@ -50,20 +50,20 @@ public class AMSApp {
     
     private final AMSDeviceManager m_DeviceManager0_a;
     private final AMSDeviceManager m_DeviceManager0_t;
-    private final AMSDeviceManager m_DeviceManager1_a;
-    private final AMSDeviceManager m_DeviceManager1_t;
-    private final AMSDeviceManager m_DeviceManager2_a;
-    private final AMSDeviceManager m_DeviceManager2_t;
-    private final AMSDeviceManager m_DeviceManager3_a;
-    private final AMSDeviceManager m_DeviceManager3_t;
-    private final AMSDeviceManager m_DeviceManager4_a;
-    private final AMSDeviceManager m_DeviceManager4_t;
-    private final AMSDeviceManager m_DeviceManager5_a;
-    private final AMSDeviceManager m_DeviceManager5_t;
-    private final AMSDeviceManager m_DeviceManager6_a;
-    private final AMSDeviceManager m_DeviceManager6_t;
-    private final AMSDeviceManager m_DeviceManager7_a;
-    private final AMSDeviceManager m_DeviceManager7_t;
+    private AMSDeviceManager m_DeviceManager1_a;
+    private AMSDeviceManager m_DeviceManager1_t;
+    private AMSDeviceManager m_DeviceManager2_a;
+    private AMSDeviceManager m_DeviceManager2_t;
+    private AMSDeviceManager m_DeviceManager3_a;
+    private AMSDeviceManager m_DeviceManager3_t;
+    private AMSDeviceManager m_DeviceManager4_a;
+    private AMSDeviceManager m_DeviceManager4_t;
+    private AMSDeviceManager m_DeviceManager5_a;
+    private AMSDeviceManager m_DeviceManager5_t;
+    private AMSDeviceManager m_DeviceManager6_a;
+    private AMSDeviceManager m_DeviceManager6_t;
+    private AMSDeviceManager m_DeviceManager7_a;
+    private AMSDeviceManager m_DeviceManager7_t;
 
     public AMSDeviceManager GetDevManager_a( int nDevice) {
         AMSDeviceManager mngr = null;
@@ -239,7 +239,7 @@ public class AMSApp {
             switch( i) {
                 case  0: mngr = m_DeviceManager0_a; break;                    
                 case  1: mngr = m_DeviceManager0_t; break;
-                case  2: mngr = m_DeviceManager1_a; break;                        
+                /*case  2: mngr = m_DeviceManager1_a; break;                        
                 case  3: mngr = m_DeviceManager1_t; break;
                 case  4: mngr = m_DeviceManager2_a; break;                    
                 case  5: mngr = m_DeviceManager2_t; break;
@@ -253,6 +253,7 @@ public class AMSApp {
                 case 13: mngr = m_DeviceManager6_t; break;
                 case 14: mngr = m_DeviceManager7_a; break;                        
                 case 15: mngr = m_DeviceManager7_t; break;
+                    */
             }
             
             if( mngr != null) {
@@ -291,6 +292,18 @@ public class AMSApp {
             return;
         }
         
+        if( rel1 == null || rel2 == null) {
+            if( rel1 != null)
+                m_rxtx.AddCommandToQueueEmergent( rel1.GetSetRelayStateByteCommand( ( byte) 0), rel1);
+            
+            if( rel2 != null)
+                m_rxtx.AddCommandToQueueEmergent( rel2.GetSetRelayStateByteCommand( ( byte) 0), rel2);
+            
+            MessageBoxError( "Ошибка в программе. Рубильник не срабатывает. Выключите рубильник на стенде!", "AMS");
+            logger.fatal( "Exception при получении объектов реле");
+            return;
+        }
+        
         //РАЗМЫКАЕМ РЕЛЕ
         m_rxtx.AddCommandToQueueEmergent( rel1.GetSetRelayStateByteCommand( ( byte) 0), rel1);
         m_rxtx.AddCommandToQueueEmergent( rel2.GetSetRelayStateByteCommand( ( byte) 0), rel2);
@@ -307,7 +320,7 @@ public class AMSApp {
             switch( i) {
                 case  0: mngr = m_DeviceManager0_a; break;
                 case  1: mngr = m_DeviceManager0_t; break;
-                case  2: mngr = m_DeviceManager1_a; break;
+                /*case  2: mngr = m_DeviceManager1_a; break;
                 case  3: mngr = m_DeviceManager1_t; break;
                 case  4: mngr = m_DeviceManager2_a; break;
                 case  5: mngr = m_DeviceManager2_t; break;
@@ -320,7 +333,7 @@ public class AMSApp {
                 case 12: mngr = m_DeviceManager6_a; break;
                 case 13: mngr = m_DeviceManager6_t; break;
                 case 14: mngr = m_DeviceManager7_a; break;
-                case 15: mngr = m_DeviceManager7_t; break;
+                case 15: mngr = m_DeviceManager7_t; break;*/
             }
             
             if( mngr != null) {           
@@ -390,6 +403,12 @@ public class AMSApp {
         m_devicesSet = new AMSDevicesSet( this);
         m_devicesSet.initialize();
         
+        logger.fatal("TODO: AUTOMATE!");
+        m_devicesSet.GetADC( AMSConstants.ADC1).SetChannel1Descriptor( AMSConstants.ADC_ANODE_CURRENT);
+        m_devicesSet.GetADC( AMSConstants.ADC1).SetChannel2Descriptor( AMSConstants.ADC_ANODE_VOLTAGE);
+        m_devicesSet.GetADC( AMSConstants.ADC1).SetChannel3Descriptor( AMSConstants.ADC_TUBULATION_CURRENT);
+        m_devicesSet.GetADC( AMSConstants.ADC1).SetChannel4Descriptor( AMSConstants.ADC_TUBULATION_VOLTAGE);
+        
         //Номера испытуемых приборов
         m_devSerNums = new AMSDevSerialNumbers();
         
@@ -407,7 +426,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev1().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev1().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev1().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev1().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev1().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev1().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev1().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev1().GetAnoRelDev());
@@ -424,7 +443,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev1().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev1().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev1().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev1().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev1().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev1().GetTubDacDev());
         dac_channel   = m_Settings.GetDev1().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev1().GetTubRelDev());
@@ -437,13 +456,14 @@ public class AMSApp {
         m_DeviceManager0_t.SetRelay(relay, relay_channel);
         m_DeviceManager0_t.SetEnabled( false);
         
+        /*
         //************************************************************
         //DEVICE2
         //DEVICE2.ANODE
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev2().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev2().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev2().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev2().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev2().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev2().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev2().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev2().GetAnoRelDev());
@@ -460,7 +480,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev2().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev2().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev2().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev2().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev2().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev2().GetTubDacDev());
         dac_channel   = m_Settings.GetDev2().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev2().GetTubRelDev());
@@ -479,7 +499,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev3().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev3().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev3().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev3().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev3().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev3().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev3().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev3().GetAnoRelDev());
@@ -496,7 +516,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev3().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev3().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev3().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev3().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev3().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev3().GetTubDacDev());
         dac_channel   = m_Settings.GetDev3().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev3().GetTubRelDev());
@@ -515,7 +535,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev4().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev4().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev4().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev4().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev4().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev4().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev4().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev4().GetAnoRelDev());
@@ -532,7 +552,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev4().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev4().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev4().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev4().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev4().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev4().GetTubDacDev());
         dac_channel   = m_Settings.GetDev4().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev4().GetTubRelDev());
@@ -551,7 +571,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev5().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev5().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev5().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev5().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev5().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev5().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev5().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev5().GetAnoRelDev());
@@ -568,7 +588,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev5().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev5().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev5().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev5().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev5().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev5().GetTubDacDev());
         dac_channel   = m_Settings.GetDev5().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev5().GetTubRelDev());
@@ -587,7 +607,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev6().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev6().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev6().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev6().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev6().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev6().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev6().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev6().GetAnoRelDev());
@@ -604,7 +624,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev6().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev6().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev6().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev6().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev6().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev6().GetTubDacDev());
         dac_channel   = m_Settings.GetDev6().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev6().GetTubRelDev());
@@ -623,7 +643,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev7().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev7().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev7().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev7().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev7().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev7().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev7().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev7().GetAnoRelDev());
@@ -640,7 +660,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev7().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev7().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev7().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev7().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev7().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev7().GetTubDacDev());
         dac_channel   = m_Settings.GetDev7().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev7().GetTubRelDev());
@@ -659,7 +679,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev8().GetAnoAdcVoltDev());
         adcV_channel  = m_Settings.GetDev8().GetAnoAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev8().GetAnoAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev8().GetAnoAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev8().GetAnoAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev8().GetAnoDacDev());
         dac_channel   = m_Settings.GetDev8().GetAnoDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev8().GetAnoRelDev());
@@ -676,7 +696,7 @@ public class AMSApp {
         adcV          = m_devicesSet.GetADC( m_Settings.GetDev8().GetTubAdcVoltDev());
         adcV_channel  = m_Settings.GetDev8().GetTubAdcVoltChan();
         adcC          = m_devicesSet.GetADC( m_Settings.GetDev8().GetTubAdcCurrDev());
-        adcC_channel  = m_Settings.GetDev8().GetTubAdcVoltChan();
+        adcC_channel  = m_Settings.GetDev8().GetTubAdcCurrChan();
         dac           = m_devicesSet.GetDAC( m_Settings.GetDev8().GetTubDacDev());
         dac_channel   = m_Settings.GetDev8().GetTubDacChan();
         relay         = m_devicesSet.GetRelay( m_Settings.GetDev8().GetTubRelDev());
@@ -688,11 +708,13 @@ public class AMSApp {
         m_DeviceManager7_t.SetDAC( dac, dac_channel);
         m_DeviceManager7_t.SetRelay(relay, relay_channel);
         m_DeviceManager7_t.SetEnabled( false);
+        */
         
         //*******************************************************************
         // Setting neighbours
         m_DeviceManager0_a.SetNeighbourManager( m_DeviceManager0_t);
         m_DeviceManager0_t.SetNeighbourManager( m_DeviceManager0_a);
+        /*
         m_DeviceManager1_a.SetNeighbourManager( m_DeviceManager1_t);
         m_DeviceManager1_t.SetNeighbourManager( m_DeviceManager1_a);
         m_DeviceManager2_a.SetNeighbourManager( m_DeviceManager2_t);
@@ -707,6 +729,7 @@ public class AMSApp {
         m_DeviceManager6_t.SetNeighbourManager( m_DeviceManager6_a);
         m_DeviceManager7_a.SetNeighbourManager( m_DeviceManager7_t);
         m_DeviceManager7_t.SetNeighbourManager( m_DeviceManager7_a);
+        */
     }
     
     
@@ -768,7 +791,7 @@ public class AMSApp {
             return;
         }
         
-        
+        /*
         //RELAY2
         try {
             relay = m_devicesSet.GetRelay( AMSConstants.REL2);
@@ -788,6 +811,7 @@ public class AMSApp {
             logger.fatal( "Exception при инициализации RELAY2", e);
             return;
         }
+        */
         
         //**********************************************************************
         //ADC1
@@ -811,6 +835,7 @@ public class AMSApp {
             logger.fatal( "Exception при инициализации ADC1", e);
             return;
         }
+        /*
         //****************************************************************
         //ADC2
         try {
@@ -877,7 +902,7 @@ public class AMSApp {
             logger.fatal( "Exception при инициализации ADC4", e);
             return;
         }
-        
+        */
         //**********************************************************************
         //DAC1
         try {
@@ -897,6 +922,7 @@ public class AMSApp {
             logger.fatal( "Exception при инициализации DAC1", e);
             return;
         }
+        /*
         
         //DAC2
         try {
@@ -955,6 +981,7 @@ public class AMSApp {
             logger.fatal( "Exception при инициализации DAC4", e);
             return;
         }
+        */
     }
     
     public void start() {
@@ -1050,53 +1077,19 @@ public class AMSApp {
         boolean bIsCurrent = false;
         boolean bIsVoltage = false;
         
-        if( "01".equals( adc.GetAddress()) && nChannel == 0) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 1) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 2) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 3) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 4) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 5) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 6) bIsVoltage = true;
-        if( "01".equals( adc.GetAddress()) && nChannel == 7) bIsVoltage = true;
+        if( adc.GetChannelDescriptor( nChannel) == AMSConstants.ADC_ANODE_CURRENT ||
+            adc.GetChannelDescriptor( nChannel) == AMSConstants.ADC_TUBULATION_CURRENT)
+            bIsCurrent = true;
         
-        if( "11".equals( adc.GetAddress()) && nChannel == 0) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 1) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 2) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 3) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 4) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 5) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 6) bIsVoltage = true;
-        if( "11".equals( adc.GetAddress()) && nChannel == 7) bIsVoltage = true;
+        if( adc.GetChannelDescriptor( nChannel) == AMSConstants.ADC_ANODE_VOLTAGE ||
+            adc.GetChannelDescriptor( nChannel) == AMSConstants.ADC_TUBULATION_VOLTAGE)
+            bIsVoltage = true;
         
-        if( "02".equals( adc.GetAddress()) && nChannel == 0) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 1) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 2) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 3) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 4) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 5) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 6) bIsCurrent = true;
-        if( "02".equals( adc.GetAddress()) && nChannel == 7) bIsCurrent = true;
-        
-        if( "12".equals( adc.GetAddress()) && nChannel == 0) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 1) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 2) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 3) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 4) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 5) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 6) bIsCurrent = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 7) bIsCurrent = true;
-        
-        /*
-        if( "11".equals( adc.GetAddress()) && nChannel == 0) bIsVoltage = true;
-        if( "12".equals( adc.GetAddress()) && nChannel == 0) bIsCurrent = true;
-        */
-        
-        //if( adc.IsCurrentDevice()) {
         if( bIsCurrent) {  
             //ЭТО АЦП ТОКОВ
-            logger.trace( "Обработка сигнала от АЦП токов. Устройство: " + adc.GetDescription() + ". Канал: " + nChannel);
+            logger.debug( "Обработка сигнала измеренного тока. Устройство: " + adc.GetDescription() + ". Канал: " + nChannel);
             
-            logger.debug( "adc=" + adc);
+            logger.trace( "adc=" + adc);
             /*logger.debug( "dev0_a_adcCur=" + m_DeviceManager0_a.GetADCCurrent());
             logger.debug( "dev0_t_adcCur=" + m_DeviceManager1_a.GetADCCurrent());*/
             
@@ -1109,7 +1102,7 @@ public class AMSApp {
             if( m_DeviceManager0_a.GetADCCurrent()== adc && m_DeviceManager0_a.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager0_a;
             if( m_DeviceManager0_t.GetADCCurrent()== adc && m_DeviceManager0_t.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager0_t;
         
-            
+            /*
             if( m_DeviceManager1_a.GetADCCurrent() == adc && m_DeviceManager1_a.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager1_a;
             if( m_DeviceManager1_t.GetADCCurrent() == adc && m_DeviceManager1_t.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager1_t;
         
@@ -1133,7 +1126,7 @@ public class AMSApp {
         
             if( m_DeviceManager7_a.GetADCCurrent() == adc && m_DeviceManager7_a.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager7_a;
             if( m_DeviceManager7_t.GetADCCurrent() == adc && m_DeviceManager7_t.GetAdcCurrentChannel() == nChannel) processor = m_DeviceManager7_t;
-            
+            */
         
             if( processor != null) {
                 logger.info( "ManageChannel(): Нашли управленца для заданного устройства (" + adc.GetDescription() + ") и канала [" + nChannel+ "]!");
@@ -1152,11 +1145,10 @@ public class AMSApp {
                 */
             }
         }
-        //else if( adc.IsVoltageDevice()) {
         else if( bIsVoltage) {
             
             //ЭТО АЦП НАПРЯЖЕНИЙ
-            logger.trace( "Обработка сигнала от АЦП напряжений. Устройство: " + adc.GetDescription() + ". Канал: " + nChannel);
+            logger.debug( "Обработка сигнала измеренного напряжения. Устройство: " + adc.GetDescription() + ". Канал: " + nChannel);
             
             logger.trace( "adc=" + adc);
             /*
@@ -1172,7 +1164,7 @@ public class AMSApp {
             
             if( m_DeviceManager0_a.GetADCVoltage()== adc && m_DeviceManager0_a.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager0_a;
             if( m_DeviceManager0_t.GetADCVoltage()== adc && m_DeviceManager0_t.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager0_t;
-            
+            /*
             if( m_DeviceManager1_a.GetADCVoltage() == adc && m_DeviceManager1_a.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager1_a;
             if( m_DeviceManager1_t.GetADCVoltage() == adc && m_DeviceManager1_t.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager1_t;
         
@@ -1193,7 +1185,7 @@ public class AMSApp {
         
             if( m_DeviceManager7_a.GetADCVoltage() == adc && m_DeviceManager7_a.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager7_a;
             if( m_DeviceManager7_t.GetADCVoltage() == adc && m_DeviceManager7_t.GetAdcVoltageChannel() == nChannel) processor = m_DeviceManager7_t;
-        
+            */
             if( processor != null) {
                 logger.info( "ManageChannel(): Нашли управленца для заданного устройства (" + adc.GetDescription() + ") и канала [" + nChannel+ "]!");
                 processor.ActionV();
@@ -1212,7 +1204,7 @@ public class AMSApp {
             }
         }
         else {
-            logger.error( "ManageChannel(): Не смог определить объект измерения АЦП (" + adc.GetDescription() + "). Токи это или напряжения?");
+            logger.error( "ManageChannel(): Не смог определить объект измерения АЦП (" + adc.GetDescription() + ") канал " + nChannel + ". Токи это или напряжения?");
         }
     }
     

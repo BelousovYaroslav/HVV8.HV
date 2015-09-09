@@ -8,6 +8,7 @@ package ams;
 import ams.devices.Adam4017plus;
 import ams.devices.Adam4024;
 import ams.devices.Adam4068;
+import java.util.logging.Level;
 import javax.swing.JLabel;
 import org.apache.log4j.Logger;
 
@@ -78,6 +79,7 @@ public class AMSDeviceManager {
     public void SetNeighbourManager( AMSDeviceManager neighbour) { m_mngrNeighbour = neighbour;}
     
     private boolean m_bBlockedByNeighbourIgnition;
+    public boolean GetBlockState() { return m_bBlockedByNeighbourIgnition; }
     public void BlockNeighbour() { m_mngrNeighbour.m_bBlockedByNeighbourIgnition = true;}
     public void UnBlockNeighbour() { m_mngrNeighbour.m_bBlockedByNeighbourIgnition = false;}
     
@@ -158,7 +160,12 @@ public class AMSDeviceManager {
         if( m_adc_voltage == null) { logger.warn( "ActionV(): Не указан объект АЦП напряжения"); return; }
         if( m_nAdcVoltageChannel == -1) { logger.warn( "ActionV(): Не указан канал АЦП напряжения"); return; }
         
-        double dblMeasuredVoltage_V = m_adc_voltage.GetAveragerChannel( m_nAdcVoltageChannel).GetAverage();
+        double dblMeasuredVoltage_V = 0.;
+        try {
+            dblMeasuredVoltage_V = m_adc_voltage.GetAveragerChannel( m_nAdcVoltageChannel).GetAverage();
+        } catch (Exception ex) {
+            logger.error( "При получении осреднителя значений произошёл Exception", ex);
+        }
         double dblCorrection_mA = dblMeasuredVoltage_V * 2. / 1000;
         //m_adc_current.SetPhysValuePiedestal( dblCorrection_mA, m_nAdcCurrentChannel);
         
@@ -185,9 +192,16 @@ public class AMSDeviceManager {
         double dblGoalCurrent_mcA = ( double) nOuterCurrent_mcA;
         
         //измеренный ток
-        double dblMeasuredCurrent_mcA = m_adc_current.GetAveragerChannel( m_nAdcCurrentChannel).GetAverage();
+        double dblMeasuredCurrent_mcA = 0.;
         //измеренное напряжение
-        double dblMeasuredVoltage_V = m_adc_voltage.GetAveragerChannel( m_nAdcVoltageChannel).GetAverage();
+        double dblMeasuredVoltage_V = 0.;
+        try {
+            dblMeasuredCurrent_mcA = m_adc_current.GetAveragerChannel( m_nAdcCurrentChannel).GetAverage();
+            dblMeasuredVoltage_V = m_adc_voltage.GetAveragerChannel( m_nAdcVoltageChannel).GetAverage();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(AMSDeviceManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
         
         if( theApp.GetRegime() == AMSApp.REGIME_I_EDGE) {
             if( dblMeasuredCurrent_mcA < 300) {
@@ -236,8 +250,13 @@ public class AMSDeviceManager {
         else if( Math.abs( dblDifference_mcA) > 0.005)   nStat = 4;
         else    nStat = 5;
         
-        m_adc_current.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
-        m_adc_voltage.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
+        try {
+            m_adc_current.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
+            m_adc_voltage.GetAveragerChannel( m_nAdcCurrentChannel).SetStatistic( nStat);
+        } catch (Exception ex) {
+            logger.error( "При получении осреднителя значений произошёл Exception", ex);
+        }
+        
 
         //снятие блокировки с соседнего прибора
         if( dblDifference_mcA < 0.1 * dblGoalCurrent_mcA) {

@@ -85,6 +85,6 @@ public class AMSCalibrationUnit {
      *      ArrayIndexOutOfBoundsException
      */
     public void SetShift( int nChannel, double dblNewVal) {
-        m_mapSlopes.put( nChannel, dblNewVal);
+        m_mapShifts.put( nChannel, dblNewVal);
     }
 }

@@ -8,6 +8,7 @@ package ams;
 import ams.devices.Adam4017plus;
 import ams.devices.Adam4024;
 import ams.devices.Adam4068;
+import ams.serial.TwoWaySerialComm;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +67,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * @param app - ссылка на приложение
      * 
      */
-    public MainFrame3( AMSApp app) {
+    public MainFrame3( final AMSApp app) {
         theApp = app;
         
         initComponents();
@@ -96,12 +97,38 @@ public class MainFrame3 extends javax.swing.JFrame {
         pnlAdditionalPanel.add( pnlRegimeEdge);
         pnlRegimeEdge.setBounds( 2, 2, 376, 936);
         
-        
+        tmrRefreshIOThreadsState = new Timer( 1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TwoWaySerialComm conn = app.GetRxTx();
+                if( conn != null) {
+                    if( app.GetRxTx().IsInputThreadAlive())
+                        lblThreadRState.setIcon( app.GetResources().getLittleBrightGreenLed());
+                    else
+                        lblThreadRState.setIcon( app.GetResources().getLittleBrightRedLed());
+                
+                    if( app.GetRxTx().IsOutputThreadAlive())
+                        lblThreadWState.setIcon( app.GetResources().getLittleBrightGreenLed());
+                    else
+                        lblThreadWState.setIcon( app.GetResources().getLittleBrightRedLed());
+                }
+                else {
+                    lblThreadRState.setIcon( app.GetResources().getLittleBrightRedLed());
+                    lblThreadWState.setIcon( app.GetResources().getLittleBrightRedLed());
+                }
+            }
+        });
+        tmrRefreshIOThreadsState.start();
         //***** ***** ***** ***** ***** ***** ***** ***** ***** *****
         
         Adam4068 relay;
         Adam4017plus adc;
         Adam4024 dac;
+        
+        //TO_REMOVE
+        theApp.GetDevManager_0_a().SetActiveLed( lblDev1_anode);
+        theApp.GetDevManager_0_t().SetActiveLed( lblDev1_tubu);
         
         HashMap mapTestedDevicesAnodeVoltages = new HashMap(8);
         mapTestedDevicesAnodeVoltages.put(AMSConstants.T_DEVICE1, edtDev1_Ano_Voltage);
@@ -167,7 +194,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         Iterator it = AMSConstants.getInstance().T_DEVICES.iterator();
         while( it.hasNext()) {
             int nDevice = ( int) it.next();
-            AMSSettingsDev devSett;
+            AMSSettingsTDev devSett;
             try {
                 devSett = theApp.GetSettings().GetDev( nDevice);
             }
@@ -181,6 +208,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             int channel = devSett.GetAnoAdcVoltChan();
             try {
                 theApp.m_devicesSet.GetADC( device).AddVisualComponent( channel, ( JTextField) mapTestedDevicesAnodeVoltages.get( nDevice));
+                theApp.m_devicesSet.GetADC( device).SetVisualizationFormat( "%.0f");
             }
             catch( Exception e) {
                 logger.error( "При получении объекта АЦП анодного напряжения испытуемого устройства, произошла исключительная ситуация!", e);
@@ -192,6 +220,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             channel = devSett.GetAnoAdcCurrChan();
             try {
                 theApp.m_devicesSet.GetADC( device).AddVisualComponent( channel, ( JTextField) mapTestedDevicesAnodeCurrents.get( nDevice));
+                theApp.m_devicesSet.GetADC( device).SetVisualizationFormat( "%.0f");
             }
             catch( Exception e) {
                 logger.error( "При получении объекта АЦП анодного тока испытуемого устройства, произошла исключительная ситуация!", e);
@@ -421,7 +450,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         edtHyroNum6 = new javax.swing.JTextField();
         edtHyroNum8 = new javax.swing.JTextField();
         edtHyroNum7 = new javax.swing.JTextField();
-        lbl = new javax.swing.JLabel();
+        lblManagementTitle = new javax.swing.JLabel();
         lblDev1_anode = new javax.swing.JLabel();
         btnDev1_Anode_Off = new javax.swing.JButton();
         lbl_Dev1_Anode_RelState = new javax.swing.JLabel();
@@ -765,11 +794,11 @@ public class MainFrame3 extends javax.swing.JFrame {
         getContentPane().add(edtHyroNum7);
         edtHyroNum7.setBounds(960, 180, 110, 30);
 
-        lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl.setText("Управление");
-        lbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(lbl);
-        lbl.setBounds(240, 660, 950, 30);
+        lblManagementTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblManagementTitle.setText("Управление");
+        lblManagementTitle.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        getContentPane().add(lblManagementTitle);
+        lblManagementTitle.setBounds(240, 660, 950, 30);
 
         lblDev1_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev1_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
@@ -778,7 +807,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev1_anode.setBounds(240, 340, 40, 30);
 
         btnDev1_Anode_Off.setText("ВЫКЛ");
-        btnDev1_Anode_Off.setEnabled(false);
         btnDev1_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev1_Anode_OffActionPerformed(evt);
@@ -793,7 +821,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev1_Anode_RelState.setBounds(280, 340, 70, 30);
 
         btnDev1_Anode_On.setText("ВКЛ");
-        btnDev1_Anode_On.setEnabled(false);
         btnDev1_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev1_Anode_OnActionPerformed(evt);
@@ -902,6 +929,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev5_anode.setBounds(720, 340, 40, 30);
 
         btnDev5_Anode_Off.setText("ВЫКЛ");
+        btnDev5_Anode_Off.setEnabled(false);
         btnDev5_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Anode_OffActionPerformed(evt);
@@ -916,6 +944,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev5_Anode_RelState.setBounds(760, 340, 70, 30);
 
         btnDev5_Anode_On.setText("ВКЛ");
+        btnDev5_Anode_On.setEnabled(false);
         btnDev5_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Anode_OnActionPerformed(evt);
@@ -931,6 +960,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev6_anode.setBounds(840, 340, 40, 30);
 
         btnDev6_Anode_Off.setText("ВЫКЛ");
+        btnDev6_Anode_Off.setEnabled(false);
         btnDev6_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Anode_OffActionPerformed(evt);
@@ -945,6 +975,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev6_Anode_RelState.setBounds(880, 340, 70, 30);
 
         btnDev6_Anode_On.setText("ВКЛ");
+        btnDev6_Anode_On.setEnabled(false);
         btnDev6_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Anode_OnActionPerformed(evt);
@@ -960,6 +991,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev7_anode.setBounds(960, 340, 40, 30);
 
         btnDev7_Anode_Off.setText("ВЫКЛ");
+        btnDev7_Anode_Off.setEnabled(false);
         btnDev7_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Anode_OffActionPerformed(evt);
@@ -974,6 +1006,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev7_Anode_RelState.setBounds(1000, 340, 70, 30);
 
         btnDev7_Anode_On.setText("ВКЛ");
+        btnDev7_Anode_On.setEnabled(false);
         btnDev7_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Anode_OnActionPerformed(evt);
@@ -989,6 +1022,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev8_anode.setBounds(1080, 340, 40, 30);
 
         btnDev8_Anode_Off.setText("ВЫКЛ");
+        btnDev8_Anode_Off.setEnabled(false);
         btnDev8_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Anode_OffActionPerformed(evt);
@@ -1003,6 +1037,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev8_Anode_RelState.setBounds(1120, 340, 70, 30);
 
         btnDev8_Anode_On.setText("ВКЛ");
+        btnDev8_Anode_On.setEnabled(false);
         btnDev8_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Anode_OnActionPerformed(evt);
@@ -1265,6 +1300,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev5_tubu.setBounds(720, 730, 40, 30);
 
         btnDev5_Tubu_Off.setText("ВЫКЛ");
+        btnDev5_Tubu_Off.setEnabled(false);
         btnDev5_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Tubu_OffActionPerformed(evt);
@@ -1279,6 +1315,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev5_Tubu_RelState.setBounds(760, 730, 70, 30);
 
         btnDev5_Tubu_On.setText("ВКЛ");
+        btnDev5_Tubu_On.setEnabled(false);
         btnDev5_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Tubu_OnActionPerformed(evt);
@@ -1294,6 +1331,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev6_tubu.setBounds(840, 730, 40, 30);
 
         btnDev6_Tubu_Off.setText("ВЫКЛ");
+        btnDev6_Tubu_Off.setEnabled(false);
         btnDev6_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Tubu_OffActionPerformed(evt);
@@ -1308,6 +1346,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev6_Tubu_RelState.setBounds(880, 730, 70, 30);
 
         btnDev6_Tubu_On.setText("ВКЛ");
+        btnDev6_Tubu_On.setEnabled(false);
         btnDev6_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Tubu_OnActionPerformed(evt);
@@ -1323,6 +1362,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev7_tubu.setBounds(960, 730, 40, 30);
 
         btnDev7_Tubu_Off.setText("ВЫКЛ");
+        btnDev7_Tubu_Off.setEnabled(false);
         btnDev7_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Tubu_OffActionPerformed(evt);
@@ -1337,6 +1377,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev7_Tubu_RelState.setBounds(1000, 730, 70, 30);
 
         btnDev7_Tubu_On.setText("ВКЛ");
+        btnDev7_Tubu_On.setEnabled(false);
         btnDev7_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Tubu_OnActionPerformed(evt);
@@ -1352,6 +1393,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev8_tubu.setBounds(1080, 730, 40, 30);
 
         btnDev8_Tubu_Off.setText("ВЫКЛ");
+        btnDev8_Tubu_Off.setEnabled(false);
         btnDev8_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Tubu_OffActionPerformed(evt);
@@ -1366,6 +1408,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev8_Tubu_RelState.setBounds(1120, 730, 70, 30);
 
         btnDev8_Tubu_On.setText("ВКЛ");
+        btnDev8_Tubu_On.setEnabled(false);
         btnDev8_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Tubu_OnActionPerformed(evt);
@@ -1514,7 +1557,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         jLabel44.setBounds(20, 700, 190, 30);
 
         btnDev1_Tubu_On.setText("ВКЛ");
-        btnDev1_Tubu_On.setEnabled(false);
         btnDev1_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev1_Tubu_OnActionPerformed(evt);
@@ -1524,7 +1566,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         btnDev1_Tubu_On.setBounds(240, 690, 110, 30);
 
         btnDev1_Tubu_Off.setText("ВЫКЛ");
-        btnDev1_Tubu_Off.setEnabled(false);
         btnDev1_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev1_Tubu_OffActionPerformed(evt);
@@ -2605,7 +2646,12 @@ public class MainFrame3 extends javax.swing.JFrame {
                 logger.fatal( "При поочередном выключении всех каналов анодов, при работе с соответствующим ЦАП, произошла исключительная ситуация!", e);
                 return;
             }
+            
+            //UnBlock neighbour device control
+            theApp.GetDevManager_a(nDevice).UnBlockNeighbour();
         }
+        
+        
     }//GEN-LAST:event_btnAllAnodesOffActionPerformed
 
     /**
@@ -2642,6 +2688,9 @@ public class MainFrame3 extends javax.swing.JFrame {
                 logger.fatal( "При поочередном включении всех каналов штенгелей, при работе с соответствующим реле, произошла исключительная ситуация!", e);
                 return;
             }
+            
+            //Block neighbour device control
+            theApp.GetDevManager_t(nDevice).BlockNeighbour();
         }
     }//GEN-LAST:event_btnAllTubusOnActionPerformed
 
@@ -2684,6 +2733,9 @@ public class MainFrame3 extends javax.swing.JFrame {
                 logger.fatal( "При поочередном выключении всех каналов штенгелей, при работе с соответствующим ЦАП, произошла исключительная ситуация!", e);
                 return;
             }
+            
+            //UnBlock neighbour device control
+            theApp.GetDevManager_t(nDevice).UnBlockNeighbour();
         }
     }//GEN-LAST:event_btnAllTubusOffActionPerformed
 
@@ -2857,7 +2909,6 @@ public class MainFrame3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel lbl;
     public javax.swing.JLabel lblDev1_anode;
     public javax.swing.JLabel lblDev1_tubu;
     public javax.swing.JLabel lblDev2_anode;
@@ -2875,6 +2926,7 @@ public class MainFrame3 extends javax.swing.JFrame {
     public javax.swing.JLabel lblDev8_anode;
     public javax.swing.JLabel lblDev8_tubu;
     private javax.swing.JLabel lblMainSwitch;
+    private javax.swing.JLabel lblManagementTitle;
     public javax.swing.JLabel lblThreadRState;
     public javax.swing.JLabel lblThreadWState;
     private javax.swing.JLabel lbl_Dev1_Anode_RelState;

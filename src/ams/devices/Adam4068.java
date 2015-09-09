@@ -161,7 +161,7 @@ public class Adam4068 extends AbstractDevice {
         if( "$".equals( strCmdType)) {
             logger.error( "Timeout on get (0,1)='$' command!");
 
-            for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++) {
+            for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
                 int nFailsCounter = ( int) m_mapLinesFailsCounter.get( i);
                 nFailsCounter++;
                 m_mapLinesFailsCounter.put( i, nFailsCounter);
@@ -216,7 +216,7 @@ public class Adam4068 extends AbstractDevice {
         */
         
         JLabel lbl;
-        for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++) {
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
             lbl = ( ( JLabel) m_vctVisualComponents.get( i));
             if( lbl != null) {
                 boolean bValue = ( boolean) m_mapLines.get( i);
@@ -227,7 +227,7 @@ public class Adam4068 extends AbstractDevice {
             }
         }
         
-        for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++)
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++)
             m_mapLinesFailsCounter.put( i, 0);
         
     }

@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import org.apache.log4j.Logger;
@@ -381,7 +382,12 @@ public class PnlEdge extends javax.swing.JPanel implements ActionListener {
                 //ТОК
                 adcC = mngr.GetADCCurrent();
                 nAdcC_Channel = mngr.GetAdcCurrentChannel();
-                double dblCurrentValue = adcC.GetAveragerChannel( nAdcC_Channel).GetAverage();
+                double dblCurrentValue = 0.;
+                try {
+                    dblCurrentValue = adcC.GetAveragerChannel( nAdcC_Channel).GetAverage();
+                } catch (Exception ex) {
+                    logger.error( "При получении осреднителя значений для канала АЦП произошёл Exception", ex);
+                }
                 lblCurrent.setText( "" + String.format( "%.3f", dblCurrentValue * 1000.) + "mcA");
                 if( mngr.GetEnabled()) {
                     lblCurrent.setForeground( Color.red);
@@ -398,7 +404,12 @@ public class PnlEdge extends javax.swing.JPanel implements ActionListener {
                 //НАПРЯЖЕНИЕ
                 adcV = mngr.GetADCVoltage();
                 nAdcV_Channel = mngr.GetAdcVoltageChannel();
-                double dblVoltageValue = adcV.GetAveragerChannel( nAdcV_Channel).GetAverage();
+                double dblVoltageValue = 0.;
+                try {
+                    dblVoltageValue = adcV.GetAveragerChannel( nAdcV_Channel).GetAverage();
+                } catch (Exception ex) {
+                    logger.error( "При получении осреднителя значений для канала АЦП произошёл Exception", ex);
+                }
                 lblVoltage.setText( "" + String.format( "%.3f", dblVoltageValue) + "V");
                 if( mngr.GetEnabled()) {
                     lblVoltage.setForeground( Color.red);

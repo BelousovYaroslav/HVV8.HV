@@ -15,8 +15,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.logging.Level;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import org.apache.log4j.Logger;
@@ -30,9 +31,9 @@ public class Adam4017plus extends AbstractDevice {
     
     private final static int MAX_FAILS_VISUALIZATION = 5;
     
-    private double m_dblChannelValues[];
-    private int m_nChannelFailsCounter[];
-    private int m_nChannelDescriptors[];
+    private HashMap m_dblChannelValues;
+    private HashMap m_nChannelFailsCounter;
+    private HashMap m_nChannelDescriptors;
     
     /**
      * Функция позволяет узнать что измеряет заданный канал этого устройства.
@@ -46,9 +47,10 @@ public class Adam4017plus extends AbstractDevice {
      * ADC_TUBULATION_CURRENT
      */
     public int GetChannelDescriptor( int nChannel) {
-        if( nChannel < AMSConstants.CHANNEL1 || nChannel < AMSConstants.CHANNEL8)
+        if( nChannel < AMSConstants.CHANNEL1 || nChannel > AMSConstants.CHANNEL8)
             return AMSConstants.ADC_UNKNOWN;        
-        return m_nChannelDescriptors[ nChannel];
+        int nDescriptor = ( int) m_nChannelDescriptors.get( nChannel);
+        return nDescriptor;
     }
     
     public int GetChannel1Descriptor() { return GetChannelDescriptor( AMSConstants.CHANNEL1); }
@@ -77,7 +79,7 @@ public class Adam4017plus extends AbstractDevice {
     
         }
         
-        m_nChannelDescriptors[ nChannel] = nChannelDescription;
+        m_nChannelDescriptors.put( nChannel, nChannelDescription);
         
     }
     
@@ -124,8 +126,11 @@ public class Adam4017plus extends AbstractDevice {
     
     
     
-    private final Vector m_avgChannels;
-    public AMSAverager GetAveragerChannel( int nChannel) {
+    private final HashMap m_avgChannels;
+    public AMSAverager GetAveragerChannel( int nChannel) throws Exception {
+        if( nChannel < AMSConstants.CHANNEL1 && nChannel > AMSConstants.CHANNEL8) {
+            throw new Exception( "Неверный номер канала '" + nChannel + "' при вызове функции SetChannelDecriptor(...)");
+        }
         return ( ( AMSAverager) m_avgChannels.get( nChannel));
     }
     
@@ -194,17 +199,18 @@ public class Adam4017plus extends AbstractDevice {
         
         m_strVisualizationFormat = "%.3f";
         
-        m_nChannelDescriptors = new int[8];
-        m_dblChannelValues = new double[8];
-        m_nChannelFailsCounter = new int[ 8];
-        m_avgChannels = new Vector();
+        m_nChannelDescriptors = new HashMap();
+        m_dblChannelValues = new HashMap();
+        m_nChannelFailsCounter = new HashMap();
+        m_avgChannels = new HashMap();
         
-        for( int i=0; i<8; i++) {
-            m_nChannelDescriptors[ i] = AMSConstants.ADC_UNKNOWN;
-            m_dblChannelValues[ i] = 0.;
-            m_nChannelFailsCounter[ i] = 0;
-            m_avgChannels.add( new AMSAverager( 1));
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
+            m_nChannelDescriptors.put( i, AMSConstants.ADC_UNKNOWN);
+            m_dblChannelValues.put( i, 0.);
+            m_nChannelFailsCounter.put( i, 0);
+            m_avgChannels.put( i, new AMSAverager( 1));
         }
+        
     
         m_avgT = new AMSAverager( 10);
     }
@@ -214,9 +220,8 @@ public class Adam4017plus extends AbstractDevice {
      * @param nNewStatistic 
      */
     public void SetManagingStatistic( int nNewStatistic) {
-        Iterator it = m_avgChannels.iterator();
-        while( it.hasNext()) {
-            AMSAverager avg = ( AMSAverager) it.next();
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
+            AMSAverager avg = ( AMSAverager) m_avgChannels.get( i);
             avg.SetStatistic( nNewStatistic);
         }
     }
@@ -276,26 +281,41 @@ public class Adam4017plus extends AbstractDevice {
             double dblVal = Double.parseDouble( strMid);
             
             
+            int nChannel = -1;
+            switch( i) {
+                case 0: nChannel = AMSConstants.CHANNEL1; break;
+                case 1: nChannel = AMSConstants.CHANNEL2; break;
+                case 2: nChannel = AMSConstants.CHANNEL3; break;
+                case 3: nChannel = AMSConstants.CHANNEL4; break;
+                case 4: nChannel = AMSConstants.CHANNEL5; break;
+                case 5: nChannel = AMSConstants.CHANNEL6; break;
+                case 6: nChannel = AMSConstants.CHANNEL7; break;
+                case 7: nChannel = AMSConstants.CHANNEL8; break;
+            }
             
-            double dblPhysValue = PhysValueCalculation( dblVal, i);
-            
-            m_dblChannelValues[ i] = dblVal;
-            GetAveragerChannel( i).AddValue( dblPhysValue);
-            
+            if( nChannel != -1) {
+                double dblPhysValue = PhysValueCalculation( dblVal, nChannel);
+                m_dblChannelValues.put( nChannel, dblVal);
+                try {
+                    GetAveragerChannel( nChannel).AddValue( dblPhysValue);
+                } catch (Exception ex) {
+                    logger.error( "При получении осреднителя значения для канала произошёл Exception", ex);
+                }
+            }
             
             
             nLeft = nRight;
         }
         
         //ОБРАБОТАЕМ ПОЛУЧЕННЫЕ ЗНАЧЕНИЯ
-        for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++) {
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
             theApp.ManageAdcChannel( this, i);
         }
         
         //ОТОБРАЖЕНИЕ ЗНАЧЕНИЙ
-        for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++) {
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
             JTextField edtTextOut;
-            double dblPhysValue = PhysValueCalculation( m_dblChannelValues[ i], i);
+            double dblPhysValue = PhysValueCalculation( ( double) m_dblChannelValues.get(i), i);
             
             if( IsVoltageChannel( i)) {
                 if( dblPhysValue < AMSConstants.ADC_VALIDATION_EDGE_VOLTAGE_LOW) dblPhysValue = 0.;
@@ -311,7 +331,8 @@ public class Adam4017plus extends AbstractDevice {
             edtTextOut = ( ( JTextField) m_vctVisualComponents.get( i));
             if( edtTextOut != null) edtTextOut.setText( String.format( m_strVisualizationFormat, dblPhysValue));
             
-            if( m_nChannelFailsCounter[ i] > 0) m_nChannelFailsCounter[ i] = 0;
+            int nFail = ( int) m_nChannelFailsCounter.get(i);
+            if( nFail > 0) m_nChannelFailsCounter.put( i, 0);
         }
         
         //разукрасим фон EDITBOX'ов отображающих наши значения
@@ -325,9 +346,10 @@ public class Adam4017plus extends AbstractDevice {
     public void paintBgVisualComponents() {
         JTextField edtTxtBoxOut;
     
-        for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; i++) {
+        for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
             edtTxtBoxOut = ( ( JTextField) m_vctVisualComponents.get( i));
-            if( m_nChannelFailsCounter[i] >= MAX_FAILS_VISUALIZATION)
+            int nFail = ( int) m_nChannelFailsCounter.get( i);
+            if( nFail >= MAX_FAILS_VISUALIZATION)
                 if( edtTxtBoxOut != null) edtTxtBoxOut.setBackground( new Color( 210, 110, 110));  //bgRed
             else            
                 if( edtTxtBoxOut != null) edtTxtBoxOut.setBackground( new Color( 237, 236, 235));  //bgWhite
@@ -375,7 +397,10 @@ public class Adam4017plus extends AbstractDevice {
                 if( bCSOk)
                     ProcessResponseGetCommand( strCmd, strResponse);
                 else {
-                    for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; m_nChannelFailsCounter[ i++]++);
+                    for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
+                        int nFails = ( int) m_nChannelFailsCounter.get( i);
+                        m_nChannelFailsCounter.put( i, ++nFails);
+                    }
                     
                     paintBgVisualComponents();
                 }
@@ -417,7 +442,10 @@ public class Adam4017plus extends AbstractDevice {
                 logger.debug( "ProcessTimeOut(): Timeout on get command!");
                 
                 //ProcessTimeOutGetCommand( strCmd, strResponse);
-                for( int i = AMSConstants.CHANNEL1; i < AMSConstants.CHANNEL8; m_nChannelFailsCounter[ i++]++);
+                for( int i = AMSConstants.CHANNEL1; i <= AMSConstants.CHANNEL8; i++) {
+                    int nFails = ( int) m_nChannelFailsCounter.get( i);
+                    m_nChannelFailsCounter.put( i, ++nFails);
+                }
                     
                 paintBgVisualComponents();
                 

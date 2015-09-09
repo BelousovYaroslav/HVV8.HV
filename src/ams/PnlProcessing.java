@@ -759,16 +759,13 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
         Adam4024 dac = theApp.GetDevManager_0_a().GetDAC();
         int nDacChannel = 0;
         
-        Adam4017plus adc = theApp.GetDevManager_0_a().GetADCCurrent();
-        int nAdcChannel = 0;
-        
         JLabel lblDac = lblCurrentOutputAno1_0;        
         AMSDeviceManager mngr = theApp.GetDevManager_0_a();
         
         for( int i=0; i < 2; i++) {
             switch( i) {
                 case  0: mngr = theApp.GetDevManager_0_a(); lblDac = lblCurrentOutputAno1_0; break;
-                case  1: mngr = theApp.GetDevManager_1_a(); lblDac = lblCurrentOutputAno1_1; break;
+                case  1: mngr = theApp.GetDevManager_0_t(); lblDac = lblCurrentOutputAno1_1; break;
                 
                 /*
                 case  0: mngr = theApp.GetDevManager_0_a(); lblDac = lblCurrentOutputAno1_0; break;

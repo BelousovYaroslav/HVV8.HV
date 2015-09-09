@@ -9,7 +9,7 @@ package ams;
  * Data-class for device-unit in settings. Describes channels on the measurement devices.
  * @author yaroslav
  */
-public class AMSSettingsDev {
+public class AMSSettingsTDev {
         
     
     /**
@@ -172,7 +172,7 @@ public class AMSSettingsDev {
      * Default constructor
      * @param nNum 
      */
-    public AMSSettingsDev( int nNum) {
+    public AMSSettingsTDev( int nNum) {
         m_nDeviceNumber = nNum;
         
         m_nAnoAdcVoltageDevice = AMSConstants.ADC1;

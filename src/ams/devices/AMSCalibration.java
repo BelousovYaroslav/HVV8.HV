@@ -7,7 +7,7 @@ package ams.devices;
 
 import ams.AMSApp;
 import ams.AMSConstants;
-import ams.AMSSettingsDev;
+import ams.AMSSettingsTDev;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;

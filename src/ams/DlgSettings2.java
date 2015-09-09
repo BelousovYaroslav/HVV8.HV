@@ -1596,7 +1596,7 @@ public class DlgSettings2 extends javax.swing.JDialog {
      * @param cmbRelDev     jcombobox для выбора устройства реле
      * @param cmbRelChan    jcombobox для выбора канала реле
      */
-    public void FillDeviceAnoCombos( AMSSettingsDev device,
+    public void FillDeviceAnoCombos( AMSSettingsTDev device,
                                     JComboBox cmbVoltDev, JComboBox cmbVoltChan,
                                     JComboBox cmbCurrDev, JComboBox cmbCurrChan,
                                     JComboBox cmbDacDev, JComboBox cmbDacChan,
@@ -1630,7 +1630,7 @@ public class DlgSettings2 extends javax.swing.JDialog {
      * @param cmbRelDev     jcombobox для выбора устройства реле
      * @param cmbRelChan    jcombobox для выбора канала реле
      */
-    public void FillDeviceTubCombos( AMSSettingsDev device,
+    public void FillDeviceTubCombos( AMSSettingsTDev device,
                                     JComboBox cmbVoltDev, JComboBox cmbVoltChan,
                                     JComboBox cmbCurrDev, JComboBox cmbCurrChan,
                                     JComboBox cmbDacDev, JComboBox cmbDacChan,

@@ -62,7 +62,7 @@ public class AMSSettings {
     public String GetDAC2Addr() { return m_strDAC2Address;}
     public String GetREL1Addr() { return m_strREL1Address;}
     
-    public AMSSettingsDev GetDev( int nDevice) throws Exception {
+    public AMSSettingsTDev GetDev( int nDevice) throws Exception {
         if( nDevice != AMSConstants.T_DEVICE1 &&
                 nDevice != AMSConstants.T_DEVICE2 &&
                 nDevice != AMSConstants.T_DEVICE3 &&
@@ -74,16 +74,16 @@ public class AMSSettings {
         
             throw new Exception( "Wrong device descriptor!");
         
-        return ( AMSSettingsDev) m_mapDevs.get( nDevice);
+        return ( AMSSettingsTDev) m_mapDevs.get( nDevice);
     }
-    public AMSSettingsDev GetDev1() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE1);}
-    public AMSSettingsDev GetDev2() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE2);}
-    public AMSSettingsDev GetDev3() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE3);}
-    public AMSSettingsDev GetDev4() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE4);}
-    public AMSSettingsDev GetDev5() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE5);}
-    public AMSSettingsDev GetDev6() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE6);}
-    public AMSSettingsDev GetDev7() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE7);}
-    public AMSSettingsDev GetDev8() { return ( AMSSettingsDev) m_mapDevs.get(AMSConstants.T_DEVICE8);}
+    public AMSSettingsTDev GetDev1() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE1);}
+    public AMSSettingsTDev GetDev2() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE2);}
+    public AMSSettingsTDev GetDev3() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE3);}
+    public AMSSettingsTDev GetDev4() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE4);}
+    public AMSSettingsTDev GetDev5() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE5);}
+    public AMSSettingsTDev GetDev6() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE6);}
+    public AMSSettingsTDev GetDev7() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE7);}
+    public AMSSettingsTDev GetDev8() { return ( AMSSettingsTDev) m_mapDevs.get(AMSConstants.T_DEVICE8);}
     
     
     //SETTERS
@@ -122,10 +122,10 @@ public class AMSSettings {
         
         m_mapDevs = new HashMap( 8);
         
-        AMSSettingsDev dev;
+        AMSSettingsTDev dev;
         
         //DEVICE1
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE1);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE1);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL1);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL1);
         dev.SetAnoDac( AMSConstants.DAC1, AMSConstants.CHANNEL1);
@@ -137,7 +137,7 @@ public class AMSSettings {
         m_mapDevs.put(AMSConstants.T_DEVICE1, dev);
         
         //DEVICE2
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE2);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE2);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL2);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL2);
         dev.SetAnoDac( AMSConstants.DAC1, AMSConstants.CHANNEL2);
@@ -150,7 +150,7 @@ public class AMSSettings {
         
         
         //DEVICE3
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE3);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE3);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL3);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL3);
         dev.SetAnoDac( AMSConstants.DAC1, AMSConstants.CHANNEL3);
@@ -163,7 +163,7 @@ public class AMSSettings {
         
         
         //DEVICE4
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE4);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE4);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL4);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL4);
         dev.SetAnoDac( AMSConstants.DAC1, AMSConstants.CHANNEL4);
@@ -176,7 +176,7 @@ public class AMSSettings {
         
         
         //DEVICE5
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE5);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE5);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL5);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL5);
         dev.SetAnoDac( AMSConstants.DAC2, AMSConstants.CHANNEL1);
@@ -189,7 +189,7 @@ public class AMSSettings {
         
         
         //DEVICE6
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE6);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE6);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL6);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL6);
         dev.SetAnoDac( AMSConstants.DAC2, AMSConstants.CHANNEL2);
@@ -202,7 +202,7 @@ public class AMSSettings {
         
         
         //DEVICE7
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE7);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE7);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL7);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL7);
         dev.SetAnoDac( AMSConstants.DAC2, AMSConstants.CHANNEL3);
@@ -215,7 +215,7 @@ public class AMSSettings {
         
         
         //DEVICE8
-        dev = new AMSSettingsDev( AMSConstants.T_DEVICE8);
+        dev = new AMSSettingsTDev( AMSConstants.T_DEVICE8);
         dev.SetAnoAdcVolt( AMSConstants.ADC1, AMSConstants.CHANNEL8);
         dev.SetAnoAdcCurr( AMSConstants.ADC2, AMSConstants.CHANNEL8);
         dev.SetAnoDac( AMSConstants.DAC2, AMSConstants.CHANNEL4);
@@ -315,45 +315,45 @@ public class AMSSettings {
                 Element device = root.addElement( "Device" + nDevice + "_channels" );            
                 Element devAn = device.addElement( "anode");
                 devAn.addElement( "ADC_V_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoAdcVoltDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoAdcVoltDev());
                 devAn.addElement( "ADC_V_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoAdcVoltChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoAdcVoltChan());
                 
                 devAn.addElement( "ADC_C_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoAdcCurrDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoAdcCurrDev());
                 devAn.addElement( "ADC_C_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoAdcCurrChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoAdcCurrChan());
                 
                 devAn.addElement( "DAC_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoDacDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoDacDev());
                 devAn.addElement( "DAC_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoDacChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoDacChan());
                 
                 devAn.addElement( "REL_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoRelDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoRelDev());
                 devAn.addElement( "REL_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetAnoRelChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetAnoRelChan());
             
                 Element devTu = device.addElement( "tubulation");
                 devTu.addElement( "ADC_V_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubAdcVoltDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubAdcVoltDev());
                 devTu.addElement( "ADC_V_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubAdcVoltChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubAdcVoltChan());
                 
                 devTu.addElement( "ADC_C_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubAdcCurrDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubAdcCurrDev());
                 devTu.addElement( "ADC_C_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubAdcCurrChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubAdcCurrChan());
                 
                 devTu.addElement( "DAC_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubDacDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubDacDev());
                 devTu.addElement( "DAC_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubDacChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubDacChan());
                 
                 devTu.addElement( "REL_DEV").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubRelDev());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubRelDev());
                 devTu.addElement( "REL_CHAN").addText(
-                        "" + ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).GetTubRelChan());
+                        "" + ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).GetTubRelChan());
             
             }
             
@@ -545,14 +545,14 @@ public class AMSSettings {
                     
                     if( bOk) {
                         switch( name) {
-                            case "ADC_V_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoAdcVoltDev( Integer.parseInt( value));   break;
-                            case "ADC_V_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoAdcVoltChan( Integer.parseInt( value));   break;
-                            case "ADC_C_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoAdcCurrDev( Integer.parseInt( value));   break;
-                            case "ADC_C_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoAdcCurrChan( Integer.parseInt( value));   break;
-                            case "DAC_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoDacDev( Integer.parseInt( value));   break;
-                            case "DAC_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoDacChan( Integer.parseInt( value));   break;
-                            case "REL_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoRelDev( Integer.parseInt( value));   break;
-                            case "REL_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetAnoRelChan( Integer.parseInt( value));   break;
+                            case "ADC_V_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoAdcVoltDev( Integer.parseInt( value));   break;
+                            case "ADC_V_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoAdcVoltChan( Integer.parseInt( value));   break;
+                            case "ADC_C_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoAdcCurrDev( Integer.parseInt( value));   break;
+                            case "ADC_C_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoAdcCurrChan( Integer.parseInt( value));   break;
+                            case "DAC_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoDacDev( Integer.parseInt( value));   break;
+                            case "DAC_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoDacChan( Integer.parseInt( value));   break;
+                            case "REL_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoRelDev( Integer.parseInt( value));   break;
+                            case "REL_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetAnoRelChan( Integer.parseInt( value));   break;
                         }
                     }
                 }
@@ -584,14 +584,14 @@ public class AMSSettings {
                     
                     if( bOk) {
                         switch( name) {
-                            case "ADC_V_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubAdcVoltDev( Integer.parseInt( value));   break;
-                            case "ADC_V_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubAdcVoltChan( Integer.parseInt( value));   break;
-                            case "ADC_C_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubAdcCurrDev( Integer.parseInt( value));   break;
-                            case "ADC_C_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubAdcCurrChan( Integer.parseInt( value));   break;
-                            case "DAC_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubDacDev( Integer.parseInt( value));   break;
-                            case "DAC_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubDacChan( Integer.parseInt( value));   break;
-                            case "REL_DEV": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubRelDev( Integer.parseInt( value));   break;
-                            case "REL_CHAN": ( ( AMSSettingsDev) m_mapDevs.get( nDevice)).SetTubRelChan( Integer.parseInt( value));   break;
+                            case "ADC_V_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubAdcVoltDev( Integer.parseInt( value));   break;
+                            case "ADC_V_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubAdcVoltChan( Integer.parseInt( value));   break;
+                            case "ADC_C_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubAdcCurrDev( Integer.parseInt( value));   break;
+                            case "ADC_C_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubAdcCurrChan( Integer.parseInt( value));   break;
+                            case "DAC_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubDacDev( Integer.parseInt( value));   break;
+                            case "DAC_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubDacChan( Integer.parseInt( value));   break;
+                            case "REL_DEV": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubRelDev( Integer.parseInt( value));   break;
+                            case "REL_CHAN": ( ( AMSSettingsTDev) m_mapDevs.get( nDevice)).SetTubRelChan( Integer.parseInt( value));   break;
                         }
                     }
                 }
