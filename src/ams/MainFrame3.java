@@ -635,7 +635,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         btnLogError = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Система управления и поддержания разряда кольцевого лазерного резонатора.   1.00 (2016.07.19 12:58)   НПО Алькор-Лаборатории 2016");
+        setTitle("Система управления и поддержания разряда кольцевого лазерного резонатора.   1.00 (2017.09.07 13:16)   НПО Алькор-Лаборатории 2017");
         setMinimumSize(new java.awt.Dimension(1630, 1020));
         setResizable(false);
         addMouseWheelListener(new java.awt.event.MouseWheelListener() {
@@ -747,7 +747,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn05mA);
-        btn05mA.setBounds(330, 90, 90, 28);
+        btn05mA.setBounds(330, 90, 90, 25);
 
         btn10mA.setText("1000 мкА");
         btn10mA.addActionListener(new java.awt.event.ActionListener() {
@@ -756,7 +756,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn10mA);
-        btn10mA.setBounds(425, 90, 90, 28);
+        btn10mA.setBounds(425, 90, 90, 25);
 
         btn15mA.setText("1500 мкА");
         btn15mA.addActionListener(new java.awt.event.ActionListener() {
@@ -765,7 +765,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn15mA);
-        btn15mA.setBounds(535, 90, 90, 28);
+        btn15mA.setBounds(535, 90, 90, 25);
 
         btn20mA.setText("2000 мкА");
         btn20mA.addActionListener(new java.awt.event.ActionListener() {
@@ -774,7 +774,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn20mA);
-        btn20mA.setBounds(645, 90, 90, 28);
+        btn20mA.setBounds(645, 90, 90, 25);
 
         btn25mA.setText("2500 мкА");
         btn25mA.addActionListener(new java.awt.event.ActionListener() {
@@ -783,7 +783,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn25mA);
-        btn25mA.setBounds(750, 90, 90, 28);
+        btn25mA.setBounds(750, 90, 90, 25);
 
         btn30mA.setText("3000 мкА");
         btn30mA.setToolTipText("");
@@ -793,7 +793,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn30mA);
-        btn30mA.setBounds(850, 90, 90, 28);
+        btn30mA.setBounds(850, 90, 90, 25);
 
         btnSwitchOff.setBackground(new java.awt.Color(150, 220, 150));
         btnSwitchOff.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
@@ -1650,7 +1650,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllTubusOn);
-        btnAllTubusOn.setBounds(242, 620, 350, 28);
+        btnAllTubusOn.setBounds(242, 620, 350, 25);
 
         btnAllTubusOff.setText("выключить все каналы штенгелей");
         btnAllTubusOff.addActionListener(new java.awt.event.ActionListener() {
@@ -1659,7 +1659,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllTubusOff);
-        btnAllTubusOff.setBounds(840, 620, 350, 28);
+        btnAllTubusOff.setBounds(840, 620, 350, 25);
 
         btnAllAnodesOn.setText("включить все каналы анодов");
         btnAllAnodesOn.addActionListener(new java.awt.event.ActionListener() {
@@ -1668,7 +1668,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllAnodesOn);
-        btnAllAnodesOn.setBounds(240, 170, 350, 28);
+        btnAllAnodesOn.setBounds(240, 170, 350, 25);
 
         btnAllAnodesOff.setText("выключить все каналы анодов");
         btnAllAnodesOff.addActionListener(new java.awt.event.ActionListener() {
@@ -1677,7 +1677,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllAnodesOff);
-        btnAllAnodesOff.setBounds(840, 170, 350, 28);
+        btnAllAnodesOff.setBounds(840, 170, 350, 25);
 
         pnlAdditionalPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlAdditionalPanel.setLayout(null);
@@ -1691,7 +1691,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSetDevSerNums);
-        btnSetDevSerNums.setBounds(970, 130, 230, 28);
+        btnSetDevSerNums.setBounds(970, 130, 230, 25);
 
         btnCalibration.setText("Калибровка");
         btnCalibration.addActionListener(new java.awt.event.ActionListener() {
@@ -1809,10 +1809,11 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn04mA);
-        btn04mA.setBounds(240, 90, 80, 28);
+        btn04mA.setBounds(240, 90, 80, 25);
 
         btnGroupLogLevel.add(btnLogDebug);
         btnLogDebug.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogDebug.setSelected(true);
         btnLogDebug.setText("D");
         btnLogDebug.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogDebug.setMaximumSize(new java.awt.Dimension(35, 35));

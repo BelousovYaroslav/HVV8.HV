@@ -7,7 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x430; &#x443;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f; &#x438; &#x43f;&#x43e;&#x434;&#x434;&#x435;&#x440;&#x436;&#x430;&#x43d;&#x438;&#x44f; &#x440;&#x430;&#x437;&#x440;&#x44f;&#x434;&#x430; &#x43a;&#x43e;&#x43b;&#x44c;&#x446;&#x435;&#x432;&#x43e;&#x433;&#x43e; &#x43b;&#x430;&#x437;&#x435;&#x440;&#x43d;&#x43e;&#x433;&#x43e; &#x440;&#x435;&#x437;&#x43e;&#x43d;&#x430;&#x442;&#x43e;&#x440;&#x430;.   1.00 (2016.07.19 12:58)   &#x41d;&#x41f;&#x41e; &#x410;&#x43b;&#x44c;&#x43a;&#x43e;&#x440;-&#x41b;&#x430;&#x431;&#x43e;&#x440;&#x430;&#x442;&#x43e;&#x440;&#x438;&#x438; 2016"/>
+    <Property name="title" type="java.lang.String" value="&#x421;&#x438;&#x441;&#x442;&#x435;&#x43c;&#x430; &#x443;&#x43f;&#x440;&#x430;&#x432;&#x43b;&#x435;&#x43d;&#x438;&#x44f; &#x438; &#x43f;&#x43e;&#x434;&#x434;&#x435;&#x440;&#x436;&#x430;&#x43d;&#x438;&#x44f; &#x440;&#x430;&#x437;&#x440;&#x44f;&#x434;&#x430; &#x43a;&#x43e;&#x43b;&#x44c;&#x446;&#x435;&#x432;&#x43e;&#x433;&#x43e; &#x43b;&#x430;&#x437;&#x435;&#x440;&#x43d;&#x43e;&#x433;&#x43e; &#x440;&#x435;&#x437;&#x43e;&#x43d;&#x430;&#x442;&#x43e;&#x440;&#x430;.   1.00 (2017.09.07 13:16)   &#x41d;&#x41f;&#x41e; &#x410;&#x43b;&#x44c;&#x43a;&#x43e;&#x440;-&#x41b;&#x430;&#x431;&#x43e;&#x440;&#x430;&#x442;&#x43e;&#x440;&#x438;&#x438; 2017"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1630, 1020]"/>
     </Property>
@@ -2286,6 +2286,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Courier 10 Pitch" size="10" style="0"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="D"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
