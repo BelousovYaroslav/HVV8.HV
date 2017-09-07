@@ -169,8 +169,8 @@ public class AMSDeviceManager {
         double dblCorrection_mA = dblMeasuredVoltage_V * 2. / 1000;
         //m_adc_current.SetPhysValuePiedestal( dblCorrection_mA, m_nAdcCurrentChannel);
         
-        logger.info( "ActionV(): Measured voltage  [V]  = " + dblMeasuredVoltage_V);
-        logger.info( "ActionV(): Correction        [mA] = " + dblCorrection_mA);
+        logger.trace( "ActionV(): Measured voltage  [V]  = " + dblMeasuredVoltage_V);
+        logger.trace( "ActionV(): Correction        [mA] = " + dblCorrection_mA);
     }
     
     /**
@@ -275,15 +275,15 @@ public class AMSDeviceManager {
             dblToDoOutVoltage_V = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
         
         //тестовый вывод
-        logger.info( "ActionC(): Measured current  [mcA] = " + dblMeasuredCurrent_mcA);
-        //logger.info( "ActionC(): Measured voltage  [V]  = " + dblMeasuredVoltage_V);
-        //logger.info( "ActionC(): Correction        [mA] = " + dblCorrection_mA);
-        //logger.info( "ActionC(): Corrected current [mA] = " + dblCurrentCorrected_mA);
-        logger.info( "ActionC(): Goal     current  [mcA] = " + dblGoalCurrent_mcA);
-        logger.info( "ActionC(): Difference        [mcA] = " + dblDifference_mcA);
-        logger.info( "ActionC(): Current out voltage [V] = " + dblCurrentOutVoltage_V);
-        logger.info( "ActionC(): Applied affection   [V] = " + dblAffection_V);
-        logger.info( "ActionC(): Todo out voltage    [V] = " + dblToDoOutVoltage_V);
+        logger.trace( "ActionC(): Measured current  [mcA] = " + dblMeasuredCurrent_mcA);
+        //logger.trace( "ActionC(): Measured voltage  [V]  = " + dblMeasuredVoltage_V);
+        //logger.trace( "ActionC(): Correction        [mA] = " + dblCorrection_mA);
+        //logger.trace( "ActionC(): Corrected current [mA] = " + dblCurrentCorrected_mA);
+        logger.trace( "ActionC(): Goal     current  [mcA] = " + dblGoalCurrent_mcA);
+        logger.trace( "ActionC(): Difference        [mcA] = " + dblDifference_mcA);
+        logger.trace( "ActionC(): Current out voltage [V] = " + dblCurrentOutVoltage_V);
+        logger.trace( "ActionC(): Applied affection   [V] = " + dblAffection_V);
+        logger.trace( "ActionC(): Todo out voltage    [V] = " + dblToDoOutVoltage_V);
         
         if( theApp.GetMainSwitcher() == true) {
             if( m_bBlockedByNeighbourIgnition == false) {
@@ -291,15 +291,15 @@ public class AMSDeviceManager {
                     m_dac.QueueSetChannelOutputValueCommand( m_nDacChannel, dblToDoOutVoltage_V);
                 }
                 else {
-                    logger.info( "Управление заблокировано кнопкой включения контроля канала!");
+                    logger.trace( "Управление заблокировано кнопкой включения контроля канала!");
                 }
             }
             else {
-                logger.info( "Управление заблокировано включением соседнего канала испытуемого устройства!");
+                logger.trace( "Управление заблокировано включением соседнего канала испытуемого устройства!");
             }
         }
         else {
-            logger.info( "Управление заблокировано рубильником!");
+            logger.trace( "Управление заблокировано рубильником!");
         }
         
     }
@@ -316,7 +316,7 @@ public class AMSDeviceManager {
      */
     double CountAffectionByDifference_V( double dblMeasuredCurrent_mcA, double dblDifference_mcA) {
         double dblRetVal = 0.;
-        logger.info( "CountAffectionByDifference_V(): in with " + dblMeasuredCurrent_mcA + ", " + dblDifference_mcA);
+        logger.trace( "CountAffectionByDifference_V(): in with " + dblMeasuredCurrent_mcA + ", " + dblDifference_mcA);
         
         /*
         if( dblMeasuredCurrent_mA < 0.3) {
@@ -335,10 +335,10 @@ public class AMSDeviceManager {
         
         /*if( Math.abs( dblDifference_mcA) > 1500) dblRetVal = Math.signum( dblDifference_mcA) * 1.5;
         else*/
-        if( Math.abs( dblDifference_mcA) > 1000) dblRetVal = Math.signum( dblDifference_mcA) * 1.0;
-        else if( Math.abs( dblDifference_mcA) > 500) dblRetVal = Math.signum( dblDifference_mcA) * 0.5;
-        else if( Math.abs( dblDifference_mcA) > 100) dblRetVal = Math.signum( dblDifference_mcA) * 0.1;
-        else if( Math.abs( dblDifference_mcA) > 50) dblRetVal = Math.signum( dblDifference_mcA) * 0.03;
+        if( Math.abs( dblDifference_mcA) > 1000) dblRetVal = Math.signum( dblDifference_mcA) * 0.5;
+        else if( Math.abs( dblDifference_mcA) > 500) dblRetVal = Math.signum( dblDifference_mcA) * 0.3;
+        else if( Math.abs( dblDifference_mcA) > 100) dblRetVal = Math.signum( dblDifference_mcA) * 0.04;
+        else if( Math.abs( dblDifference_mcA) > 50) dblRetVal = Math.signum( dblDifference_mcA) * 0.02;
         else if( Math.abs( dblDifference_mcA) > 10) dblRetVal = Math.signum( dblDifference_mcA) * 0.005;
         else if( Math.abs( dblDifference_mcA) > 5) dblRetVal = Math.signum( dblDifference_mcA) * 0.001;
         else dblRetVal = 0;

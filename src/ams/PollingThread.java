@@ -43,7 +43,7 @@ public class PollingThread implements Runnable {
         try {
             while( m_bContinue) {
             
-                if( m_RxTx.GetCommandQueueLen() < 50) {
+                if( m_RxTx.GetQueue().size() < 50) {
                     Iterator it = vctDevices.iterator();
                     while( it.hasNext()) {
                         AbstractDevice item = (AbstractDevice) it.next();

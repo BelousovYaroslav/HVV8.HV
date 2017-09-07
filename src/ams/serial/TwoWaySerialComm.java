@@ -6,9 +6,11 @@ import ams.devices.AbstractDevice;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
+import hvv_timeouts.HVV_TimeoutsManager;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.log4j.Logger;
 
@@ -36,11 +38,8 @@ public class TwoWaySerialComm
     };
     
     CommPort commPort;
-            
-    //private Thread m_thrTimeout;    
-    //public Thread GetTimeOutThread() { return m_thrTimeout; }
-    //public void SetTimeOutThread( Thread thrTimeout) { m_thrTimeout = thrTimeout; }
     
+    /*
     private CmdRespondTimeoutThread pTimeoutThread;
     public CmdRespondTimeoutThread GetTimeoutThread() { return pTimeoutThread;}
     public void CreateNewTimeoutThread() {
@@ -52,36 +51,53 @@ public class TwoWaySerialComm
         }
         pTimeoutThread = new CmdRespondTimeoutThread( this);
     }
-            
-    public CommandItem currentCommandInAction;
+    */
+    
+    volatile public long m_lTimeOutId;
+    volatile int m_nTimeOutCounter;
+    volatile private CommandItem currentCommandInAction;
 
+    synchronized CommandItem GetCmdInAction() { return currentCommandInAction; }
+    synchronized void SetCmdInAction( CommandItem pNewAction) { currentCommandInAction = pNewAction;}
+    
     public CircleBuffer crclBuffer;
     
     
     /* ********************************************************** */
     /* *************** COMMAND QUEUE **************************** */
     //private Stack cmdQueue;
-    private final LinkedList cmdQueue;
+    //private final LinkedList cmdQueue;
+    private final ConcurrentLinkedQueue cmdQueue;
+    
+    /*
     public synchronized void AddCommandToQueueEmergent( String strCmd, AbstractDevice clientInstance ) {
         cmdQueue.addFirst( new CommandItem( strCmd, clientInstance));
-        logger.debug( "AddCommandToQueueEmergent(" + strCmd + ",...): queue length: " + cmdQueue.size());
+        logger.trace( "AddCommandToQueueEmergent(" + strCmd + ",...): queue length: " + cmdQueue.size());
     }
+    */
+    
+    public synchronized ConcurrentLinkedQueue GetQueue() { return cmdQueue; }
     
     public synchronized void AddCommandToQueue( String strCmd, AbstractDevice clientInstance ) {
-        cmdQueue.addLast( new CommandItem( strCmd, clientInstance));
-        logger.debug( "AddCommandToQueue(" + strCmd + ",...): queue length: " + cmdQueue.size());
+        cmdQueue.add( new CommandItem( strCmd, clientInstance));
+        logger.trace( "AddCommandToQueue(" + strCmd + ",...): queue length: " + cmdQueue.size());
     }
     
-    public synchronized int GetCommandQueueLen() { return cmdQueue.size(); }
+    //public synchronized int GetCommandQueueLen() { return cmdQueue.size(); }
     /* ********************************************************** */
     
     
     public TwoWaySerialComm()
     {
-        cmdQueue = new LinkedList();
+        cmdQueue = new ConcurrentLinkedQueue();
         crclBuffer = new CircleBuffer();
-        pTimeoutThread = new CmdRespondTimeoutThread( this);
+        
+        //pTimeoutThread = new CmdRespondTimeoutThread( this);
+        m_lTimeOutId = 0;
+        m_nTimeOutCounter = 0;
+        
         //logger.setLevel( AMSApp.LOG_LEVEL);
+        
         commPort = null;
         thrInput = null;
         thrOutput = null;
@@ -118,7 +134,7 @@ public class TwoWaySerialComm
                 thrOutput = new Thread( new SerialReader(in, this));
                 thrOutput.start();
                 
-                thrInput = new Thread( new SerialWriter(out, cmdQueue, this));
+                thrInput = new Thread( new SerialWriter(out, this));
                 thrInput.start();
 
             }
@@ -131,8 +147,14 @@ public class TwoWaySerialComm
     }
     
     public void disconnect( COMPortSettings pSettings) throws Exception {
+        /*
         if( pTimeoutThread != null)
             pTimeoutThread.interrupt();
+        */
+        if( m_lTimeOutId != 0) {
+            HVV_TimeoutsManager.getInstance().RemoveId( m_lTimeOutId);
+            m_lTimeOutId = 0;
+        }
         
         if( commPort != null) {
             commPort.close();

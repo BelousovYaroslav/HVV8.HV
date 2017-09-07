@@ -33,6 +33,10 @@ public class AMSSettings {
     //MEMBERS
     private final COMPortSettings m_pCOMPortSettings;
     
+    private String m_strREL3Address;
+    private int m_nFanChan;
+    private int m_nVibChan;
+    
     private String m_strADC3Address;
     private String m_strADC4Address;
     private String m_strDAC3Address;
@@ -47,8 +51,15 @@ public class AMSSettings {
     
     private final HashMap m_mapDevs;
     
+    private final int m_nSingleInstanceSocketServerPort;
+    public int GetSingleInstanceSocketServerPort() { return m_nSingleInstanceSocketServerPort;}
+    
     //GETTERS
     public COMPortSettings GetCOMPortSettings() { return m_pCOMPortSettings; }    
+    
+    public String GetREL3Addr() { return m_strREL3Address;}
+    public int GetREL3_Chan_Fan() { return m_nFanChan; }
+    public int GetREL3_Chan_Vib() { return m_nVibChan; }
     
     public String GetADC3Addr() { return m_strADC3Address;}
     public String GetADC4Addr() { return m_strADC4Address;}
@@ -99,6 +110,12 @@ public class AMSSettings {
     public void SetDAC2Addr( String val) { m_strDAC2Address = val;}
     public void SetREL1Addr( String val) { m_strREL1Address = val;}
     
+    private int m_nPollerPort;
+    public int GetPortPoller() { return m_nPollerPort; }
+    
+    private int m_nExecutorPort;
+    public int GetPortExecutor() { return m_nExecutorPort; }
+    
     //REST
     private final AMSApp theApp;
     static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger( AMSSettings.class);
@@ -119,6 +136,10 @@ public class AMSSettings {
         m_strDAC3Address = "13";
         m_strDAC4Address = "14";
         m_strREL2Address = "15";        
+        
+        m_strREL3Address = "20";
+        m_nFanChan = AMSConstants.CHANNEL1;
+        m_nVibChan = AMSConstants.CHANNEL5;
         
         m_mapDevs = new HashMap( 8);
         
@@ -225,6 +246,11 @@ public class AMSSettings {
         dev.SetTubDac( AMSConstants.DAC4, AMSConstants.CHANNEL4);
         dev.SetTubRel( AMSConstants.REL2, AMSConstants.CHANNEL8);
         m_mapDevs.put(AMSConstants.T_DEVICE8, dev);
+        
+        m_nSingleInstanceSocketServerPort = 10002;
+        
+        m_nPollerPort = 6341;
+        m_nExecutorPort = 6343;
     }
     
     /**
@@ -306,11 +332,12 @@ public class AMSSettings {
             adams.addElement( "REL2").addText( m_strREL2Address);
             
             // ***** ***** ***** ***** *****
-            //for( int nDevice = AMSConstants.T_DEVICE1; nDevice < AMSConstants.T_DEVICE8; nDevice++) {
-            
-            Iterator it = AMSConstants.getInstance().T_DEVICES.iterator();
-            while( it.hasNext()) {
-                int nDevice = ( int) it.next();
+            //
+            //Iterator it = AMSConstants.getInstance().T_DEVICES.iterator();
+            //while( it.hasNext()) {            
+            for( int nDevice = AMSConstants.T_DEVICE1; nDevice <= AMSConstants.T_DEVICE8; nDevice++) {
+                
+                //int nDevice = ( int) it.next();
             
                 Element device = root.addElement( "Device" + nDevice + "_channels" );            
                 Element devAn = device.addElement( "anode");
@@ -358,7 +385,7 @@ public class AMSSettings {
             }
             
             OutputFormat format = OutputFormat.createPrettyPrint();
-            String strSettingsXmlFile = System.getenv( "AMS_ROOT") + "/settings.xml";
+            String strSettingsXmlFile = System.getenv( "AMS_ROOT") + "/etc/settings.ams.xml";
             XMLWriter writer = new XMLWriter( new FileWriter( strSettingsXmlFile), format);
             
             writer.write( document );
@@ -379,7 +406,7 @@ public class AMSSettings {
         try {
             SAXReader reader = new SAXReader();
             
-            String strSettingsFilePathName = System.getenv( "AMS_ROOT") + "/settings.xml";
+            String strSettingsFilePathName = System.getenv( "AMS_ROOT") + "/etc/settings.ams.xml";
             URL url = ( new java.io.File( strSettingsFilePathName)).toURI().toURL();
             
             Document document = reader.read( url);

@@ -36,7 +36,7 @@ public abstract class AbstractDevice {
     public boolean GetCSEnabled() { return m_bCheckSummEnabled;}
     public void SetCSEnabled( boolean bEnable) { m_bCheckSummEnabled = bEnable;}
     
-    HashMap m_vctVisualComponents = new HashMap();
+    public HashMap m_vctVisualComponents = new HashMap();
     abstract void AddVisualComponent( int nDescription, JComponent comp);
     
     public abstract void ProcessResponse( String strCmd, String strResponse);

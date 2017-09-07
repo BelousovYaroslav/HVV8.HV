@@ -61,7 +61,7 @@ public class AMSCalibration {
         try {
             SAXReader reader = new SAXReader();
             
-            String strCalibrationFilePathName = System.getenv( "AMS_ROOT") + "/calibration.xml";
+            String strCalibrationFilePathName = System.getenv( "AMS_ROOT") + "/etc/calibration.xml";
             URL url = ( new java.io.File( strCalibrationFilePathName)).toURI().toURL();
             
             Document document = reader.read( url);
@@ -374,7 +374,7 @@ public class AMSCalibration {
             anodes.addElement( "ADC4_7_B").addText(String.format("%.3f", unit.GetShift( AMSConstants.CHANNEL8)));
             
             OutputFormat format = OutputFormat.createPrettyPrint();
-            String strCalibrationFilePathName = System.getenv( "AMS_ROOT") + "/calibration.xml";
+            String strCalibrationFilePathName = System.getenv( "AMS_ROOT") + "/etc/calibration.xml";
             XMLWriter writer = new XMLWriter( new FileWriter( strCalibrationFilePathName), format);
             
             writer.write( document );

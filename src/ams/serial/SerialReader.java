@@ -48,82 +48,109 @@ public class SerialReader implements Runnable
             
             while( m_bContinue) {
                 
-                if( this.in.available() > 0) {
-                    len = this.in.read(buffer);
-                
-                    logger.trace("after this.in.read. len=" + len);
-                
-                    String strResponse1 = new String( buffer, 0, len - 1);
-                    logger.debug( "COM-INTERACTION Response1: " + strResponse1);
-                
-                    pParent.crclBuffer.AddBytes( buffer, len);
-                
-                    if( pParent.currentCommandInAction != null) {
-                        len = pParent.crclBuffer.isAnswerReady();
-                        if( len > 0) {
-                            String strResponse2 = new String( pParent.crclBuffer.getAnswer( len));
-                            logger.trace( "Response2: " + strResponse2);
-                            
-                            boolean bCorrectResponse = true;
+                if( pParent.GetCmdInAction() != null) {         //Если есть испущенная команда (нам надо получить ответ)
+                    if( hvv_timeouts.HVV_TimeoutsManager.getInstance().CheckTimeout( pParent.m_lTimeOutId) == true) {
+                        logger.info( "TimeOut happens for id=" + pParent.m_lTimeOutId);
+                        hvv_timeouts.HVV_TimeoutsManager.getInstance().RemoveId( pParent.m_lTimeOutId);
+                        pParent.m_lTimeOutId = 0;
                         
-                            //check if strResponse is valid
-                            //1. \n на конце
-                            if( strResponse2.charAt( strResponse2.length() - 1) == '\r') {
-                                strResponse2 = strResponse2.substring( 0, strResponse2.length() - 1);
-                            }
-                            else {
-                                logger.warn( "Пришедший ответ без (CR) на конце");
-                                bCorrectResponse = false;
-                            }
-                            
-                            /*
-                            if( !strResponse1.equals( strResponse2)) {
-                                logger.error( "ОПА!");
-                                pParent.crclBuffer.PrintState();
-                            }
-                            */
-                            
-                            /*
-                            //2. $,#,%,@ на начале
-                            String strMarker = strResponse.substring( 0, 1);
-                            if( !( "!$#%@".contains( strMarker))) {
-                                logger.warn( "Ответ с некорректным заголовком!");
-                                bCorrectResponse = false;
-                            }
-                            */
-                            
-                            /*
-                            //3. адресат запроса совпадает с адресатом ответа
-                            String strAddress = strResponse.substring( 1, 3);
-                            if( pParent.currentCommandInAction.GetClient().GetAddress() != strAddress) {
-                                logger.warn( "Адресат запроса не совпадает с адресатом ответа");
-                                bCorrectResponse = false;
-                            }
-                            */
-                            
-                            if( bCorrectResponse) {
-                                
-                                
-                                //pParent.GetTimeoutThread().CancelTimeout();
-                                pParent.GetTimeoutThread().interrupt();
-                                
-                                CommandItem item = pParent.currentCommandInAction;
-                                pParent.currentCommandInAction = null;
-                                
-                                item.ProcessResponse( strResponse2);
-                                
-                            }
-                        }
-                    
+                        pParent.GetCmdInAction().ProcessTimeOut();
+                        
+                        pParent.m_nTimeOutCounter++;
+                        pParent.SetCmdInAction( null);
                     }
                     else {
-                        logger.warn( "Входящие данные при отсутствии запрашивающей команды!");
+                        
+                        if( this.in.available() > 0) {
+                            len = this.in.read(buffer);
+
+                            logger.trace("after this.in.read. len=" + len);
+
+                            String strResponse1 = new String( buffer, 0, len - 1);
+                            logger.trace( "COM-INTERACTION Response1: " + strResponse1);
+
+                            pParent.crclBuffer.AddBytes( buffer, len);
+                            
+                            len = pParent.crclBuffer.isAnswerReady();
+                            if( len > 0) {
+                                String strResponse2 = new String( pParent.crclBuffer.getAnswer( len));
+                                logger.trace( "Response2: " + strResponse2);
+
+                                boolean bCorrectResponse = true;
+
+                                //check if strResponse is valid
+                                //1. \n на конце
+                                if( strResponse2.charAt( strResponse2.length() - 1) == '\r') {
+                                    strResponse2 = strResponse2.substring( 0, strResponse2.length() - 1);
+                                }
+                                else {
+                                    logger.warn( "Пришедший ответ без (CR) на конце");
+                                    bCorrectResponse = false;
+                                }
+
+                                /*
+                                if( !strResponse1.equals( strResponse2)) {
+                                    logger.error( "ОПА!");
+                                    pParent.crclBuffer.PrintState();
+                                }
+                                */
+
+                                /*
+                                //2. $,#,%,@ на начале
+                                String strMarker = strResponse.substring( 0, 1);
+                                if( !( "!$#%@".contains( strMarker))) {
+                                    logger.warn( "Ответ с некорректным заголовком!");
+                                    bCorrectResponse = false;
+                                }
+                                */
+
+                                /*
+                                //3. адресат запроса совпадает с адресатом ответа
+                                String strAddress = strResponse.substring( 1, 3);
+                                if( pParent.currentCommandInAction.GetClient().GetAddress() != strAddress) {
+                                    logger.warn( "Адресат запроса не совпадает с адресатом ответа");
+                                    bCorrectResponse = false;
+                                }
+                                */
+
+                                if( bCorrectResponse) {
+
+
+                                    //pParent.GetTimeoutThread().CancelTimeout();
+                                    
+                                    /*
+                                    pParent.GetTimeoutThread().interrupt();
+
+                                    CommandItem item = pParent.currentCommandInAction;
+                                    pParent.currentCommandInAction = null;*/
+                                    hvv_timeouts.HVV_TimeoutsManager.getInstance().RemoveId( pParent.m_lTimeOutId);
+                                    pParent.m_lTimeOutId = 0;
+                                    pParent.m_nTimeOutCounter = 0;
+
+                                    pParent.GetCmdInAction().ProcessResponse( strResponse2);
+                                    
+                                    pParent.SetCmdInAction( null);
+                                }
+                                else {
+                                    //логируется выше?
+                                }
+                            }
+                            else {
+                                //не готов ответ из кольцевого буфера
+                            }
+
+                            
+                        }
+                        else
+                            //logger.debug( "No RX data");
+
+                        Thread.sleep( 10);
                     }
+                    
                 }
-                else
-                    //logger.debug( "No RX data");
-                
-                Thread.sleep( 50);
+                else {
+                    //logger.trace( "Нет испущенной команды");
+                }
             }
             
             //something new

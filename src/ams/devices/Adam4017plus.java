@@ -8,6 +8,7 @@ package ams.devices;
 import ams.AMSApp;
 import ams.AMSAverager;
 import ams.AMSConstants;
+import ams.AMSDeviceManager;
 import ams.serial.CheckSumm;
 import ams.serial.TwoWaySerialComm;
 import java.awt.Color;
@@ -157,10 +158,10 @@ public class Adam4017plus extends AbstractDevice {
         */
         
         double dblResult = dblValInCodes * m_dblA + m_dblB;
-        logger.info( "nChannel=" + nChannel);
-        logger.info( "m_dblPhysValueCoefficient=" + m_dblA);
-        logger.info( "m_dblPhysValuePiedestal=" + m_dblB);
-        logger.info( "dblResult=" + dblResult);
+        logger.trace( "nChannel=" + nChannel);
+        logger.trace( "m_dblPhysValueCoefficient=" + m_dblA);
+        logger.trace( "m_dblPhysValuePiedestal=" + m_dblB);
+        logger.trace( "dblResult=" + dblResult);
         
         return dblResult;
     }
@@ -318,6 +319,86 @@ public class Adam4017plus extends AbstractDevice {
             double dblPhysValue = PhysValueCalculation( ( double) m_dblChannelValues.get(i), i);
             
             if( IsVoltageChannel( i)) {
+                
+                AMSDeviceManager processor = null;
+                int nTDev = -1;
+                        
+                if( theApp.GetDevManager_0_a().GetADCVoltage()== this && theApp.GetDevManager_0_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE1;
+                    processor = theApp.GetDevManager_0_a();
+                }
+                //if( theApp.GetDevManager_0_t().GetADCVoltage()== this && theApp.GetDevManager_0_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_0_t();
+                
+                if( theApp.GetDevManager_1_a().GetADCVoltage()== this && theApp.GetDevManager_1_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE2;
+                    processor = theApp.GetDevManager_1_a();
+                }
+                //if( theApp.GetDevManager_1_t().GetADCVoltage()== this && theApp.GetDevManager_1_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_1_t();
+        
+                if( theApp.GetDevManager_2_a().GetADCVoltage()== this && theApp.GetDevManager_2_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE3;
+                    processor = theApp.GetDevManager_2_a();
+                }
+                //if( theApp.GetDevManager_2_t().GetADCVoltage()== this && theApp.GetDevManager_2_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_2_t();
+                
+                if( theApp.GetDevManager_3_a().GetADCVoltage()== this && theApp.GetDevManager_3_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE4;
+                    processor = theApp.GetDevManager_3_a();
+                }
+                //if( theApp.GetDevManager_3_t().GetADCVoltage()== this && theApp.GetDevManager_3_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_3_t();
+                
+                if( theApp.GetDevManager_4_a().GetADCVoltage()== this && theApp.GetDevManager_4_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE5;
+                    processor = theApp.GetDevManager_4_a();
+                }
+                //if( theApp.GetDevManager_4_t().GetADCVoltage()== this && theApp.GetDevManager_4_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_4_t();
+                
+                if( theApp.GetDevManager_5_a().GetADCVoltage()== this && theApp.GetDevManager_5_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE6;
+                    processor = theApp.GetDevManager_5_a();
+                }
+                //if( theApp.GetDevManager_5_t().GetADCVoltage()== this && theApp.GetDevManager_5_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_5_t();
+        
+                if( theApp.GetDevManager_6_a().GetADCVoltage()== this && theApp.GetDevManager_6_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE7;
+                    processor = theApp.GetDevManager_6_a();
+                }
+                //if( theApp.GetDevManager_6_t().GetADCVoltage()== this && theApp.GetDevManager_6_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_6_t();
+                
+                if( theApp.GetDevManager_7_a().GetADCVoltage()== this && theApp.GetDevManager_7_a().GetAdcVoltageChannel() == i) {
+                    nTDev = AMSConstants.T_DEVICE8;
+                    processor = theApp.GetDevManager_7_a();
+                }
+                //if( theApp.GetDevManager_7_t().GetADCVoltage()== this && theApp.GetDevManager_7_t().GetAdcVoltageChannel() == i) processor = theApp.GetDevManager_7_t();
+
+                if( processor != null) {
+                    
+                    //измеренный ток
+                    double dblMeasuredCurrent_mcA = 0.;
+                
+                    try {
+                        dblMeasuredCurrent_mcA = processor.GetADCCurrent().GetAveragerChannel( processor.GetAdcCurrentChannel()).GetAverage();
+                    } catch (Exception ex) {
+                        logger.error( "Exception при получении объектов АЦП токов и напряжений", ex);
+                    }
+                    
+                    if( theApp.GetNewAnoCalib().GetUsage( nTDev) == true) {
+                        logger.trace( "Работаем по новой калибровке U=f(u_adc, i)");
+                        dblPhysValue = theApp.GetNewAnoCalib().GetResult( nTDev, dblMeasuredCurrent_mcA, ( double) m_dblChannelValues.get(i));
+                    }
+                    else {
+                        logger.debug( "Работаем по старой калибровке U=f(u_adc)");
+                        //РАБОТАЕМ ПО СТАРОЙ КАЛИБРОВКЕ - КОРРЕКТИРУЕМСЯ НА СОПРОТИВЛЕНИЕ
+                        logger.debug( ">>>>>>> POI: dblPhysValue (V)=" + dblPhysValue);
+                        logger.debug( ">>>>>>> POI: dblMeasuredCurrent_mcA (mcA)=" + dblMeasuredCurrent_mcA);
+                    
+                        dblPhysValue -= 0.395 * dblMeasuredCurrent_mcA;
+                    
+                        logger.debug( ">>>>>>> POI: Corrected Voltage (V)=" + dblPhysValue);
+                    }
+                }
+                
+                
                 if( dblPhysValue < AMSConstants.ADC_VALIDATION_EDGE_VOLTAGE_LOW) dblPhysValue = 0.;
                 if( dblPhysValue > AMSConstants.ADC_VALIDATION_EDGE_VOLTAGE_HIGH) dblPhysValue = AMSConstants.ADC_VALIDATION_EDGE_VOLTAGE_HIGH;
             }
@@ -365,18 +446,18 @@ public class Adam4017plus extends AbstractDevice {
      */
     @Override
     public void ProcessResponse( String strCmd, String strResponse) {
-        logger.debug( "ProcessResponse(): " + "strCmd='" + strCmd + "  strResponse: " + strResponse);
+        logger.trace( "ProcessResponse(): " + "strCmd='" + strCmd + "  strResponse: " + strResponse);
         
         boolean bCSOk;
         
         if( GetCSEnabled()) {
             
             if( CheckSumm.CheckCheckSumm( strResponse)) {
-                logger.debug( "ProcessResponse(): CS control is enabled and it's correct");
+                logger.trace( "ProcessResponse(): CS control is enabled and it's correct");
                 bCSOk = true;
             }
             else {
-                logger.debug( "ProcessResponse(): CS control is enabled and it's failed");
+                logger.warn( "ProcessResponse(): CS control is enabled and it's failed");
                 bCSOk = false;
             }
         }
@@ -393,7 +474,7 @@ public class Adam4017plus extends AbstractDevice {
             break;
                         
             case "#":
-                logger.debug( "ProcessResponse(): Response for get command!");
+                logger.trace( "ProcessResponse(): Response for get command!");
                 if( bCSOk)
                     ProcessResponseGetCommand( strCmd, strResponse);
                 else {

@@ -122,7 +122,7 @@ public class AMSDevSerialNumbers {
         try {
             SAXReader reader = new SAXReader();
             
-            String strSerialsFileName = System.getenv( "AMS_ROOT") + "/serials.xml";
+            String strSerialsFileName = System.getenv( "AMS_ROOT") + "/etc/serials.xml";
             URL url = ( new java.io.File( strSerialsFileName)).toURI().toURL();
             
             Document document = reader.read(url);

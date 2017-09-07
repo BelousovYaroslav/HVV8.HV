@@ -7,7 +7,6 @@ package ams.devices;
 
 import ams.AMSApp;
 import ams.AMSConstants;
-import static ams.devices.Adam4024.logger;
 import ams.serial.CheckSumm;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ import org.apache.log4j.Logger;
  * @author yaroslav
  */
 public class Adam4068 extends AbstractDevice {
-    private AMSApp theApp;
+    private final AMSApp theApp;
     
     private HashMap m_mapLines;
     private HashMap m_mapLinesFailsCounter;
@@ -36,7 +35,8 @@ public class Adam4068 extends AbstractDevice {
         //logger.setLevel( AMSApp.LOG_LEVEL);
         
         if( nDeviceDescriptor != AMSConstants.REL1 &&
-                nDeviceDescriptor != AMSConstants.REL2) {
+                nDeviceDescriptor != AMSConstants.REL2 &&
+                    nDeviceDescriptor != AMSConstants.REL3) {
             throw new Exception( "Некорректный DeviceDescriptor!");
         }
         SetDeviceDescriptor( nDeviceDescriptor);
@@ -183,6 +183,12 @@ public class Adam4068 extends AbstractDevice {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public int GetRelayBitState( int nChannel) {
+        Boolean bln = ( Boolean) m_mapLines.get( nChannel);
+        int nResult = bln ? 1 : 0;
+        return nResult;
+    }
+    
     private void ProcessGetCommand( String strCmd, String strResponse) {
         String strMarker = strResponse.substring( 0, 1);
         String strDigiOut = strResponse.substring( 1, 3);

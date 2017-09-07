@@ -23,14 +23,12 @@ public class SerialWriter implements Runnable
     private boolean m_bContinue;
     public void StopThread() { m_bContinue = false;}
                 
-    private final LinkedList cmdQueue;
     TwoWaySerialComm pParent;
     
     
-    public SerialWriter ( OutputStream out, LinkedList queue, TwoWaySerialComm parent)
+    public SerialWriter ( OutputStream out, TwoWaySerialComm parent)
     {
         this.out = out;
-        this.cmdQueue = queue;
         this.pParent = parent;
         
         //logger.setLevel( Level.OFF);
@@ -49,40 +47,48 @@ public class SerialWriter implements Runnable
 
                 //logger.debug( "Alive! pParent.currentCommandInAction = " + pParent.currentCommandInAction);
                 
-                if( ( pParent.currentCommandInAction == null) &&                        //нет команды в обработке
-                        ( !cmdQueue.isEmpty()) &&                                       //в очереди что-то есть
-                        ( pParent.GetTimeoutThread().GetInProgress() != true)) {        //таймаут поток погашен
+                if( pParent.GetCmdInAction() == null) {                         //нет команды в обработке
                     
-                    item = ( CommandItem) cmdQueue.poll();
-                    
-                    if( item != null) {
-                        logger.debug( "Item from queue: '" + item.GetCommand() + "'!");
-                        String strCmd = item.GetCommand();
-                        logger.debug( "COM-INTERACTION Command '" + strCmd + "' from Queue!");
-                        logger.debug( "Queue length: " + cmdQueue.size());
-                    
-                        strCmd += "\r";
+                    if( pParent.GetQueue().isEmpty() == false) {                //в очереди что-то есть
                         
-                        //byte [] btsToSend = strCmd.getBytes();
-                        //logger.debug( "btsToSend[]=" + btsToSend);
-                        
-                        this.out.write( strCmd.getBytes());
-                        pParent.currentCommandInAction = item;
+                        item = ( CommandItem) pParent.GetQueue().poll();
                     
-                        //logger.debug( "Timeout thread isAlive(): " + pParent.GetTimeoutThread().isAlive());
-                        //logger.debug( "Timeout thread getState(): " + pParent.GetTimeoutThread().getState());
-                        //logger.debug( "Timeout thread GetInProgress(): " + pParent.GetTimeoutThread().GetInProgress());
+                        if( item != null) {
+                            logger.trace( "Item from queue: '" + item.GetCommand() + "'!");
+                            String strCmd = item.GetCommand();
+                            logger.trace( "COM-INTERACTION Command '" + strCmd + "' from Queue!");
+                            logger.trace( "Queue length: " + pParent.GetQueue().size());
 
+                            strCmd += "\r";
 
-                        pParent.CreateNewTimeoutThread();
-                        pParent.GetTimeoutThread().start();
+                            //byte [] btsToSend = strCmd.getBytes();
+                            //logger.debug( "btsToSend[]=" + btsToSend);
+
+                            this.out.write( strCmd.getBytes());
+                            
+
+                            //logger.debug( "Timeout thread isAlive(): " + pParent.GetTimeoutThread().isAlive());
+                            //logger.debug( "Timeout thread getState(): " + pParent.GetTimeoutThread().getState());
+                            //logger.debug( "Timeout thread GetInProgress(): " + pParent.GetTimeoutThread().GetInProgress());
+
+                            //START TIMEOUT INSTANCE
+                            //pParent.CreateNewTimeoutThread();
+                            //pParent.GetTimeoutThread().start();
+                            pParent.m_lTimeOutId = hvv_timeouts.HVV_TimeoutsManager.getInstance().StartTimeout( 1000);
+                            
+                            pParent.SetCmdInAction( item);
+                        }
+                        else {
+                            logger.debug( "Item from queue: 'NULL'! Wow!");
+                            logger.debug( "Item from queue is 'null'! Queue length: " + pParent.GetQueue().size());
+                        }
                     }
                     else {
-                        logger.debug( "Item from queue: 'NULL'! Wow!");
-                        logger.debug( "Item from queue is 'null'! Queue length: " + cmdQueue.size());
+                        //logger.trace( "2. Очередь команд пустая!");
                     }
                 }
                 else {
+                    /*
                     if( pParent.currentCommandInAction != null) {
                         //logger.trace( "Есть команда в обработке!");
                     }
@@ -92,6 +98,8 @@ public class SerialWriter implements Runnable
                     if( pParent.GetTimeoutThread().GetInProgress() != true) {
                         //logger.trace( "Поток таймаута не закончен!");
                     }
+                    */
+                    //logger.trace( "1. Команда испущена, а сигнала об окончании её обработки или таймаута не было!");
                 }
 
 
@@ -148,7 +156,7 @@ public class SerialWriter implements Runnable
                 }
                 */
                 
-                Thread.sleep( 20);
+                Thread.sleep( 10);
                 
                 /*
                 int c = 0;

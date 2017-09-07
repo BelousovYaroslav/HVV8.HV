@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -112,11 +113,27 @@ public class MainFrame3 extends javax.swing.JFrame {
                         lblThreadWState.setIcon( app.GetResources().getLittleBrightGreenLed());
                     else
                         lblThreadWState.setIcon( app.GetResources().getLittleBrightRedLed());
+                    
+                    
                 }
                 else {
                     lblThreadRState.setIcon( app.GetResources().getLittleBrightRedLed());
                     lblThreadWState.setIcon( app.GetResources().getLittleBrightRedLed());
                 }
+                
+                if( app.GetPollerAdapter().GetAliveStatus() == true) {
+                    lblThreadPoller.setIcon( app.GetResources().getLittleBrightGreenLed());
+                    //TODO: blue state (connection established, but inactive)
+                }
+                else
+                    lblThreadPoller.setIcon( app.GetResources().getLittleBrightRedLed());
+                
+                if( app.GetExecutorAdapter().GetAliveStatus() == true) {
+                    lblThreadExecutor.setIcon( app.GetResources().getLittleBrightGreenLed());
+                    //TODO: blue state (connection established, but inactive)
+                }
+                else
+                    lblThreadExecutor.setIcon( app.GetResources().getLittleBrightRedLed());
             }
         });
         tmrRefreshIOThreadsState.start();
@@ -190,7 +207,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         mapTestedDevicesTubulationRelays.put(AMSConstants.T_DEVICE7, lbl_Dev7_Tubu_RelState);
         mapTestedDevicesTubulationRelays.put(AMSConstants.T_DEVICE8, lbl_Dev8_Tubu_RelState);
         
-        //for( int nDevice = AMSConstants.T_DEVICE1; nDevice < AMSConstants.T_DEVICE8; nDevice++) {
         Iterator it = AMSConstants.getInstance().T_DEVICES.iterator();
         while( it.hasNext()) {
             int nDevice = ( int) it.next();
@@ -272,10 +288,17 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         }
                     
-                    
-        
-        
-        
+
+        //сигнальная лампочка вибрации
+        try {
+            Adam4068 dev = theApp.GetDevicesSet().GetRelay( AMSConstants.REL3);
+            dev.AddVisualComponent( AMSConstants.CHANNEL1, lblFan);
+            dev.AddVisualComponent( AMSConstants.CHANNEL5, lblVibration);
+            
+        }
+        catch( Exception ex) {
+            logger.error( "При инициализации модуля реле3 произошла исключительная ситуация", ex);
+        }
         //***** ***** ***** ***** ***** ***** ***** ***** ***** *****
         //Сигнальные лампочки для менеджеров
         theApp.GetDevManager_0_a().SetActiveLed( lblDev1_anode);
@@ -393,6 +416,24 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         tmrRefreshIOThreadsState.start();
+        
+        btnSetDevSerNums.setVisible( false);
+        edtHyroNum1.setVisible( false);
+        edtHyroNum2.setVisible( false);
+        edtHyroNum3.setVisible( false);
+        edtHyroNum4.setVisible( false);
+        edtHyroNum5.setVisible( false);
+        edtHyroNum6.setVisible( false);
+        edtHyroNum7.setVisible( false);
+        edtHyroNum8.setVisible( false);
+        
+        
+        btnLogTrace.setSelected( logger.getLevel() == Level.TRACE);
+        btnLogDebug.setSelected( logger.getLevel() == Level.DEBUG);
+        btnLogInfo.setSelected(  logger.getLevel() == Level.INFO);
+        btnLogWarn.setSelected(  logger.getLevel() == Level.WARN);
+        btnLogError.setSelected( logger.getLevel() == Level.ERROR);
+        btnLogFatal.setSelected( logger.getLevel() == Level.FATAL);
     }
 
     /**
@@ -426,6 +467,7 @@ public class MainFrame3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupLogLevel = new javax.swing.ButtonGroup();
         btnRegimeManual = new javax.swing.JButton();
         btnRegimeUIC = new javax.swing.JButton();
         btnRegimeEdge = new javax.swing.JButton();
@@ -503,7 +545,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         edtDev7_Ano_Voltage = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        lblThreadWState = new javax.swing.JLabel();
+        lblThreadPoller = new javax.swing.JLabel();
         btnVibroOff = new javax.swing.JButton();
         lbl_Dev1_Tubu_RelState = new javax.swing.JLabel();
         btnVibroOn = new javax.swing.JButton();
@@ -555,7 +597,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         edtDev7_Tub_Voltage = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
+        lblVibration = new javax.swing.JLabel();
         btnDev1_Tubu_On = new javax.swing.JButton();
         btnDev1_Tubu_Off = new javax.swing.JButton();
         lblMainSwitch = new javax.swing.JLabel();
@@ -570,9 +612,30 @@ public class MainFrame3 extends javax.swing.JFrame {
         btnCalibration = new javax.swing.JButton();
         lblDev1_tubu = new javax.swing.JLabel();
         lblThreadRState = new javax.swing.JLabel();
+        lblThreadWState = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        btnFanOn = new javax.swing.JButton();
+        lblFan = new javax.swing.JLabel();
+        btnFanOff = new javax.swing.JButton();
+        lblThreadExecutor = new javax.swing.JLabel();
+        btn04mA = new javax.swing.JButton();
+        btnLogDebug = new javax.swing.JToggleButton();
+        btnLogTrace = new javax.swing.JToggleButton();
+        btnLogWarn = new javax.swing.JToggleButton();
+        btnLogInfo = new javax.swing.JToggleButton();
+        btnLogFatal = new javax.swing.JToggleButton();
+        btnLogError = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Система управления и поддержания разряда кольцевого лазерного резонатора.   1.00   НПО Алькор-Лаборатории 2014");
+        setTitle("Система управления и поддержания разряда кольцевого лазерного резонатора.   1.00 (2016.07.19 12:58)   НПО Алькор-Лаборатории 2016");
         setMinimumSize(new java.awt.Dimension(1630, 1020));
         setResizable(false);
         addMouseWheelListener(new java.awt.event.MouseWheelListener() {
@@ -600,7 +663,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegimeUIC);
-        btnRegimeUIC.setBounds(10, 100, 210, 80);
+        btnRegimeUIC.setBounds(10, 90, 210, 80);
 
         btnRegimeEdge.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         btnRegimeEdge.setText("<html><center>ИЗМЕРЕНИЕ<br>ПОРОГОВОГО<br>ТОКА</center></html>");
@@ -611,7 +674,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegimeEdge);
-        btnRegimeEdge.setBounds(10, 280, 210, 80);
+        btnRegimeEdge.setBounds(10, 250, 210, 80);
 
         btnRegimeProcessing.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         btnRegimeProcessing.setText("ОБРАБОТКА");
@@ -621,7 +684,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegimeProcessing);
-        btnRegimeProcessing.setBounds(10, 190, 210, 80);
+        btnRegimeProcessing.setBounds(10, 170, 210, 80);
 
         sldOuterCurrent.setMajorTickSpacing(500);
         sldOuterCurrent.setMaximum(3100);
@@ -651,7 +714,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(edtOuterCurrent);
-        edtOuterCurrent.setBounds(950, 20, 200, 100);
+        edtOuterCurrent.setBounds(950, 20, 180, 100);
 
         btnOuterCurrentSpinUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/up.gif"))); // NOI18N
         btnOuterCurrentSpinUp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -663,7 +726,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnOuterCurrentSpinUp);
-        btnOuterCurrentSpinUp.setBounds(1160, 20, 32, 50);
+        btnOuterCurrentSpinUp.setBounds(1140, 20, 60, 50);
 
         btnOuterCurrentSpinDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/down.gif"))); // NOI18N
         btnOuterCurrentSpinDown.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -675,7 +738,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnOuterCurrentSpinDown);
-        btnOuterCurrentSpinDown.setBounds(1160, 70, 32, 50);
+        btnOuterCurrentSpinDown.setBounds(1140, 70, 60, 50);
 
         btn05mA.setText("500 мкА");
         btn05mA.addActionListener(new java.awt.event.ActionListener() {
@@ -684,7 +747,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn05mA);
-        btn05mA.setBounds(325, 90, 90, 28);
+        btn05mA.setBounds(330, 90, 90, 28);
 
         btn10mA.setText("1000 мкА");
         btn10mA.addActionListener(new java.awt.event.ActionListener() {
@@ -741,7 +804,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSwitchOff);
-        btnSwitchOff.setBounds(10, 520, 210, 60);
+        btnSwitchOff.setBounds(10, 450, 210, 60);
 
         btnSwitchOn.setBackground(new java.awt.Color(210, 110, 110));
         btnSwitchOn.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
@@ -752,47 +815,47 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSwitchOn);
-        btnSwitchOn.setBounds(10, 390, 210, 60);
+        btnSwitchOn.setBounds(10, 340, 210, 60);
 
         edtHyroNum1.setEditable(false);
         edtHyroNum1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum1);
-        edtHyroNum1.setBounds(240, 180, 110, 30);
+        edtHyroNum1.setBounds(1090, 130, 110, 30);
 
         edtHyroNum2.setEditable(false);
         edtHyroNum2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum2);
-        edtHyroNum2.setBounds(360, 180, 110, 30);
+        edtHyroNum2.setBounds(1090, 130, 110, 30);
 
         edtHyroNum3.setEditable(false);
         edtHyroNum3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum3);
-        edtHyroNum3.setBounds(480, 180, 110, 30);
+        edtHyroNum3.setBounds(1090, 130, 110, 30);
 
         edtHyroNum4.setEditable(false);
         edtHyroNum4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum4);
-        edtHyroNum4.setBounds(600, 180, 110, 30);
+        edtHyroNum4.setBounds(1090, 130, 110, 30);
 
         edtHyroNum5.setEditable(false);
         edtHyroNum5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum5);
-        edtHyroNum5.setBounds(720, 180, 110, 30);
+        edtHyroNum5.setBounds(1090, 130, 110, 30);
 
         edtHyroNum6.setEditable(false);
         edtHyroNum6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum6);
-        edtHyroNum6.setBounds(840, 180, 110, 30);
+        edtHyroNum6.setBounds(1090, 130, 110, 30);
 
         edtHyroNum8.setEditable(false);
         edtHyroNum8.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum8);
-        edtHyroNum8.setBounds(1080, 180, 110, 30);
+        edtHyroNum8.setBounds(1090, 130, 110, 30);
 
         edtHyroNum7.setEditable(false);
         edtHyroNum7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         getContentPane().add(edtHyroNum7);
-        edtHyroNum7.setBounds(960, 180, 110, 30);
+        edtHyroNum7.setBounds(1090, 130, 110, 30);
 
         lblManagementTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblManagementTitle.setText("Управление");
@@ -804,7 +867,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev1_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev1_anode.setText("1");
         getContentPane().add(lblDev1_anode);
-        lblDev1_anode.setBounds(240, 340, 40, 30);
+        lblDev1_anode.setBounds(240, 270, 40, 30);
 
         btnDev1_Anode_Off.setText("ВЫКЛ");
         btnDev1_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
@@ -813,12 +876,12 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDev1_Anode_Off);
-        btnDev1_Anode_Off.setBounds(240, 380, 110, 30);
+        btnDev1_Anode_Off.setBounds(240, 310, 110, 30);
 
         lbl_Dev1_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev1_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev1_Anode_RelState);
-        lbl_Dev1_Anode_RelState.setBounds(280, 340, 70, 30);
+        lbl_Dev1_Anode_RelState.setBounds(280, 270, 70, 30);
 
         btnDev1_Anode_On.setText("ВКЛ");
         btnDev1_Anode_On.addActionListener(new java.awt.event.ActionListener() {
@@ -827,237 +890,223 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDev1_Anode_On);
-        btnDev1_Anode_On.setBounds(240, 300, 110, 30);
+        btnDev1_Anode_On.setBounds(240, 230, 110, 30);
 
         lblDev2_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev2_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev2_anode.setText("3");
         getContentPane().add(lblDev2_anode);
-        lblDev2_anode.setBounds(360, 340, 40, 30);
+        lblDev2_anode.setBounds(360, 270, 40, 30);
 
         btnDev2_Anode_Off.setText("ВЫКЛ");
-        btnDev2_Anode_Off.setEnabled(false);
         btnDev2_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev2_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev2_Anode_Off);
-        btnDev2_Anode_Off.setBounds(360, 380, 110, 30);
+        btnDev2_Anode_Off.setBounds(360, 310, 110, 30);
 
         lbl_Dev2_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev2_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev2_Anode_RelState);
-        lbl_Dev2_Anode_RelState.setBounds(400, 340, 70, 30);
+        lbl_Dev2_Anode_RelState.setBounds(400, 270, 70, 30);
 
         btnDev2_Anode_On.setText("ВКЛ");
-        btnDev2_Anode_On.setEnabled(false);
         btnDev2_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev2_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev2_Anode_On);
-        btnDev2_Anode_On.setBounds(360, 300, 110, 30);
+        btnDev2_Anode_On.setBounds(360, 230, 110, 30);
 
         lblDev3_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev3_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev3_anode.setText("5");
         getContentPane().add(lblDev3_anode);
-        lblDev3_anode.setBounds(480, 340, 40, 30);
+        lblDev3_anode.setBounds(480, 270, 40, 30);
 
         btnDev3_Anode_Off.setText("ВЫКЛ");
-        btnDev3_Anode_Off.setEnabled(false);
         btnDev3_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev3_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev3_Anode_Off);
-        btnDev3_Anode_Off.setBounds(480, 380, 110, 30);
+        btnDev3_Anode_Off.setBounds(480, 310, 110, 30);
 
         lbl_Dev3_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev3_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev3_Anode_RelState);
-        lbl_Dev3_Anode_RelState.setBounds(520, 340, 70, 30);
+        lbl_Dev3_Anode_RelState.setBounds(520, 270, 70, 30);
 
         btnDev3_Anode_On.setText("ВКЛ");
-        btnDev3_Anode_On.setEnabled(false);
         btnDev3_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev3_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev3_Anode_On);
-        btnDev3_Anode_On.setBounds(480, 300, 110, 30);
+        btnDev3_Anode_On.setBounds(480, 230, 110, 30);
 
         lblDev4_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev4_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev4_anode.setText("7");
         getContentPane().add(lblDev4_anode);
-        lblDev4_anode.setBounds(600, 340, 40, 30);
+        lblDev4_anode.setBounds(600, 270, 40, 30);
 
         btnDev4_Anode_Off.setText("ВЫКЛ");
-        btnDev4_Anode_Off.setEnabled(false);
         btnDev4_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev4_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev4_Anode_Off);
-        btnDev4_Anode_Off.setBounds(600, 380, 110, 30);
+        btnDev4_Anode_Off.setBounds(600, 310, 110, 30);
 
         lbl_Dev4_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev4_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev4_Anode_RelState);
-        lbl_Dev4_Anode_RelState.setBounds(640, 340, 70, 30);
+        lbl_Dev4_Anode_RelState.setBounds(640, 270, 70, 30);
 
         btnDev4_Anode_On.setText("ВКЛ");
-        btnDev4_Anode_On.setEnabled(false);
         btnDev4_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev4_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev4_Anode_On);
-        btnDev4_Anode_On.setBounds(600, 300, 110, 30);
+        btnDev4_Anode_On.setBounds(600, 230, 110, 30);
 
         lblDev5_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev5_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev5_anode.setText("9");
         getContentPane().add(lblDev5_anode);
-        lblDev5_anode.setBounds(720, 340, 40, 30);
+        lblDev5_anode.setBounds(720, 270, 40, 30);
 
         btnDev5_Anode_Off.setText("ВЫКЛ");
-        btnDev5_Anode_Off.setEnabled(false);
         btnDev5_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev5_Anode_Off);
-        btnDev5_Anode_Off.setBounds(720, 380, 110, 30);
+        btnDev5_Anode_Off.setBounds(720, 310, 110, 30);
 
         lbl_Dev5_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev5_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev5_Anode_RelState);
-        lbl_Dev5_Anode_RelState.setBounds(760, 340, 70, 30);
+        lbl_Dev5_Anode_RelState.setBounds(760, 270, 70, 30);
 
         btnDev5_Anode_On.setText("ВКЛ");
-        btnDev5_Anode_On.setEnabled(false);
         btnDev5_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev5_Anode_On);
-        btnDev5_Anode_On.setBounds(720, 300, 110, 30);
+        btnDev5_Anode_On.setBounds(720, 230, 110, 30);
 
         lblDev6_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev6_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev6_anode.setText("11");
         getContentPane().add(lblDev6_anode);
-        lblDev6_anode.setBounds(840, 340, 40, 30);
+        lblDev6_anode.setBounds(840, 270, 40, 30);
 
         btnDev6_Anode_Off.setText("ВЫКЛ");
-        btnDev6_Anode_Off.setEnabled(false);
         btnDev6_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev6_Anode_Off);
-        btnDev6_Anode_Off.setBounds(840, 380, 110, 30);
+        btnDev6_Anode_Off.setBounds(840, 310, 110, 30);
 
         lbl_Dev6_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev6_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev6_Anode_RelState);
-        lbl_Dev6_Anode_RelState.setBounds(880, 340, 70, 30);
+        lbl_Dev6_Anode_RelState.setBounds(880, 270, 70, 30);
 
         btnDev6_Anode_On.setText("ВКЛ");
-        btnDev6_Anode_On.setEnabled(false);
         btnDev6_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev6_Anode_On);
-        btnDev6_Anode_On.setBounds(840, 300, 110, 30);
+        btnDev6_Anode_On.setBounds(840, 230, 110, 30);
 
         lblDev7_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev7_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev7_anode.setText("13");
         getContentPane().add(lblDev7_anode);
-        lblDev7_anode.setBounds(960, 340, 40, 30);
+        lblDev7_anode.setBounds(960, 270, 40, 30);
 
         btnDev7_Anode_Off.setText("ВЫКЛ");
-        btnDev7_Anode_Off.setEnabled(false);
         btnDev7_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev7_Anode_Off);
-        btnDev7_Anode_Off.setBounds(960, 380, 110, 30);
+        btnDev7_Anode_Off.setBounds(960, 310, 110, 30);
 
         lbl_Dev7_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev7_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev7_Anode_RelState);
-        lbl_Dev7_Anode_RelState.setBounds(1000, 340, 70, 30);
+        lbl_Dev7_Anode_RelState.setBounds(1000, 270, 70, 30);
 
         btnDev7_Anode_On.setText("ВКЛ");
-        btnDev7_Anode_On.setEnabled(false);
         btnDev7_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev7_Anode_On);
-        btnDev7_Anode_On.setBounds(960, 300, 110, 30);
+        btnDev7_Anode_On.setBounds(960, 230, 110, 30);
 
         lblDev8_anode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev8_anode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
         lblDev8_anode.setText("15");
         getContentPane().add(lblDev8_anode);
-        lblDev8_anode.setBounds(1080, 340, 40, 30);
+        lblDev8_anode.setBounds(1080, 270, 40, 30);
 
         btnDev8_Anode_Off.setText("ВЫКЛ");
-        btnDev8_Anode_Off.setEnabled(false);
         btnDev8_Anode_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Anode_OffActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev8_Anode_Off);
-        btnDev8_Anode_Off.setBounds(1080, 380, 110, 30);
+        btnDev8_Anode_Off.setBounds(1080, 310, 110, 30);
 
         lbl_Dev8_Anode_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev8_Anode_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
         getContentPane().add(lbl_Dev8_Anode_RelState);
-        lbl_Dev8_Anode_RelState.setBounds(1120, 340, 70, 30);
+        lbl_Dev8_Anode_RelState.setBounds(1120, 270, 70, 30);
 
         btnDev8_Anode_On.setText("ВКЛ");
-        btnDev8_Anode_On.setEnabled(false);
         btnDev8_Anode_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Anode_OnActionPerformed(evt);
             }
         });
         getContentPane().add(btnDev8_Anode_On);
-        btnDev8_Anode_On.setBounds(1080, 300, 110, 30);
+        btnDev8_Anode_On.setBounds(1080, 230, 110, 30);
 
         jLabel19.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("АНОДЫ");
         getContentPane().add(jLabel19);
-        jLabel19.setBounds(600, 220, 230, 30);
+        jLabel19.setBounds(600, 150, 230, 30);
 
         edtDev1_Ano_Current.setEditable(false);
         edtDev1_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev1_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev1_Ano_Current.setText("-");
         getContentPane().add(edtDev1_Ano_Current);
-        edtDev1_Ano_Current.setBounds(240, 450, 110, 40);
+        edtDev1_Ano_Current.setBounds(240, 380, 110, 40);
 
         edtDev2_Ano_Current.setEditable(false);
         edtDev2_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
@@ -1065,49 +1114,49 @@ public class MainFrame3 extends javax.swing.JFrame {
         edtDev2_Ano_Current.setText("-");
         edtDev2_Ano_Current.setToolTipText("");
         getContentPane().add(edtDev2_Ano_Current);
-        edtDev2_Ano_Current.setBounds(360, 450, 110, 40);
+        edtDev2_Ano_Current.setBounds(360, 380, 110, 40);
 
         edtDev3_Ano_Current.setEditable(false);
         edtDev3_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev3_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev3_Ano_Current.setText("-");
         getContentPane().add(edtDev3_Ano_Current);
-        edtDev3_Ano_Current.setBounds(480, 450, 110, 40);
+        edtDev3_Ano_Current.setBounds(480, 380, 110, 40);
 
         edtDev4_Ano_Current.setEditable(false);
         edtDev4_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev4_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev4_Ano_Current.setText("-");
         getContentPane().add(edtDev4_Ano_Current);
-        edtDev4_Ano_Current.setBounds(600, 450, 110, 40);
+        edtDev4_Ano_Current.setBounds(600, 380, 110, 40);
 
         edtDev5_Ano_Current.setEditable(false);
         edtDev5_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev5_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev5_Ano_Current.setText("-");
         getContentPane().add(edtDev5_Ano_Current);
-        edtDev5_Ano_Current.setBounds(720, 450, 110, 40);
+        edtDev5_Ano_Current.setBounds(720, 380, 110, 40);
 
         edtDev6_Ano_Current.setEditable(false);
         edtDev6_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev6_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev6_Ano_Current.setText("-");
         getContentPane().add(edtDev6_Ano_Current);
-        edtDev6_Ano_Current.setBounds(840, 450, 110, 40);
+        edtDev6_Ano_Current.setBounds(840, 380, 110, 40);
 
         edtDev8_Ano_Current.setEditable(false);
         edtDev8_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev8_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev8_Ano_Current.setText("-");
         getContentPane().add(edtDev8_Ano_Current);
-        edtDev8_Ano_Current.setBounds(1080, 450, 110, 40);
+        edtDev8_Ano_Current.setBounds(1080, 380, 110, 40);
 
         edtDev7_Ano_Current.setEditable(false);
         edtDev7_Ano_Current.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev7_Ano_Current.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev7_Ano_Current.setText("-");
         getContentPane().add(edtDev7_Ano_Current);
-        edtDev7_Ano_Current.setBounds(960, 450, 110, 40);
+        edtDev7_Ano_Current.setBounds(960, 380, 110, 40);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("Ток, мкА");
@@ -1119,56 +1168,56 @@ public class MainFrame3 extends javax.swing.JFrame {
         edtDev1_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev1_Ano_Voltage.setText("-");
         getContentPane().add(edtDev1_Ano_Voltage);
-        edtDev1_Ano_Voltage.setBounds(240, 530, 110, 40);
+        edtDev1_Ano_Voltage.setBounds(240, 460, 110, 40);
 
         edtDev2_Ano_Voltage.setEditable(false);
         edtDev2_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev2_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev2_Ano_Voltage.setText("-");
         getContentPane().add(edtDev2_Ano_Voltage);
-        edtDev2_Ano_Voltage.setBounds(360, 530, 110, 40);
+        edtDev2_Ano_Voltage.setBounds(360, 460, 110, 40);
 
         edtDev3_Ano_Voltage.setEditable(false);
         edtDev3_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev3_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev3_Ano_Voltage.setText("-");
         getContentPane().add(edtDev3_Ano_Voltage);
-        edtDev3_Ano_Voltage.setBounds(480, 530, 110, 40);
+        edtDev3_Ano_Voltage.setBounds(480, 460, 110, 40);
 
         edtDev4_Ano_Voltage.setEditable(false);
         edtDev4_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev4_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev4_Ano_Voltage.setText("-");
         getContentPane().add(edtDev4_Ano_Voltage);
-        edtDev4_Ano_Voltage.setBounds(600, 530, 110, 40);
+        edtDev4_Ano_Voltage.setBounds(600, 460, 110, 40);
 
         edtDev5_Ano_Voltage.setEditable(false);
         edtDev5_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev5_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev5_Ano_Voltage.setText("-");
         getContentPane().add(edtDev5_Ano_Voltage);
-        edtDev5_Ano_Voltage.setBounds(720, 530, 110, 40);
+        edtDev5_Ano_Voltage.setBounds(720, 460, 110, 40);
 
         edtDev6_Ano_Voltage.setEditable(false);
         edtDev6_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev6_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev6_Ano_Voltage.setText("-");
         getContentPane().add(edtDev6_Ano_Voltage);
-        edtDev6_Ano_Voltage.setBounds(840, 530, 110, 40);
+        edtDev6_Ano_Voltage.setBounds(840, 460, 110, 40);
 
         edtDev8_Ano_Voltage.setEditable(false);
         edtDev8_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev8_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev8_Ano_Voltage.setText("-");
         getContentPane().add(edtDev8_Ano_Voltage);
-        edtDev8_Ano_Voltage.setBounds(1080, 530, 110, 40);
+        edtDev8_Ano_Voltage.setBounds(1080, 460, 110, 40);
 
         edtDev7_Ano_Voltage.setEditable(false);
         edtDev7_Ano_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
         edtDev7_Ano_Voltage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         edtDev7_Ano_Voltage.setText("-");
         getContentPane().add(edtDev7_Ano_Voltage);
-        edtDev7_Ano_Voltage.setBounds(960, 530, 110, 40);
+        edtDev7_Ano_Voltage.setBounds(960, 460, 110, 40);
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("Напряжение, В");
@@ -1179,17 +1228,22 @@ public class MainFrame3 extends javax.swing.JFrame {
         jLabel22.setText("Управление");
         jLabel22.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(jLabel22);
-        jLabel22.setBounds(600, 270, 230, 30);
+        jLabel22.setBounds(600, 200, 230, 30);
 
-        lblThreadWState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblThreadWState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/red_little_dark.gif"))); // NOI18N
-        lblThreadWState.setText("W");
-        getContentPane().add(lblThreadWState);
-        lblThreadWState.setBounds(50, 950, 40, 30);
+        lblThreadPoller.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThreadPoller.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/red_little_dark.gif"))); // NOI18N
+        lblThreadPoller.setText("P");
+        getContentPane().add(lblThreadPoller);
+        lblThreadPoller.setBounds(90, 950, 40, 30);
 
         btnVibroOff.setText("ВЫКЛ");
+        btnVibroOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVibroOffActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVibroOff);
-        btnVibroOff.setBounds(10, 740, 210, 40);
+        btnVibroOff.setBounds(50, 610, 130, 40);
 
         lbl_Dev1_Tubu_RelState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Dev1_Tubu_RelState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
@@ -1197,8 +1251,13 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev1_Tubu_RelState.setBounds(280, 730, 70, 30);
 
         btnVibroOn.setText("ВКЛ");
+        btnVibroOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVibroOnActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVibroOn);
-        btnVibroOn.setBounds(10, 650, 210, 40);
+        btnVibroOn.setBounds(50, 540, 130, 40);
 
         lblDev2_tubu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev2_tubu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
@@ -1207,7 +1266,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev2_tubu.setBounds(360, 730, 40, 30);
 
         btnDev2_Tubu_Off.setText("ВЫКЛ");
-        btnDev2_Tubu_Off.setEnabled(false);
         btnDev2_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev2_Tubu_OffActionPerformed(evt);
@@ -1222,7 +1280,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev2_Tubu_RelState.setBounds(400, 730, 70, 30);
 
         btnDev2_Tubu_On.setText("ВКЛ");
-        btnDev2_Tubu_On.setEnabled(false);
         btnDev2_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev2_Tubu_OnActionPerformed(evt);
@@ -1238,7 +1295,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev3_tubu.setBounds(480, 730, 40, 30);
 
         btnDev3_Tubu_Off.setText("ВЫКЛ");
-        btnDev3_Tubu_Off.setEnabled(false);
         btnDev3_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev3_Tubu_OffActionPerformed(evt);
@@ -1253,7 +1309,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev3_Tubu_RelState.setBounds(520, 730, 70, 30);
 
         btnDev3_Tubu_On.setText("ВКЛ");
-        btnDev3_Tubu_On.setEnabled(false);
         btnDev3_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev3_Tubu_OnActionPerformed(evt);
@@ -1269,7 +1324,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev4_tubu.setBounds(600, 730, 40, 30);
 
         btnDev4_Tubu_Off.setText("ВЫКЛ");
-        btnDev4_Tubu_Off.setEnabled(false);
         btnDev4_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev4_Tubu_OffActionPerformed(evt);
@@ -1284,7 +1338,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev4_Tubu_RelState.setBounds(640, 730, 70, 30);
 
         btnDev4_Tubu_On.setText("ВКЛ");
-        btnDev4_Tubu_On.setEnabled(false);
         btnDev4_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev4_Tubu_OnActionPerformed(evt);
@@ -1300,7 +1353,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev5_tubu.setBounds(720, 730, 40, 30);
 
         btnDev5_Tubu_Off.setText("ВЫКЛ");
-        btnDev5_Tubu_Off.setEnabled(false);
         btnDev5_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Tubu_OffActionPerformed(evt);
@@ -1315,7 +1367,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev5_Tubu_RelState.setBounds(760, 730, 70, 30);
 
         btnDev5_Tubu_On.setText("ВКЛ");
-        btnDev5_Tubu_On.setEnabled(false);
         btnDev5_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev5_Tubu_OnActionPerformed(evt);
@@ -1331,7 +1382,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev6_tubu.setBounds(840, 730, 40, 30);
 
         btnDev6_Tubu_Off.setText("ВЫКЛ");
-        btnDev6_Tubu_Off.setEnabled(false);
         btnDev6_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Tubu_OffActionPerformed(evt);
@@ -1346,7 +1396,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev6_Tubu_RelState.setBounds(880, 730, 70, 30);
 
         btnDev6_Tubu_On.setText("ВКЛ");
-        btnDev6_Tubu_On.setEnabled(false);
         btnDev6_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev6_Tubu_OnActionPerformed(evt);
@@ -1362,7 +1411,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev7_tubu.setBounds(960, 730, 40, 30);
 
         btnDev7_Tubu_Off.setText("ВЫКЛ");
-        btnDev7_Tubu_Off.setEnabled(false);
         btnDev7_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Tubu_OffActionPerformed(evt);
@@ -1377,7 +1425,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev7_Tubu_RelState.setBounds(1000, 730, 70, 30);
 
         btnDev7_Tubu_On.setText("ВКЛ");
-        btnDev7_Tubu_On.setEnabled(false);
         btnDev7_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev7_Tubu_OnActionPerformed(evt);
@@ -1393,7 +1440,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev8_tubu.setBounds(1080, 730, 40, 30);
 
         btnDev8_Tubu_Off.setText("ВЫКЛ");
-        btnDev8_Tubu_Off.setEnabled(false);
         btnDev8_Tubu_Off.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Tubu_OffActionPerformed(evt);
@@ -1408,7 +1454,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lbl_Dev8_Tubu_RelState.setBounds(1120, 730, 70, 30);
 
         btnDev8_Tubu_On.setText("ВКЛ");
-        btnDev8_Tubu_On.setEnabled(false);
         btnDev8_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDev8_Tubu_OnActionPerformed(evt);
@@ -1482,7 +1527,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel40.setText("Ток, мкА");
         getContentPane().add(jLabel40);
-        jLabel40.setBounds(240, 410, 950, 40);
+        jLabel40.setBounds(240, 340, 950, 40);
 
         edtDev1_Tub_Voltage.setEditable(false);
         edtDev1_Tub_Voltage.setFont(new java.awt.Font("Cantarell", 0, 28)); // NOI18N
@@ -1544,17 +1589,17 @@ public class MainFrame3 extends javax.swing.JFrame {
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel41.setText("Напряжение, В");
         getContentPane().add(jLabel41);
-        jLabel41.setBounds(240, 490, 950, 40);
+        jLabel41.setBounds(240, 420, 950, 40);
 
         jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel42.setText("Вибрация");
         getContentPane().add(jLabel42);
-        jLabel42.setBounds(10, 610, 210, 40);
+        jLabel42.setBounds(10, 510, 210, 30);
 
-        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
-        getContentPane().add(jLabel44);
-        jLabel44.setBounds(20, 700, 190, 30);
+        lblVibration.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVibration.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
+        getContentPane().add(lblVibration);
+        lblVibration.setBounds(20, 580, 190, 30);
 
         btnDev1_Tubu_On.setText("ВКЛ");
         btnDev1_Tubu_On.addActionListener(new java.awt.event.ActionListener() {
@@ -1578,7 +1623,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblMainSwitch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMainSwitch.setText("СНЯТО");
         getContentPane().add(lblMainSwitch);
-        lblMainSwitch.setBounds(20, 460, 190, 50);
+        lblMainSwitch.setBounds(20, 400, 190, 50);
 
         btnToggleBlockScreen.setText("Заблокировать  экран");
         btnToggleBlockScreen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1596,7 +1641,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSettings);
-        btnSettings.setBounds(10, 860, 210, 40);
+        btnSettings.setBounds(10, 870, 210, 40);
 
         btnAllTubusOn.setText("включить все каналы штенгелей");
         btnAllTubusOn.addActionListener(new java.awt.event.ActionListener() {
@@ -1623,7 +1668,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllAnodesOn);
-        btnAllAnodesOn.setBounds(240, 240, 350, 28);
+        btnAllAnodesOn.setBounds(240, 170, 350, 28);
 
         btnAllAnodesOff.setText("выключить все каналы анодов");
         btnAllAnodesOff.addActionListener(new java.awt.event.ActionListener() {
@@ -1632,7 +1677,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAllAnodesOff);
-        btnAllAnodesOff.setBounds(840, 240, 350, 28);
+        btnAllAnodesOff.setBounds(840, 170, 350, 28);
 
         pnlAdditionalPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlAdditionalPanel.setLayout(null);
@@ -1646,7 +1691,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSetDevSerNums);
-        btnSetDevSerNums.setBounds(600, 140, 230, 28);
+        btnSetDevSerNums.setBounds(970, 130, 230, 28);
 
         btnCalibration.setText("Калибровка");
         btnCalibration.addActionListener(new java.awt.event.ActionListener() {
@@ -1655,7 +1700,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCalibration);
-        btnCalibration.setBounds(10, 810, 210, 40);
+        btnCalibration.setBounds(10, 830, 210, 40);
 
         lblDev1_tubu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDev1_tubu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/green_little_bright.gif"))); // NOI18N
@@ -1668,6 +1713,193 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblThreadRState.setText("R");
         getContentPane().add(lblThreadRState);
         lblThreadRState.setBounds(10, 950, 40, 30);
+
+        lblThreadWState.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThreadWState.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/red_little_dark.gif"))); // NOI18N
+        lblThreadWState.setText("W");
+        getContentPane().add(lblThreadWState);
+        lblThreadWState.setBounds(50, 950, 40, 30);
+
+        jLabel1.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("8");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(1080, 510, 110, 80);
+
+        jLabel2.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("1");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(240, 510, 110, 80);
+
+        jLabel3.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("2");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(360, 510, 110, 80);
+
+        jLabel4.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("3");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(480, 510, 110, 80);
+
+        jLabel5.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("4");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(600, 510, 110, 80);
+
+        jLabel6.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("5");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(720, 510, 110, 80);
+
+        jLabel7.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("6");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(840, 510, 110, 80);
+
+        jLabel8.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("7");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(960, 510, 110, 80);
+
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel43.setText("Вентилятор");
+        getContentPane().add(jLabel43);
+        jLabel43.setBounds(10, 650, 210, 30);
+
+        btnFanOn.setText("ВКЛ");
+        btnFanOn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFanOnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFanOn);
+        btnFanOn.setBounds(50, 680, 130, 40);
+
+        lblFan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/blackLED.gif"))); // NOI18N
+        getContentPane().add(lblFan);
+        lblFan.setBounds(20, 720, 190, 30);
+
+        btnFanOff.setText("ВЫКЛ");
+        btnFanOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFanOffActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFanOff);
+        btnFanOff.setBounds(50, 750, 130, 40);
+
+        lblThreadExecutor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThreadExecutor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ams/images/red_little_dark.gif"))); // NOI18N
+        lblThreadExecutor.setText("E");
+        getContentPane().add(lblThreadExecutor);
+        lblThreadExecutor.setBounds(130, 950, 40, 30);
+
+        btn04mA.setText("400 мкА");
+        btn04mA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn04mAActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn04mA);
+        btn04mA.setBounds(240, 90, 80, 28);
+
+        btnGroupLogLevel.add(btnLogDebug);
+        btnLogDebug.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogDebug.setText("D");
+        btnLogDebug.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogDebug.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogDebug.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogDebug.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogDebug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogDebugActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogDebug);
+        btnLogDebug.setBounds(40, 795, 35, 35);
+
+        btnGroupLogLevel.add(btnLogTrace);
+        btnLogTrace.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogTrace.setText("T");
+        btnLogTrace.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogTrace.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogTrace.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogTrace.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogTrace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogTraceActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogTrace);
+        btnLogTrace.setBounds(0, 795, 35, 35);
+
+        btnGroupLogLevel.add(btnLogWarn);
+        btnLogWarn.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogWarn.setText("W");
+        btnLogWarn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogWarn.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogWarn.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogWarn.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogWarn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogWarnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogWarn);
+        btnLogWarn.setBounds(120, 795, 35, 35);
+
+        btnGroupLogLevel.add(btnLogInfo);
+        btnLogInfo.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogInfo.setText("I");
+        btnLogInfo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogInfo.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogInfo.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogInfo.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInfoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogInfo);
+        btnLogInfo.setBounds(80, 795, 35, 35);
+
+        btnGroupLogLevel.add(btnLogFatal);
+        btnLogFatal.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogFatal.setText("F");
+        btnLogFatal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogFatal.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogFatal.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogFatal.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogFatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogFatalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogFatal);
+        btnLogFatal.setBounds(200, 795, 35, 35);
+
+        btnGroupLogLevel.add(btnLogError);
+        btnLogError.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogError.setText("E");
+        btnLogError.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLogError.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnLogError.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnLogError.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnLogError.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogErrorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogError);
+        btnLogError.setBounds(160, 795, 35, 35);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1952,7 +2184,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Включение канала штенгеля для устройства nDevice
      * @param nDevice 
      */
-    void TurnOnAnoDevice( int nDevice) {
+    public void TurnOnAnoDevice( int nDevice) {
         if( !theApp.GetRxTx().IsActive()) return;
         
         
@@ -1999,7 +2231,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Выключение канала анода для устройства nDevice
      * @param nDevice 
      */
-    void TurnOffAnoDevice( int nDevice) {
+    public void TurnOffAnoDevice( int nDevice) {
         if( !theApp.GetRxTx().IsActive()) return;
         
         //DEVICE.MANAGER
@@ -2316,6 +2548,18 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblMainSwitch.setForeground( new Color(0, 0, 0));
         
         if( !btnToggleBlockScreen.isSelected()) SetRegimeButtonsState( true);
+        
+        /*
+        //Выключаем канал реле для вентиллятора шкафа
+        try {
+            Adam4068 relayFan = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nFanChan = theApp.GetSettings().GetREL3_Chan_Fan();
+            relayFan.QueueSetRelayStateBitCommand( nFanChan, false);
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке выключить реле вентиллятора шкафа произошла исключительная ситуация.", ex);
+        }
+        */
     }//GEN-LAST:event_btnSwitchOffActionPerformed
 
     /**
@@ -2327,6 +2571,13 @@ public class MainFrame3 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSettingsActionPerformed
 
     /**
+     * public-обёртка для включения рубильника
+     */ 
+    public void fakeSwitchOn() {
+        btnSwitchOnActionPerformed( null);
+    }
+    
+    /**
      * Включение рубильника
      * @param evt 
      */
@@ -2337,6 +2588,18 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         lblMainSwitch.setText("ПОДАНО");
         lblMainSwitch.setForeground( new Color( 200, 0, 0));
+        
+        /*
+        //включаем канал реле для вентиллятора шкафа
+        try {
+            Adam4068 relayFan = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nFanChan = theApp.GetSettings().GetREL3_Chan_Fan();
+            relayFan.QueueSetRelayStateBitCommand( nFanChan, true);
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке включить реле вентиллятора шкафа произошла исключительная ситуация.", ex);
+        }
+        */
     }//GEN-LAST:event_btnSwitchOnActionPerformed
 
     /**
@@ -2482,7 +2745,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Включение канала штенгеля для устройства nDevice
      * @param nDevice 
      */
-    void TurnOnTubuDevice( int nDevice) {
+    public void TurnOnTubuDevice( int nDevice) {
         if( !theApp.GetRxTx().IsActive()) return;
         
         //DEVICE.MANAGER
@@ -2528,7 +2791,7 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Выключение канала штенгеля для устройства nDevice
      * @param nDevice 
      */
-    void TurnOffTubuDevice( int nDevice) {
+    public void TurnOffTubuDevice( int nDevice) {
         if( !theApp.GetRxTx().IsActive()) return;
         
         //DEVICE.MANAGER
@@ -2577,32 +2840,44 @@ public class MainFrame3 extends javax.swing.JFrame {
         while( it.hasNext()) {
             int nDevice = ( int) it.next();
             
-            //Setting DAC values
+            //DEVICE.MANAGER
+            AMSDeviceManager mngr = theApp.GetDevManager_a( nDevice);
+        
+            //РЕЛЕ
+            Adam4068 relay;
+            int nDev_Ano_REL_channel;
+            relay = mngr.GetRelay();
+            nDev_Ano_REL_channel = mngr.GetRelayChannel();
+        
+            //ЦАП
             Adam4024 dac;
-            try {
-                int nDacDev = theApp.GetSettings().GetDev( nDevice).GetAnoDacDev();
-                int nDacChannel = theApp.GetSettings().GetDev( nDevice).GetAnoDacChan();
-                dac = theApp.m_devicesSet.GetDAC( nDacDev);
-                dac.QueueSetChannelOutputValueCommand( nDacChannel, AMSConstants.DAC_CHANNEL_REG_ON_DAC_VOLT);
-            }
-            catch( Exception e) {
-                logger.fatal( "При поочередном включении всех каналов анодов, при работе с соответствующим ЦАП, произошла исключительная ситуация!", e);
-                return;
-            }
+            int nDev_Ano_DAC_channel;
+            dac = mngr.GetDAC();
+            nDev_Ano_DAC_channel = mngr.GetDacChannel();
+        
+            //Включаем менеджера, и зажигаем его лампочку
+            mngr.SetEnabled( true);
+            mngr.GetActiveLed().setIcon( theApp.GetResources().getLittleIconOn());
+        
+            //Ставим на соответствующий канал DAC 6.0 вольт
+            dac.QueueSetChannelOutputValueCommand(
+                nDev_Ano_DAC_channel, AMSConstants.DAC_CHANNEL_REG_ON_DAC_VOLT);
             
-            //Switching relays
-            try {
-                int nRelDev = theApp.GetSettings().GetDev( nDevice).GetAnoRelDev();
-                int nRelChannel = theApp.GetSettings().GetDev( nDevice).GetAnoRelChan();
-                Adam4068 relay = theApp.m_devicesSet.GetRelay( nRelDev);
-                relay.QueueSetRelayStateBitCommand( nRelChannel, true);
-            } catch( Exception e) {
-                logger.fatal( "При поочередном включении всех каналов анодов, при работе с соответствующим реле, произошла исключительная ситуация!", e);
-                return;
+            if( theApp.GetMainSwitcher() == true) {
+                //Включаем соответствующий канал реле
+                relay.QueueSetRelayStateBitCommand(
+                nDev_Ano_REL_channel, true);
+        
+                //посылаем запрос на состояния реле
+                relay.QueueRequestDataCommand();
+        
+                //заблокируем управление соседнего канала
+                theApp.GetDevManager_a(nDevice).BlockNeighbour();
             }
-            
-            //Block neighbour device control
-            theApp.GetDevManager_a(nDevice).BlockNeighbour();
+            else {
+                logger.info( "Включение канала анода заблокировано рубильником.");
+                continue;
+            }            
         }
     }//GEN-LAST:event_btnAllAnodesOnActionPerformed
 
@@ -2637,6 +2912,12 @@ public class MainFrame3 extends javax.swing.JFrame {
             //Setting DAC values
             Adam4024 dac;
             try {
+                //посылаем запрос на состояния реле
+                int nRelDev = theApp.GetSettings().GetDev(nDevice).GetAnoRelDev();
+                int nRelChannel = theApp.GetSettings().GetDev(nDevice).GetAnoRelChan();
+                Adam4068 relay = theApp.m_devicesSet.GetRelay( nRelDev);
+                relay.QueueRequestDataCommand();
+            
                 int nDacDev = theApp.GetSettings().GetDev(nDevice).GetAnoDacDev();
                 int nDacChannel = theApp.GetSettings().GetDev(nDevice).GetAnoDacChan();
                 dac = theApp.m_devicesSet.GetDAC( nDacDev);
@@ -2647,8 +2928,14 @@ public class MainFrame3 extends javax.swing.JFrame {
                 return;
             }
             
+            
+                
             //UnBlock neighbour device control
             theApp.GetDevManager_a(nDevice).UnBlockNeighbour();
+            
+            //выключаем менеджера и гасим его лампочку
+            theApp.GetDevManager_a(nDevice).SetEnabled( false);
+            theApp.GetDevManager_a(nDevice).GetActiveLed().setIcon( theApp.GetResources().getLittleIconOff());
         }
         
         
@@ -2665,32 +2952,45 @@ public class MainFrame3 extends javax.swing.JFrame {
         Iterator it = AMSConstants.getInstance().T_DEVICES.iterator();
         while( it.hasNext()) {
             int nDevice = ( int) it.next();    
-            //Setting DAC values
+            
+            //DEVICE.MANAGER
+            AMSDeviceManager mngr = theApp.GetDevManager_t( nDevice);
+        
+            //ЦАП
             Adam4024 dac;
-            try {
-                int nDacDev = theApp.GetSettings().GetDev(nDevice).GetTubDacDev();
-                int nDacChannel = theApp.GetSettings().GetDev(nDevice).GetTubDacChan();
-                dac = theApp.m_devicesSet.GetDAC( nDacDev);
-                dac.QueueSetChannelOutputValueCommand( nDacChannel, AMSConstants.DAC_CHANNEL_REG_ON_DAC_VOLT);
+            int nDev_Tub_DAC_channel;
+            dac = mngr.GetDAC();
+            nDev_Tub_DAC_channel = mngr.GetDacChannel();
+        
+            //РЕЛЕ
+            Adam4068 relay;
+            int nDev_Tub_REL_channel;
+            relay = mngr.GetRelay();
+            nDev_Tub_REL_channel = mngr.GetRelayChannel();
+        
+            //Включаем менеджера, и зажигаем его лампочку
+            mngr.SetEnabled( true);
+            mngr.GetActiveLed().setIcon( theApp.GetResources().getLittleIconOn());
+        
+            if( theApp.GetMainSwitcher() == true) {
+                //Ставим на соответствующий канал DAC 6.0 вольт
+                dac.QueueSetChannelOutputValueCommand(
+                        nDev_Tub_DAC_channel, AMSConstants.DAC_CHANNEL_REG_ON_DAC_VOLT);
+
+                //Включаем соответствующий канал реле
+                relay.QueueSetRelayStateBitCommand(
+                        nDev_Tub_REL_channel, true);
+
+                //посылаем запрос на состояния реле
+                relay.QueueRequestDataCommand();
+
+                //заблокируем управление соседнего канала
+                theApp.GetDevManager_t(nDevice).BlockNeighbour();
             }
-            catch( Exception e) {
-                logger.fatal( "При поочередном включении всех каналов штенгелей, при работе с соответствующим ЦАП, произошла исключительная ситуация!", e);
+            else {
+                logger.info( "Включение канала штенгеля заблокировано рубильником.");
                 return;
             }
-            
-            //Switching relays
-            try {
-                int nRelDev = theApp.GetSettings().GetDev(nDevice).GetTubRelDev();
-                int nRelChannel = theApp.GetSettings().GetDev(nDevice).GetTubRelChan();
-                Adam4068 relay = theApp.m_devicesSet.GetRelay( nRelDev);
-                relay.QueueSetRelayStateBitCommand( nRelChannel, true);
-            } catch( Exception e) {
-                logger.fatal( "При поочередном включении всех каналов штенгелей, при работе с соответствующим реле, произошла исключительная ситуация!", e);
-                return;
-            }
-            
-            //Block neighbour device control
-            theApp.GetDevManager_t(nDevice).BlockNeighbour();
         }
     }//GEN-LAST:event_btnAllTubusOnActionPerformed
 
@@ -2728,6 +3028,13 @@ public class MainFrame3 extends javax.swing.JFrame {
                 int nDacChannel = theApp.GetSettings().GetDev(nDevice).GetTubDacChan();
                 dac = theApp.m_devicesSet.GetDAC( nDacDev);
                 dac.QueueSetChannelOutputValueCommand( nDacChannel, AMSConstants.DAC_CHANNEL_REG_OFF_DAC_VOLT);
+                
+                //посылаем запрос на состояния реле
+                Adam4068 relay;
+                int nDev_Tub_REL_channel;
+                relay = theApp.GetDevManager_t(nDevice).GetRelay();
+                nDev_Tub_REL_channel = theApp.GetDevManager_t(nDevice).GetRelayChannel(); 
+                relay.QueueRequestDataCommand();
             }
             catch( Exception e) {
                 logger.fatal( "При поочередном выключении всех каналов штенгелей, при работе с соответствующим ЦАП, произошла исключительная ситуация!", e);
@@ -2736,6 +3043,10 @@ public class MainFrame3 extends javax.swing.JFrame {
             
             //UnBlock neighbour device control
             theApp.GetDevManager_t(nDevice).UnBlockNeighbour();
+            
+            //выключаем менеджера и гасим его лампочку
+            theApp.GetDevManager_t(nDevice).SetEnabled( false);
+            theApp.GetDevManager_t(nDevice).GetActiveLed().setIcon( theApp.GetResources().getLittleIconOff());
         }
     }//GEN-LAST:event_btnAllTubusOffActionPerformed
 
@@ -2756,6 +3067,118 @@ public class MainFrame3 extends javax.swing.JFrame {
         theApp.GetCalibration().CallCalibrationDialog();
     }//GEN-LAST:event_btnCalibrationActionPerformed
 
+    private void btnVibroOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVibroOnActionPerformed
+        TurnVibroOn();
+    }//GEN-LAST:event_btnVibroOnActionPerformed
+
+    public void TurnVibroOn() {
+        //включаем канал реле для вибрации
+        try {
+            Adam4068 relayVibro = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nVibroChan = theApp.GetSettings().GetREL3_Chan_Vib();
+            relayVibro.QueueSetRelayStateBitCommand( nVibroChan, true);
+            theApp.m_nVibration = 1;
+            
+            //посылаем запрос на состояния реле
+            relayVibro.QueueRequestDataCommand();
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке включить реле вибрации произошла исключительная ситуация.", ex);
+        }
+    }
+    
+    private void btnVibroOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVibroOffActionPerformed
+        TurnVibroOff();
+    }//GEN-LAST:event_btnVibroOffActionPerformed
+
+    public void TurnVibroOff() {
+        //выключаем канал реле для вибрации
+        try {
+            Adam4068 relayVibro = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nVibroChan = theApp.GetSettings().GetREL3_Chan_Vib();
+            relayVibro.QueueSetRelayStateBitCommand( nVibroChan, false);
+            theApp.m_nVibration = 0;
+            
+            //посылаем запрос на состояния реле
+            relayVibro.QueueRequestDataCommand();
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке выключить реле вибрации произошла исключительная ситуация.", ex);
+        }
+    }
+    
+    private void btnFanOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFanOnActionPerformed
+        TurnFanOn();
+    }//GEN-LAST:event_btnFanOnActionPerformed
+
+    public void TurnFanOn() {
+        //включаем канал реле для вентилятора
+        try {
+            Adam4068 relayFan = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nFanChan = theApp.GetSettings().GetREL3_Chan_Fan();
+            relayFan.QueueSetRelayStateBitCommand( nFanChan, true);
+            
+            //посылаем запрос на состояния реле
+            relayFan.QueueRequestDataCommand();
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке включить реле вентилятора произошла исключительная ситуация.", ex);
+        }
+    }
+    
+    private void btnFanOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFanOffActionPerformed
+        TurnFanOff();
+    }//GEN-LAST:event_btnFanOffActionPerformed
+
+    private void btn04mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn04mAActionPerformed
+        theApp.SetOuterCurrent( 400);
+        refreshControlsState();
+    }//GEN-LAST:event_btn04mAActionPerformed
+
+    private void btnLogTraceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogTraceActionPerformed
+        logger.fatal( "SWITCHING LOGGING TO TRACE");
+        Logger.getRootLogger().setLevel( Level.TRACE);
+    }//GEN-LAST:event_btnLogTraceActionPerformed
+
+    private void btnLogDebugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogDebugActionPerformed
+        logger.fatal( "SWITCHING LOGGING TO DEBUG");
+        Logger.getRootLogger().setLevel( Level.DEBUG);
+    }//GEN-LAST:event_btnLogDebugActionPerformed
+
+    private void btnLogInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInfoActionPerformed
+        logger.fatal( "SWITCHING LOGGING TO INFO");
+        Logger.getRootLogger().setLevel( Level.INFO);
+    }//GEN-LAST:event_btnLogInfoActionPerformed
+
+    private void btnLogWarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogWarnActionPerformed
+        logger.fatal( "SWITCHING LOGGING TO WARN");
+        Logger.getRootLogger().setLevel( Level.WARN);
+    }//GEN-LAST:event_btnLogWarnActionPerformed
+
+    private void btnLogErrorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogErrorActionPerformed
+        logger.fatal( "SWITCHING LOGGING TO ERROR");
+        Logger.getRootLogger().setLevel( Level.ERROR);
+    }//GEN-LAST:event_btnLogErrorActionPerformed
+
+    private void btnLogFatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogFatalActionPerformed
+        logger.fatal("SWITCHING LOGGING TO ERROR");
+        Logger.getRootLogger().setLevel( Level.FATAL);
+    }//GEN-LAST:event_btnLogFatalActionPerformed
+
+    public void TurnFanOff() {
+        //выключаем канал реле для вентилятора
+        try {
+            Adam4068 relayFan = theApp.m_devicesSet.GetRelay( AMSConstants.REL3);
+            int nFanChan = theApp.GetSettings().GetREL3_Chan_Fan();
+            relayFan.QueueSetRelayStateBitCommand( nFanChan, false);
+            
+            //посылаем запрос на состояния реле
+            relayFan.QueueRequestDataCommand();
+        }
+        catch( Exception ex) {
+            logger.error( "При попытке выключить реле вентилятора произошла исключительная ситуация.", ex);
+        }
+    }
     
     /*
     public static void main(String args[]) {
@@ -2803,6 +3226,7 @@ public class MainFrame3 extends javax.swing.JFrame {
     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn04mA;
     private javax.swing.JButton btn05mA;
     private javax.swing.JButton btn10mA;
     private javax.swing.JButton btn15mA;
@@ -2846,6 +3270,15 @@ public class MainFrame3 extends javax.swing.JFrame {
     private javax.swing.JButton btnDev8_Anode_On;
     private javax.swing.JButton btnDev8_Tubu_Off;
     private javax.swing.JButton btnDev8_Tubu_On;
+    private javax.swing.JButton btnFanOff;
+    private javax.swing.JButton btnFanOn;
+    private javax.swing.ButtonGroup btnGroupLogLevel;
+    private javax.swing.JToggleButton btnLogDebug;
+    private javax.swing.JToggleButton btnLogError;
+    private javax.swing.JToggleButton btnLogFatal;
+    private javax.swing.JToggleButton btnLogInfo;
+    private javax.swing.JToggleButton btnLogTrace;
+    private javax.swing.JToggleButton btnLogWarn;
     private javax.swing.JButton btnOuterCurrentSpinDown;
     private javax.swing.JButton btnOuterCurrentSpinUp;
     private javax.swing.JButton btnRegimeEdge;
@@ -2900,15 +3333,23 @@ public class MainFrame3 extends javax.swing.JFrame {
     private javax.swing.JTextField edtHyroNum7;
     private javax.swing.JTextField edtHyroNum8;
     private javax.swing.JTextField edtOuterCurrent;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     public javax.swing.JLabel lblDev1_anode;
     public javax.swing.JLabel lblDev1_tubu;
     public javax.swing.JLabel lblDev2_anode;
@@ -2925,10 +3366,14 @@ public class MainFrame3 extends javax.swing.JFrame {
     public javax.swing.JLabel lblDev7_tubu;
     public javax.swing.JLabel lblDev8_anode;
     public javax.swing.JLabel lblDev8_tubu;
+    private javax.swing.JLabel lblFan;
     private javax.swing.JLabel lblMainSwitch;
     private javax.swing.JLabel lblManagementTitle;
+    public javax.swing.JLabel lblThreadExecutor;
+    public javax.swing.JLabel lblThreadPoller;
     public javax.swing.JLabel lblThreadRState;
     public javax.swing.JLabel lblThreadWState;
+    private javax.swing.JLabel lblVibration;
     private javax.swing.JLabel lbl_Dev1_Anode_RelState;
     private javax.swing.JLabel lbl_Dev1_Tubu_RelState;
     private javax.swing.JLabel lbl_Dev2_Anode_RelState;

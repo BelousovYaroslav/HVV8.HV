@@ -53,7 +53,7 @@ public class AMSConstants {
     
     public static final int REL1 = 9;
     public static final int REL2 = 10;
-    
+    public static final int REL3 = 11;
     
     //ADC SPECIALS
     public static final int ADC_UNKNOWN = -1;
@@ -64,7 +64,7 @@ public class AMSConstants {
     
     public static final int ADC_VALIDATION_EDGE_VOLTAGE_LOW = 350;
     public static final int ADC_VALIDATION_EDGE_VOLTAGE_HIGH = 3500;
-    public static final int ADC_VALIDATION_EDGE_CURRENT_LOW = 300;
+    public static final int ADC_VALIDATION_EDGE_CURRENT_LOW = 250;
     public static final int ADC_VALIDATION_EDGE_CURRENT_HIGH = 3000;
     
     
@@ -74,7 +74,7 @@ public class AMSConstants {
     public static final double DAC_CHANNEL_REG_ON_DAC_VOLT = 6.0;
     public static final double DAC_CHANNEL_REG_OFF_DAC_VOLT = 3.0;
     public static final double DAC_MIN_OUTPUT_VOLTAGE_WARN = 3.0;
-    public static final double DAC_MIN_OUTPUT_VOLTAGE = 2.5;
+    public static final double DAC_MIN_OUTPUT_VOLTAGE = 2.8;
     
     private AMSConstants() {
         T_DEVICES = new LinkedList();
@@ -86,15 +86,5 @@ public class AMSConstants {
         T_DEVICES.add( T_DEVICE6);
         T_DEVICES.add( T_DEVICE7);
         T_DEVICES.add( T_DEVICE8);
-        
-        CHANNELS = new LinkedList();
-        CHANNELS.add( CHANNEL1);
-        CHANNELS.add( CHANNEL2);
-        CHANNELS.add( CHANNEL3);
-        CHANNELS.add( CHANNEL4);
-        CHANNELS.add( CHANNEL5);
-        CHANNELS.add( CHANNEL6);
-        CHANNELS.add( CHANNEL7);
-        CHANNELS.add( CHANNEL8);
     }
 }

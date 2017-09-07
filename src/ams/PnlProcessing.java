@@ -25,22 +25,25 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
     
     Timer tmrRefresh;
     
-    public double m_dblDacAno1_0;
-    public double m_dblDacAno1_1;
-    /*public double m_dblDacAno1_2;
-    public double m_dblDacAno1_3;
-    public double m_dblDacAno2_0;
-    public double m_dblDacAno2_1;
-    public double m_dblDacAno2_2;
-    public double m_dblDacAno2_3;
-    public double m_dblDacTub1_0;
-    public double m_dblDacTub1_1;
-    public double m_dblDacTub1_2;
-    public double m_dblDacTub1_3;    
-    public double m_dblDacTub2_0;
-    public double m_dblDacTub2_1;
-    public double m_dblDacTub2_2;
-    public double m_dblDacTub2_3;*/
+    public double m_dblDac1Ch0;
+    public double m_dblDac1Ch1;
+    public double m_dblDac1Ch2;
+    public double m_dblDac1Ch3;
+    
+    public double m_dblDac2Ch0;
+    public double m_dblDac2Ch1;
+    public double m_dblDac2Ch2;
+    public double m_dblDac2Ch3;
+    
+    public double m_dblDac3Ch0;
+    public double m_dblDac3Ch1;
+    public double m_dblDac3Ch2;
+    public double m_dblDac3Ch3;
+    
+    public double m_dblDac4Ch0;
+    public double m_dblDac4Ch1;
+    public double m_dblDac4Ch2;
+    public double m_dblDac4Ch3;
     
             
     private final AMSApp theApp;
@@ -74,69 +77,69 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
         jButton16 = new javax.swing.JButton();
         jTextField16 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        edtDesiredVoltageAno1_0 = new javax.swing.JTextField();
-        btnApplyAno1_0 = new javax.swing.JButton();
+        edtDesiredVoltageDac03_0 = new javax.swing.JTextField();
+        btnApplyDac03_0 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        edtDesiredVoltageAno1_1 = new javax.swing.JTextField();
-        btnApplyAno1_1 = new javax.swing.JButton();
+        edtDesiredVoltageDac03_1 = new javax.swing.JTextField();
+        btnApplyDac03_1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        edtDesiredVoltageAno1_2 = new javax.swing.JTextField();
-        btnApplyAno1_2 = new javax.swing.JButton();
+        edtDesiredVoltageDac03_2 = new javax.swing.JTextField();
+        btnApplyDac03_2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        edtDesiredVoltageAno1_3 = new javax.swing.JTextField();
-        btnApplyAno1_3 = new javax.swing.JButton();
-        edtDesiredVoltageAno2_3 = new javax.swing.JTextField();
-        btnApplyAno2_3 = new javax.swing.JButton();
+        edtDesiredVoltageDac03_3 = new javax.swing.JTextField();
+        btnApplyDac03_3 = new javax.swing.JButton();
+        edtDesiredVoltageDac04_3 = new javax.swing.JTextField();
+        btnApplyDac04_3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        edtDesiredVoltageAno2_0 = new javax.swing.JTextField();
-        btnApplyAno2_1 = new javax.swing.JButton();
-        edtDesiredVoltageAno2_1 = new javax.swing.JTextField();
+        edtDesiredVoltageDac04_0 = new javax.swing.JTextField();
+        btnApplyDac04_1 = new javax.swing.JButton();
+        edtDesiredVoltageDac04_1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnApplyAno2_0 = new javax.swing.JButton();
+        btnApplyDac04_0 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        btnApplyAno2_2 = new javax.swing.JButton();
-        edtDesiredVoltageAno2_2 = new javax.swing.JTextField();
+        btnApplyDac04_2 = new javax.swing.JButton();
+        edtDesiredVoltageDac04_2 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        edtDesiredVoltageTub1_2 = new javax.swing.JTextField();
+        edtDesiredVoltageDac13_2 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        btnApplyTub1_2 = new javax.swing.JButton();
-        edtDesiredVoltageTub1_3 = new javax.swing.JTextField();
+        btnApplyDac13_2 = new javax.swing.JButton();
+        edtDesiredVoltageDac13_3 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        edtDesiredVoltageTub1_1 = new javax.swing.JTextField();
-        btnApplyTub1_0 = new javax.swing.JButton();
+        edtDesiredVoltageDac13_1 = new javax.swing.JTextField();
+        btnApplyDac13_0 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        btnApplyTub1_3 = new javax.swing.JButton();
-        btnApplyTub1_1 = new javax.swing.JButton();
-        edtDesiredVoltageTub1_0 = new javax.swing.JTextField();
-        edtDesiredVoltageTub2_2 = new javax.swing.JTextField();
+        btnApplyDac13_3 = new javax.swing.JButton();
+        btnApplyDac13_1 = new javax.swing.JButton();
+        edtDesiredVoltageDac13_0 = new javax.swing.JTextField();
+        edtDesiredVoltageDac14_2 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        btnApplyTub2_2 = new javax.swing.JButton();
-        edtDesiredVoltageTub2_3 = new javax.swing.JTextField();
+        btnApplyDac14_2 = new javax.swing.JButton();
+        edtDesiredVoltageDac14_3 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        edtDesiredVoltageTub2_1 = new javax.swing.JTextField();
-        btnApplyTub2_0 = new javax.swing.JButton();
+        edtDesiredVoltageDac14_1 = new javax.swing.JTextField();
+        btnApplyDac14_0 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
-        btnApplyTub2_3 = new javax.swing.JButton();
-        btnApplyTub2_1 = new javax.swing.JButton();
-        edtDesiredVoltageTub2_0 = new javax.swing.JTextField();
-        lblCurrentOutputAno1_0 = new javax.swing.JLabel();
-        lblCurrentOutputAno1_1 = new javax.swing.JLabel();
-        lblCurrentOutputAno1_2 = new javax.swing.JLabel();
-        lblCurrentOutputAno1_3 = new javax.swing.JLabel();
-        lblCurrentOutputAno2_0 = new javax.swing.JLabel();
-        lblCurrentOutputAno2_1 = new javax.swing.JLabel();
-        lblCurrentOutputAno2_2 = new javax.swing.JLabel();
-        lblCurrentOutputAno2_3 = new javax.swing.JLabel();
-        lblCurrentOutputTub1_0 = new javax.swing.JLabel();
-        lblCurrentOutputTub1_1 = new javax.swing.JLabel();
-        lblCurrentOutputTub1_2 = new javax.swing.JLabel();
-        lblCurrentOutputTub1_3 = new javax.swing.JLabel();
-        lblCurrentOutputTub2_0 = new javax.swing.JLabel();
-        lblCurrentOutputTub2_1 = new javax.swing.JLabel();
-        lblCurrentOutputTub2_2 = new javax.swing.JLabel();
-        lblCurrentOutputTub2_3 = new javax.swing.JLabel();
+        btnApplyDac14_3 = new javax.swing.JButton();
+        btnApplyDac14_1 = new javax.swing.JButton();
+        edtDesiredVoltageDac14_0 = new javax.swing.JTextField();
+        lblCurrentOutputDac03_0 = new javax.swing.JLabel();
+        lblCurrentOutputDac03_1 = new javax.swing.JLabel();
+        lblCurrentOutputDac03_2 = new javax.swing.JLabel();
+        lblCurrentOutputDac03_3 = new javax.swing.JLabel();
+        lblCurrentOutputDac04_0 = new javax.swing.JLabel();
+        lblCurrentOutputDac04_1 = new javax.swing.JLabel();
+        lblCurrentOutputDac04_2 = new javax.swing.JLabel();
+        lblCurrentOutputDac04_3 = new javax.swing.JLabel();
+        lblCurrentOutputDac13_0 = new javax.swing.JLabel();
+        lblCurrentOutputDac13_1 = new javax.swing.JLabel();
+        lblCurrentOutputDac13_2 = new javax.swing.JLabel();
+        lblCurrentOutputDac13_3 = new javax.swing.JLabel();
+        lblCurrentOutputDac14_0 = new javax.swing.JLabel();
+        lblCurrentOutputDac14_1 = new javax.swing.JLabel();
+        lblCurrentOutputDac14_2 = new javax.swing.JLabel();
+        lblCurrentOutputDac14_3 = new javax.swing.JLabel();
 
         jTextField13.setText("-");
 
@@ -162,479 +165,420 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
 
         jTextField16.setText("-");
 
+        setLayout(null);
+
         jLabel1.setText("U на DAC_03.0:");
+        add(jLabel1);
+        jLabel1.setBounds(10, 400, 120, 30);
 
-        edtDesiredVoltageAno1_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno1_0.setText("-");
+        edtDesiredVoltageDac03_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac03_0.setText("-");
+        add(edtDesiredVoltageDac03_0);
+        edtDesiredVoltageDac03_0.setBounds(200, 400, 70, 30);
 
-        btnApplyAno1_0.setText("Применить");
-        btnApplyAno1_0.addActionListener(new java.awt.event.ActionListener() {
+        btnApplyDac03_0.setText("Применить");
+        btnApplyDac03_0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApplyAno1_0ActionPerformed(evt);
+                btnApplyDac03_0ActionPerformed(evt);
             }
         });
+        add(btnApplyDac03_0);
+        btnApplyDac03_0.setBounds(280, 400, 84, 30);
 
         jLabel2.setText("U на DAC_03.1:");
+        add(jLabel2);
+        jLabel2.setBounds(10, 430, 120, 30);
 
-        edtDesiredVoltageAno1_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno1_1.setText("-");
+        edtDesiredVoltageDac03_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac03_1.setText("-");
+        add(edtDesiredVoltageDac03_1);
+        edtDesiredVoltageDac03_1.setBounds(200, 430, 70, 30);
 
-        btnApplyAno1_1.setText("Применить");
-        btnApplyAno1_1.addActionListener(new java.awt.event.ActionListener() {
+        btnApplyDac03_1.setText("Применить");
+        btnApplyDac03_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApplyAno1_1ActionPerformed(evt);
+                btnApplyDac03_1ActionPerformed(evt);
             }
         });
+        add(btnApplyDac03_1);
+        btnApplyDac03_1.setBounds(280, 430, 84, 30);
 
         jLabel3.setText("U на DAC_03.2:");
         jLabel3.setToolTipText("");
+        add(jLabel3);
+        jLabel3.setBounds(10, 460, 120, 30);
 
-        edtDesiredVoltageAno1_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno1_2.setText("-");
+        edtDesiredVoltageDac03_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac03_2.setText("-");
+        add(edtDesiredVoltageDac03_2);
+        edtDesiredVoltageDac03_2.setBounds(200, 460, 70, 30);
 
-        btnApplyAno1_2.setText("Применить");
-        btnApplyAno1_2.setEnabled(false);
+        btnApplyDac03_2.setText("Применить");
+        btnApplyDac03_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac03_2ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac03_2);
+        btnApplyDac03_2.setBounds(280, 460, 84, 30);
 
         jLabel4.setText("U на DAC_03.3:");
+        add(jLabel4);
+        jLabel4.setBounds(10, 490, 120, 30);
 
-        edtDesiredVoltageAno1_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno1_3.setText("-");
+        edtDesiredVoltageDac03_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac03_3.setText("-");
+        add(edtDesiredVoltageDac03_3);
+        edtDesiredVoltageDac03_3.setBounds(200, 490, 70, 30);
 
-        btnApplyAno1_3.setText("Применить");
-        btnApplyAno1_3.setEnabled(false);
+        btnApplyDac03_3.setText("Применить");
+        btnApplyDac03_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac03_3ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac03_3);
+        btnApplyDac03_3.setBounds(280, 490, 84, 30);
 
-        edtDesiredVoltageAno2_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno2_3.setText("-");
+        edtDesiredVoltageDac04_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac04_3.setText("-");
+        add(edtDesiredVoltageDac04_3);
+        edtDesiredVoltageDac04_3.setBounds(200, 360, 70, 30);
 
-        btnApplyAno2_3.setText("Применить");
-        btnApplyAno2_3.setEnabled(false);
+        btnApplyDac04_3.setText("Применить");
+        btnApplyDac04_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac04_3ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac04_3);
+        btnApplyDac04_3.setBounds(280, 360, 84, 30);
 
         jLabel5.setText("U на DAC_04.0:");
+        add(jLabel5);
+        jLabel5.setBounds(10, 270, 120, 30);
+        jLabel5.getAccessibleContext().setAccessibleName("Напряжение на DAC04.0");
 
-        edtDesiredVoltageAno2_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno2_0.setText("-");
+        edtDesiredVoltageDac04_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac04_0.setText("-");
+        add(edtDesiredVoltageDac04_0);
+        edtDesiredVoltageDac04_0.setBounds(200, 270, 70, 30);
 
-        btnApplyAno2_1.setText("Применить");
-        btnApplyAno2_1.setEnabled(false);
+        btnApplyDac04_1.setText("Применить");
+        btnApplyDac04_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac04_1ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac04_1);
+        btnApplyDac04_1.setBounds(280, 300, 84, 30);
 
-        edtDesiredVoltageAno2_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno2_1.setText("-");
+        edtDesiredVoltageDac04_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac04_1.setText("-");
+        add(edtDesiredVoltageDac04_1);
+        edtDesiredVoltageDac04_1.setBounds(200, 300, 70, 30);
 
         jLabel6.setText("U на DAC_04.1:");
+        add(jLabel6);
+        jLabel6.setBounds(10, 300, 120, 30);
 
-        btnApplyAno2_0.setText("Применить");
-        btnApplyAno2_0.setEnabled(false);
+        btnApplyDac04_0.setText("Применить");
+        btnApplyDac04_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac04_0ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac04_0);
+        btnApplyDac04_0.setBounds(280, 270, 84, 30);
 
         jLabel7.setText("U на DAC_04.3:");
+        add(jLabel7);
+        jLabel7.setBounds(10, 360, 120, 30);
 
-        btnApplyAno2_2.setText("Применить");
-        btnApplyAno2_2.setEnabled(false);
+        btnApplyDac04_2.setText("Применить");
+        btnApplyDac04_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac04_2ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac04_2);
+        btnApplyDac04_2.setBounds(280, 330, 84, 30);
 
-        edtDesiredVoltageAno2_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageAno2_2.setText("-");
+        edtDesiredVoltageDac04_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac04_2.setText("-");
+        add(edtDesiredVoltageDac04_2);
+        edtDesiredVoltageDac04_2.setBounds(200, 330, 70, 30);
 
         jLabel8.setText("U на DAC_04.2:");
         jLabel8.setToolTipText("");
+        add(jLabel8);
+        jLabel8.setBounds(10, 330, 120, 30);
 
-        edtDesiredVoltageTub1_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub1_2.setText("-");
+        edtDesiredVoltageDac13_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac13_2.setText("-");
+        add(edtDesiredVoltageDac13_2);
+        edtDesiredVoltageDac13_2.setBounds(200, 200, 70, 30);
 
         jLabel9.setText("U на DAC_13.2:");
+        add(jLabel9);
+        jLabel9.setBounds(10, 200, 120, 30);
 
         jLabel10.setText("U на DAC_13.3:");
+        add(jLabel10);
+        jLabel10.setBounds(10, 230, 120, 30);
 
-        btnApplyTub1_2.setText("Применить");
-        btnApplyTub1_2.setEnabled(false);
+        btnApplyDac13_2.setText("Применить");
+        btnApplyDac13_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac13_2ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac13_2);
+        btnApplyDac13_2.setBounds(280, 200, 84, 30);
 
-        edtDesiredVoltageTub1_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub1_3.setText("-");
+        edtDesiredVoltageDac13_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac13_3.setText("-");
+        add(edtDesiredVoltageDac13_3);
+        edtDesiredVoltageDac13_3.setBounds(200, 230, 70, 30);
 
         jLabel11.setText("U на DAC_13.1:");
+        add(jLabel11);
+        jLabel11.setBounds(10, 170, 120, 30);
 
-        edtDesiredVoltageTub1_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub1_1.setText("-");
+        edtDesiredVoltageDac13_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac13_1.setText("-");
+        add(edtDesiredVoltageDac13_1);
+        edtDesiredVoltageDac13_1.setBounds(200, 170, 70, 30);
 
-        btnApplyTub1_0.setText("Применить");
-        btnApplyTub1_0.setEnabled(false);
+        btnApplyDac13_0.setText("Применить");
+        btnApplyDac13_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac13_0ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac13_0);
+        btnApplyDac13_0.setBounds(280, 140, 84, 30);
 
         jLabel12.setText("U на DAC_13.0:");
+        add(jLabel12);
+        jLabel12.setBounds(10, 140, 120, 30);
 
-        btnApplyTub1_3.setText("Применить");
-        btnApplyTub1_3.setEnabled(false);
+        btnApplyDac13_3.setText("Применить");
+        btnApplyDac13_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac13_3ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac13_3);
+        btnApplyDac13_3.setBounds(280, 230, 84, 30);
 
-        btnApplyTub1_1.setText("Применить");
-        btnApplyTub1_1.setEnabled(false);
+        btnApplyDac13_1.setText("Применить");
+        btnApplyDac13_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac13_1ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac13_1);
+        btnApplyDac13_1.setBounds(280, 170, 84, 30);
 
-        edtDesiredVoltageTub1_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub1_0.setText("-");
+        edtDesiredVoltageDac13_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac13_0.setText("-");
+        add(edtDesiredVoltageDac13_0);
+        edtDesiredVoltageDac13_0.setBounds(200, 140, 70, 30);
 
-        edtDesiredVoltageTub2_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub2_2.setText("-");
+        edtDesiredVoltageDac14_2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac14_2.setText("-");
+        add(edtDesiredVoltageDac14_2);
+        edtDesiredVoltageDac14_2.setBounds(200, 70, 70, 30);
 
         jLabel17.setText("U на DAC_14.2:");
+        add(jLabel17);
+        jLabel17.setBounds(10, 70, 120, 30);
 
         jLabel18.setText("U на DAC_14.3:");
+        add(jLabel18);
+        jLabel18.setBounds(10, 100, 120, 30);
 
-        btnApplyTub2_2.setText("Применить");
-        btnApplyTub2_2.setEnabled(false);
+        btnApplyDac14_2.setText("Применить");
+        btnApplyDac14_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac14_2ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac14_2);
+        btnApplyDac14_2.setBounds(280, 70, 84, 30);
 
-        edtDesiredVoltageTub2_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub2_3.setText("-");
+        edtDesiredVoltageDac14_3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac14_3.setText("-");
+        add(edtDesiredVoltageDac14_3);
+        edtDesiredVoltageDac14_3.setBounds(200, 100, 70, 30);
 
         jLabel19.setText("U на DAC_14.1:");
+        add(jLabel19);
+        jLabel19.setBounds(10, 40, 120, 30);
 
-        edtDesiredVoltageTub2_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub2_1.setText("-");
+        edtDesiredVoltageDac14_1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac14_1.setText("-");
+        add(edtDesiredVoltageDac14_1);
+        edtDesiredVoltageDac14_1.setBounds(200, 40, 70, 30);
 
-        btnApplyTub2_0.setText("Применить");
-        btnApplyTub2_0.setEnabled(false);
+        btnApplyDac14_0.setText("Применить");
+        btnApplyDac14_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac14_0ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac14_0);
+        btnApplyDac14_0.setBounds(280, 10, 84, 30);
 
         jLabel20.setText("U на DAC_14.0:");
+        add(jLabel20);
+        jLabel20.setBounds(10, 10, 120, 30);
 
-        btnApplyTub2_3.setText("Применить");
-        btnApplyTub2_3.setEnabled(false);
+        btnApplyDac14_3.setText("Применить");
+        btnApplyDac14_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac14_3ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac14_3);
+        btnApplyDac14_3.setBounds(280, 100, 84, 30);
 
-        btnApplyTub2_1.setText("Применить");
-        btnApplyTub2_1.setEnabled(false);
+        btnApplyDac14_1.setText("Применить");
+        btnApplyDac14_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyDac14_1ActionPerformed(evt);
+            }
+        });
+        add(btnApplyDac14_1);
+        btnApplyDac14_1.setBounds(280, 40, 84, 30);
 
-        edtDesiredVoltageTub2_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        edtDesiredVoltageTub2_0.setText("-");
+        edtDesiredVoltageDac14_0.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        edtDesiredVoltageDac14_0.setText("-");
+        add(edtDesiredVoltageDac14_0);
+        edtDesiredVoltageDac14_0.setBounds(200, 10, 70, 30);
 
-        lblCurrentOutputAno1_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno1_0.setText("-");
-        lblCurrentOutputAno1_0.setBorder(null);
+        lblCurrentOutputDac03_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac03_0.setText("-");
+        lblCurrentOutputDac03_0.setBorder(null);
+        add(lblCurrentOutputDac03_0);
+        lblCurrentOutputDac03_0.setBounds(140, 400, 50, 30);
 
-        lblCurrentOutputAno1_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno1_1.setText("-");
-        lblCurrentOutputAno1_1.setBorder(null);
+        lblCurrentOutputDac03_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac03_1.setText("-");
+        lblCurrentOutputDac03_1.setBorder(null);
+        add(lblCurrentOutputDac03_1);
+        lblCurrentOutputDac03_1.setBounds(140, 430, 50, 30);
 
-        lblCurrentOutputAno1_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno1_2.setText("-");
-        lblCurrentOutputAno1_2.setBorder(null);
+        lblCurrentOutputDac03_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac03_2.setText("-");
+        lblCurrentOutputDac03_2.setBorder(null);
+        add(lblCurrentOutputDac03_2);
+        lblCurrentOutputDac03_2.setBounds(140, 460, 50, 30);
 
-        lblCurrentOutputAno1_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno1_3.setText("-");
-        lblCurrentOutputAno1_3.setBorder(null);
+        lblCurrentOutputDac03_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac03_3.setText("-");
+        lblCurrentOutputDac03_3.setBorder(null);
+        add(lblCurrentOutputDac03_3);
+        lblCurrentOutputDac03_3.setBounds(140, 490, 50, 30);
 
-        lblCurrentOutputAno2_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno2_0.setText("-");
-        lblCurrentOutputAno2_0.setBorder(null);
+        lblCurrentOutputDac04_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac04_0.setText("-");
+        lblCurrentOutputDac04_0.setBorder(null);
+        add(lblCurrentOutputDac04_0);
+        lblCurrentOutputDac04_0.setBounds(140, 270, 50, 30);
 
-        lblCurrentOutputAno2_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno2_1.setText("-");
-        lblCurrentOutputAno2_1.setBorder(null);
+        lblCurrentOutputDac04_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac04_1.setText("-");
+        lblCurrentOutputDac04_1.setBorder(null);
+        add(lblCurrentOutputDac04_1);
+        lblCurrentOutputDac04_1.setBounds(140, 300, 50, 30);
 
-        lblCurrentOutputAno2_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno2_2.setText("-");
-        lblCurrentOutputAno2_2.setBorder(null);
+        lblCurrentOutputDac04_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac04_2.setText("-");
+        lblCurrentOutputDac04_2.setBorder(null);
+        add(lblCurrentOutputDac04_2);
+        lblCurrentOutputDac04_2.setBounds(140, 330, 50, 30);
 
-        lblCurrentOutputAno2_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputAno2_3.setText("-");
-        lblCurrentOutputAno2_3.setBorder(null);
+        lblCurrentOutputDac04_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac04_3.setText("-");
+        lblCurrentOutputDac04_3.setBorder(null);
+        add(lblCurrentOutputDac04_3);
+        lblCurrentOutputDac04_3.setBounds(140, 360, 50, 30);
 
-        lblCurrentOutputTub1_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub1_0.setText("-");
-        lblCurrentOutputTub1_0.setBorder(null);
+        lblCurrentOutputDac13_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac13_0.setText("-");
+        lblCurrentOutputDac13_0.setBorder(null);
+        add(lblCurrentOutputDac13_0);
+        lblCurrentOutputDac13_0.setBounds(140, 140, 50, 30);
 
-        lblCurrentOutputTub1_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub1_1.setText("-");
-        lblCurrentOutputTub1_1.setBorder(null);
+        lblCurrentOutputDac13_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac13_1.setText("-");
+        lblCurrentOutputDac13_1.setBorder(null);
+        add(lblCurrentOutputDac13_1);
+        lblCurrentOutputDac13_1.setBounds(140, 170, 50, 30);
 
-        lblCurrentOutputTub1_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub1_2.setText("-");
-        lblCurrentOutputTub1_2.setBorder(null);
+        lblCurrentOutputDac13_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac13_2.setText("-");
+        lblCurrentOutputDac13_2.setBorder(null);
+        add(lblCurrentOutputDac13_2);
+        lblCurrentOutputDac13_2.setBounds(140, 200, 50, 30);
 
-        lblCurrentOutputTub1_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub1_3.setText("-");
-        lblCurrentOutputTub1_3.setBorder(null);
+        lblCurrentOutputDac13_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac13_3.setText("-");
+        lblCurrentOutputDac13_3.setBorder(null);
+        add(lblCurrentOutputDac13_3);
+        lblCurrentOutputDac13_3.setBounds(140, 230, 50, 30);
 
-        lblCurrentOutputTub2_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub2_0.setText("-");
-        lblCurrentOutputTub2_0.setBorder(null);
+        lblCurrentOutputDac14_0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac14_0.setText("-");
+        lblCurrentOutputDac14_0.setBorder(null);
+        add(lblCurrentOutputDac14_0);
+        lblCurrentOutputDac14_0.setBounds(140, 10, 50, 30);
 
-        lblCurrentOutputTub2_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub2_1.setText("-");
-        lblCurrentOutputTub2_1.setBorder(null);
+        lblCurrentOutputDac14_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac14_1.setText("-");
+        lblCurrentOutputDac14_1.setBorder(null);
+        add(lblCurrentOutputDac14_1);
+        lblCurrentOutputDac14_1.setBounds(140, 40, 50, 30);
 
-        lblCurrentOutputTub2_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub2_2.setText("-");
-        lblCurrentOutputTub2_2.setBorder(null);
+        lblCurrentOutputDac14_2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac14_2.setText("-");
+        lblCurrentOutputDac14_2.setBorder(null);
+        add(lblCurrentOutputDac14_2);
+        lblCurrentOutputDac14_2.setBounds(140, 70, 50, 30);
 
-        lblCurrentOutputTub2_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCurrentOutputTub2_3.setText("-");
-        lblCurrentOutputTub2_3.setBorder(null);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCurrentOutputAno1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtDesiredVoltageAno1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnApplyAno1_0))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCurrentOutputAno1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(edtDesiredVoltageAno1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnApplyAno1_1)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageAno1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno1_2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageAno1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno1_3)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageAno2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno2_0))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageAno2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno2_1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageAno2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno2_2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputAno2_3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageAno2_3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyAno2_3)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageTub1_0, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub1_0))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageTub1_1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub1_1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageTub1_2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub1_2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageTub1_3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub1_3)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageTub2_0, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub2_0))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageTub2_1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub2_1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(edtDesiredVoltageTub2_2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub2_2))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblCurrentOutputTub2_3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(edtDesiredVoltageTub2_3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnApplyTub2_3))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(edtDesiredVoltageAno1_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno1_0)
-                    .addComponent(lblCurrentOutputAno1_0))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(edtDesiredVoltageAno1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno1_1)
-                    .addComponent(lblCurrentOutputAno1_1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(edtDesiredVoltageAno1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno1_2)
-                    .addComponent(lblCurrentOutputAno1_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(edtDesiredVoltageAno1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno1_3)
-                    .addComponent(lblCurrentOutputAno1_3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(edtDesiredVoltageAno2_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno2_0)
-                    .addComponent(lblCurrentOutputAno2_0))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(edtDesiredVoltageAno2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno2_1)
-                    .addComponent(lblCurrentOutputAno2_1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(edtDesiredVoltageAno2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno2_2)
-                    .addComponent(lblCurrentOutputAno2_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(edtDesiredVoltageAno2_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyAno2_3)
-                    .addComponent(lblCurrentOutputAno2_3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(edtDesiredVoltageTub1_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub1_0)
-                    .addComponent(lblCurrentOutputTub1_0))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(edtDesiredVoltageTub1_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub1_1)
-                    .addComponent(lblCurrentOutputTub1_1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(edtDesiredVoltageTub1_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub1_2)
-                    .addComponent(lblCurrentOutputTub1_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(edtDesiredVoltageTub1_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub1_3)
-                    .addComponent(lblCurrentOutputTub1_3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(edtDesiredVoltageTub2_0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub2_0)
-                    .addComponent(lblCurrentOutputTub2_0))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(edtDesiredVoltageTub2_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub2_1)
-                    .addComponent(lblCurrentOutputTub2_1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(edtDesiredVoltageTub2_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub2_2)
-                    .addComponent(lblCurrentOutputTub2_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(edtDesiredVoltageTub2_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApplyTub2_3)
-                    .addComponent(lblCurrentOutputTub2_3))
-                .addContainerGap(161, Short.MAX_VALUE))
-        );
-
-        jLabel5.getAccessibleContext().setAccessibleName("Напряжение на DAC04.0");
+        lblCurrentOutputDac14_3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCurrentOutputDac14_3.setText("-");
+        lblCurrentOutputDac14_3.setBorder(null);
+        add(lblCurrentOutputDac14_3);
+        lblCurrentOutputDac14_3.setBounds(140, 100, 50, 30);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnApplyAno1_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyAno1_0ActionPerformed
+    private void btnApplyDac03_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac03_0ActionPerformed
         Double dblVal;
         try {
-            dblVal = new Double( edtDesiredVoltageAno1_0.getText());
+            dblVal = new Double( edtDesiredVoltageDac03_0.getText());
         }
         catch ( NumberFormatException e) {
             logger.warn( "Caught NumberFormatException!", e);
-            edtDesiredVoltageAno1_0.setText( lblCurrentOutputAno1_0.getText());
+            edtDesiredVoltageDac03_0.setText( lblCurrentOutputDac03_0.getText());
             return;
         }
         
         if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
             dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
-            edtDesiredVoltageAno1_0.setText( "" + String.format( "%.3f", dblVal));
+            edtDesiredVoltageDac03_0.setText( "" + String.format( "%.3f", dblVal));
         }
         if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
             dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
-            edtDesiredVoltageAno1_0.setText( "" + String.format( "%.3f", dblVal));
+            edtDesiredVoltageDac03_0.setText( "" + String.format( "%.3f", dblVal));
         }
         
-        m_dblDacAno1_0 = dblVal;
+        m_dblDac1Ch0 = dblVal;
         if( theApp.GetMainSwitcher() == true) {
             try {
-                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( 0, dblVal);
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL1, dblVal);
             }
             catch( Exception e) {
                 logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
@@ -643,26 +587,26 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
         else {
             logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
         }        
-    }//GEN-LAST:event_btnApplyAno1_0ActionPerformed
+    }//GEN-LAST:event_btnApplyDac03_0ActionPerformed
 
-    private void btnApplyAno1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyAno1_1ActionPerformed
+    private void btnApplyDac03_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac03_1ActionPerformed
         
         
-        Double dblVal = new Double( edtDesiredVoltageAno1_1.getText());
+        Double dblVal = new Double( edtDesiredVoltageDac03_1.getText());
         if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
             dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
-            edtDesiredVoltageAno1_1.setText( "" + String.format( "%.3f", dblVal));
+            edtDesiredVoltageDac03_1.setText( "" + String.format( "%.3f", dblVal));
         }
         if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
             dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
-            edtDesiredVoltageAno1_1.setText( "" + String.format( "%.3f", dblVal));
+            edtDesiredVoltageDac03_1.setText( "" + String.format( "%.3f", dblVal));
         }
         
-        m_dblDacAno1_1 = dblVal;
+        m_dblDac1Ch1 = dblVal;
         
         if( theApp.GetMainSwitcher() == true) {
             try {
-                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( 1, dblVal);
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL2, dblVal);
             }
             catch( Exception e) {
                 logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
@@ -671,42 +615,406 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
         else {
             logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
         }
-    }//GEN-LAST:event_btnApplyAno1_1ActionPerformed
+    }//GEN-LAST:event_btnApplyDac03_1ActionPerformed
+
+    private void btnApplyDac03_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac03_2ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac03_2.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac03_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac03_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac1Ch2 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL3, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac03_2ActionPerformed
+
+    private void btnApplyDac03_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac03_3ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac03_3.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac03_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac03_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac1Ch3 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC1).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL4, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac03_3ActionPerformed
+
+    private void btnApplyDac04_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac04_0ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac04_0.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac2Ch0 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC2).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL1, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac04_0ActionPerformed
+
+    private void btnApplyDac04_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac04_1ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac04_1.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac2Ch1 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC2).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL2, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac04_1ActionPerformed
+
+    private void btnApplyDac04_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac04_2ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac04_2.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac2Ch2 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC2).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL3, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac04_2ActionPerformed
+
+    private void btnApplyDac04_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac04_3ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac04_3.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac04_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac2Ch3 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC2).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL4, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac04_3ActionPerformed
+
+    private void btnApplyDac13_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac13_0ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac13_0.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac3Ch0 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC3).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL1, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac13_0ActionPerformed
+
+    private void btnApplyDac13_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac13_1ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac13_1.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac3Ch1 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC3).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL2, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac13_1ActionPerformed
+
+    private void btnApplyDac13_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac13_2ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac13_2.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac3Ch2 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC3).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL3, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac13_2ActionPerformed
+
+    private void btnApplyDac13_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac13_3ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac13_3.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac13_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac3Ch3 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC3).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL4, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac13_3ActionPerformed
+
+    private void btnApplyDac14_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac14_0ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac14_0.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_0.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac4Ch0 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC4).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL1, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac14_0ActionPerformed
+
+    private void btnApplyDac14_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac14_1ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac14_1.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_1.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac4Ch1 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC4).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL2, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac14_1ActionPerformed
+
+    private void btnApplyDac14_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac14_2ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac14_2.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_2.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac4Ch2 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC4).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL3, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac14_2ActionPerformed
+
+    private void btnApplyDac14_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyDac14_3ActionPerformed
+        Double dblVal = new Double( edtDesiredVoltageDac14_3.getText());
+        if( dblVal >= AMSConstants.DAC_MAX_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MAX_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        if( dblVal <= AMSConstants.DAC_MIN_OUTPUT_VOLTAGE) {
+            dblVal = AMSConstants.DAC_MIN_OUTPUT_VOLTAGE;
+            edtDesiredVoltageDac14_3.setText( "" + String.format( "%.3f", dblVal));
+        }
+        
+        m_dblDac4Ch3 = dblVal;
+        
+        if( theApp.GetMainSwitcher() == true) {
+            try {
+                theApp.m_devicesSet.GetDAC( AMSConstants.DAC4).QueueSetChannelOutputValueCommand( AMSConstants.CHANNEL4, dblVal);
+            }
+            catch( Exception e) {
+                logger.error( "При выставке напряжения на ЦАП, произошла исключительная ситуация", e);
+            }
+        }
+        else {
+            logger.warn( "btnApplyAno1_1ActionPerformed: применение введённого напряжения заблокировано рубильником!");
+        }
+    }//GEN-LAST:event_btnApplyDac14_3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApplyAno1_0;
-    private javax.swing.JButton btnApplyAno1_1;
-    private javax.swing.JButton btnApplyAno1_2;
-    private javax.swing.JButton btnApplyAno1_3;
-    private javax.swing.JButton btnApplyAno2_0;
-    private javax.swing.JButton btnApplyAno2_1;
-    private javax.swing.JButton btnApplyAno2_2;
-    private javax.swing.JButton btnApplyAno2_3;
-    private javax.swing.JButton btnApplyTub1_0;
-    private javax.swing.JButton btnApplyTub1_1;
-    private javax.swing.JButton btnApplyTub1_2;
-    private javax.swing.JButton btnApplyTub1_3;
-    private javax.swing.JButton btnApplyTub2_0;
-    private javax.swing.JButton btnApplyTub2_1;
-    private javax.swing.JButton btnApplyTub2_2;
-    private javax.swing.JButton btnApplyTub2_3;
-    private javax.swing.JTextField edtDesiredVoltageAno1_0;
-    private javax.swing.JTextField edtDesiredVoltageAno1_1;
-    private javax.swing.JTextField edtDesiredVoltageAno1_2;
-    private javax.swing.JTextField edtDesiredVoltageAno1_3;
-    private javax.swing.JTextField edtDesiredVoltageAno2_0;
-    private javax.swing.JTextField edtDesiredVoltageAno2_1;
-    private javax.swing.JTextField edtDesiredVoltageAno2_2;
-    private javax.swing.JTextField edtDesiredVoltageAno2_3;
-    private javax.swing.JTextField edtDesiredVoltageTub1_0;
-    private javax.swing.JTextField edtDesiredVoltageTub1_1;
-    private javax.swing.JTextField edtDesiredVoltageTub1_2;
-    private javax.swing.JTextField edtDesiredVoltageTub1_3;
-    private javax.swing.JTextField edtDesiredVoltageTub2_0;
-    private javax.swing.JTextField edtDesiredVoltageTub2_1;
-    private javax.swing.JTextField edtDesiredVoltageTub2_2;
-    private javax.swing.JTextField edtDesiredVoltageTub2_3;
+    private javax.swing.JButton btnApplyDac03_0;
+    private javax.swing.JButton btnApplyDac03_1;
+    private javax.swing.JButton btnApplyDac03_2;
+    private javax.swing.JButton btnApplyDac03_3;
+    private javax.swing.JButton btnApplyDac04_0;
+    private javax.swing.JButton btnApplyDac04_1;
+    private javax.swing.JButton btnApplyDac04_2;
+    private javax.swing.JButton btnApplyDac04_3;
+    private javax.swing.JButton btnApplyDac13_0;
+    private javax.swing.JButton btnApplyDac13_1;
+    private javax.swing.JButton btnApplyDac13_2;
+    private javax.swing.JButton btnApplyDac13_3;
+    private javax.swing.JButton btnApplyDac14_0;
+    private javax.swing.JButton btnApplyDac14_1;
+    private javax.swing.JButton btnApplyDac14_2;
+    private javax.swing.JButton btnApplyDac14_3;
+    private javax.swing.JTextField edtDesiredVoltageDac03_0;
+    private javax.swing.JTextField edtDesiredVoltageDac03_1;
+    private javax.swing.JTextField edtDesiredVoltageDac03_2;
+    private javax.swing.JTextField edtDesiredVoltageDac03_3;
+    private javax.swing.JTextField edtDesiredVoltageDac04_0;
+    private javax.swing.JTextField edtDesiredVoltageDac04_1;
+    private javax.swing.JTextField edtDesiredVoltageDac04_2;
+    private javax.swing.JTextField edtDesiredVoltageDac04_3;
+    private javax.swing.JTextField edtDesiredVoltageDac13_0;
+    private javax.swing.JTextField edtDesiredVoltageDac13_1;
+    private javax.swing.JTextField edtDesiredVoltageDac13_2;
+    private javax.swing.JTextField edtDesiredVoltageDac13_3;
+    private javax.swing.JTextField edtDesiredVoltageDac14_0;
+    private javax.swing.JTextField edtDesiredVoltageDac14_1;
+    private javax.swing.JTextField edtDesiredVoltageDac14_2;
+    private javax.swing.JTextField edtDesiredVoltageDac14_3;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
@@ -735,22 +1043,22 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
-    private javax.swing.JLabel lblCurrentOutputAno1_0;
-    private javax.swing.JLabel lblCurrentOutputAno1_1;
-    private javax.swing.JLabel lblCurrentOutputAno1_2;
-    private javax.swing.JLabel lblCurrentOutputAno1_3;
-    private javax.swing.JLabel lblCurrentOutputAno2_0;
-    private javax.swing.JLabel lblCurrentOutputAno2_1;
-    private javax.swing.JLabel lblCurrentOutputAno2_2;
-    private javax.swing.JLabel lblCurrentOutputAno2_3;
-    private javax.swing.JLabel lblCurrentOutputTub1_0;
-    private javax.swing.JLabel lblCurrentOutputTub1_1;
-    private javax.swing.JLabel lblCurrentOutputTub1_2;
-    private javax.swing.JLabel lblCurrentOutputTub1_3;
-    private javax.swing.JLabel lblCurrentOutputTub2_0;
-    private javax.swing.JLabel lblCurrentOutputTub2_1;
-    private javax.swing.JLabel lblCurrentOutputTub2_2;
-    private javax.swing.JLabel lblCurrentOutputTub2_3;
+    private javax.swing.JLabel lblCurrentOutputDac03_0;
+    private javax.swing.JLabel lblCurrentOutputDac03_1;
+    private javax.swing.JLabel lblCurrentOutputDac03_2;
+    private javax.swing.JLabel lblCurrentOutputDac03_3;
+    private javax.swing.JLabel lblCurrentOutputDac04_0;
+    private javax.swing.JLabel lblCurrentOutputDac04_1;
+    private javax.swing.JLabel lblCurrentOutputDac04_2;
+    private javax.swing.JLabel lblCurrentOutputDac04_3;
+    private javax.swing.JLabel lblCurrentOutputDac13_0;
+    private javax.swing.JLabel lblCurrentOutputDac13_1;
+    private javax.swing.JLabel lblCurrentOutputDac13_2;
+    private javax.swing.JLabel lblCurrentOutputDac13_3;
+    private javax.swing.JLabel lblCurrentOutputDac14_0;
+    private javax.swing.JLabel lblCurrentOutputDac14_1;
+    private javax.swing.JLabel lblCurrentOutputDac14_2;
+    private javax.swing.JLabel lblCurrentOutputDac14_3;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -759,39 +1067,34 @@ public class PnlProcessing extends javax.swing.JPanel implements ActionListener 
         Adam4024 dac = theApp.GetDevManager_0_a().GetDAC();
         int nDacChannel = 0;
         
-        JLabel lblDac = lblCurrentOutputAno1_0;        
+        JLabel lblDac = lblCurrentOutputDac03_0;        
         AMSDeviceManager mngr = theApp.GetDevManager_0_a();
         
-        for( int i=0; i < 2; i++) {
+        for( int i=0; i < 17; i++) {
             switch( i) {
-                case  0: mngr = theApp.GetDevManager_0_a(); lblDac = lblCurrentOutputAno1_0; break;
-                case  1: mngr = theApp.GetDevManager_0_t(); lblDac = lblCurrentOutputAno1_1; break;
-                
-                /*
-                case  0: mngr = theApp.GetDevManager_0_a(); lblDac = lblCurrentOutputAno1_0; break;
-                case  1: mngr = theApp.GetDevManager_0_t(); lblDac = lblCurrentOutputTub1_0; break;
+                case  0: mngr = theApp.GetDevManager_0_a(); lblDac = lblCurrentOutputDac14_0; break;
+                case  1: mngr = theApp.GetDevManager_0_t(); lblDac = lblCurrentOutputDac14_1; break;
                     
-                case  3: mngr = theApp.GetDevManager_1_a(); lblDac = lblCurrentOutputAno1_1; break;
-                case  4: mngr = theApp.GetDevManager_1_t(); lblDac = lblCurrentOutputTub1_1; break;
+                case  3: mngr = theApp.GetDevManager_1_a(); lblDac = lblCurrentOutputDac14_2; break;
+                case  4: mngr = theApp.GetDevManager_1_t(); lblDac = lblCurrentOutputDac14_3; break;
                     
-                case  5: mngr = theApp.GetDevManager_2_a(); lblDac = lblCurrentOutputAno1_2; break;
-                case  6: mngr = theApp.GetDevManager_2_t(); lblDac = lblCurrentOutputTub1_2; break;
+                case  5: mngr = theApp.GetDevManager_2_a(); lblDac = lblCurrentOutputDac13_0; break;
+                case  6: mngr = theApp.GetDevManager_2_t(); lblDac = lblCurrentOutputDac13_1; break;
                     
-                case  7: mngr = theApp.GetDevManager_3_a(); lblDac = lblCurrentOutputAno1_3; break;
-                case  8: mngr = theApp.GetDevManager_3_t(); lblDac = lblCurrentOutputTub1_3; break;
+                case  7: mngr = theApp.GetDevManager_3_a(); lblDac = lblCurrentOutputDac13_2; break;
+                case  8: mngr = theApp.GetDevManager_3_t(); lblDac = lblCurrentOutputDac13_3; break;
                     
-                case  9: mngr = theApp.GetDevManager_4_a(); lblDac = lblCurrentOutputAno2_0; break;
-                case 10: mngr = theApp.GetDevManager_4_t(); lblDac = lblCurrentOutputTub2_0; break;
+                case  9: mngr = theApp.GetDevManager_4_a(); lblDac = lblCurrentOutputDac04_0; break;
+                case 10: mngr = theApp.GetDevManager_4_t(); lblDac = lblCurrentOutputDac04_1; break;
                     
-                case 11: mngr = theApp.GetDevManager_5_a(); lblDac = lblCurrentOutputAno2_1; break;
-                case 12: mngr = theApp.GetDevManager_5_t(); lblDac = lblCurrentOutputTub2_1; break;
+                case 11: mngr = theApp.GetDevManager_5_a(); lblDac = lblCurrentOutputDac04_2; break;
+                case 12: mngr = theApp.GetDevManager_5_t(); lblDac = lblCurrentOutputDac04_3; break;
                     
-                case 13: mngr = theApp.GetDevManager_6_a(); lblDac = lblCurrentOutputAno2_2; break;
-                case 14: mngr = theApp.GetDevManager_6_t(); lblDac = lblCurrentOutputTub2_2; break;
+                case 13: mngr = theApp.GetDevManager_6_a(); lblDac = lblCurrentOutputDac03_0; break;
+                case 14: mngr = theApp.GetDevManager_6_t(); lblDac = lblCurrentOutputDac03_1; break;
                     
-                case 15: mngr = theApp.GetDevManager_7_a(); lblDac = lblCurrentOutputAno2_3; break;
-                case 16: mngr = theApp.GetDevManager_7_t(); lblDac = lblCurrentOutputTub2_3; break;
-                */
+                case 15: mngr = theApp.GetDevManager_7_a(); lblDac = lblCurrentOutputDac03_2; break;
+                case 16: mngr = theApp.GetDevManager_7_t(); lblDac = lblCurrentOutputDac03_3; break;
             }
         
             if( mngr != null) {

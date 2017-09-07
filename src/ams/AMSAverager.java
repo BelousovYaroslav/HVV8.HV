@@ -30,7 +30,7 @@ public class AMSAverager {
      */
     public void SetStatistic( int nStatistic) {
         
-        logger.debug( "SetStatistic: in with " + nStatistic);
+        logger.trace( "SetStatistic: in with " + nStatistic);
         
         if( nStatistic > 0 && nStatistic < 100) {
             
@@ -143,12 +143,12 @@ public class AMSAverager {
             String strArray = "";
             for( int i = 0; i < dblN; strArray += "" + m_arrData[i++] + ", ");
         
-            logger.debug( "m_arrData: " + strArray);
-            logger.debug( "m_nStatistic: " + m_nStatistic);
-            logger.debug( "m_bOverRound: " + m_bOverRound);
-            logger.debug( "dblN: " + dblN);
-            logger.debug( "dblSumm: " + dblSumm);
-            logger.debug( "dblRetVal: " + dblRetVal);
+            logger.trace( "m_arrData: " + strArray);
+            logger.trace( "m_nStatistic: " + m_nStatistic);
+            logger.trace( "m_bOverRound: " + m_bOverRound);
+            logger.trace( "dblN: " + dblN);
+            logger.trace( "dblSumm: " + dblSumm);
+            logger.trace( "dblRetVal: " + dblRetVal);
         }
         
         return dblRetVal;
