@@ -1813,6 +1813,7 @@ public class MainFrame3 extends javax.swing.JFrame {
 
         btnGroupLogLevel.add(btnLogDebug);
         btnLogDebug.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
+        btnLogDebug.setSelected(true);
         btnLogDebug.setText("D");
         btnLogDebug.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLogDebug.setMaximumSize(new java.awt.Dimension(35, 35));
