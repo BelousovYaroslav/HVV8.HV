@@ -73,6 +73,7 @@ public class MainFrame3 extends javax.swing.JFrame {
         
         initComponents();
         
+        setTitle( "Система управления и поддержания разряда кольцевого лазерного резонатора.   2018.02.27 11:40   НПО Алькор-Лаборатории, ФЛАВТ 2018");
         spinning = new SpinnerThread( theApp, 1, this);
         spinnerAccelerator = new SpinFasterThread( spinning);
         
@@ -478,8 +479,8 @@ public class MainFrame3 extends javax.swing.JFrame {
         btnOuterCurrentSpinDown = new javax.swing.JButton();
         btn05mA = new javax.swing.JButton();
         btn10mA = new javax.swing.JButton();
-        btn15mA = new javax.swing.JButton();
-        btn20mA = new javax.swing.JButton();
+        btn11mA = new javax.swing.JButton();
+        btn12mA = new javax.swing.JButton();
         btn25mA = new javax.swing.JButton();
         btn30mA = new javax.swing.JButton();
         btnSwitchOff = new javax.swing.JButton();
@@ -613,6 +614,8 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblDev1_tubu = new javax.swing.JLabel();
         lblThreadRState = new javax.swing.JLabel();
         lblThreadWState = new javax.swing.JLabel();
+        btn04mA = new javax.swing.JButton();
+        btn06mA = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -626,7 +629,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblFan = new javax.swing.JLabel();
         btnFanOff = new javax.swing.JButton();
         lblThreadExecutor = new javax.swing.JLabel();
-        btn04mA = new javax.swing.JButton();
         btnLogDebug = new javax.swing.JToggleButton();
         btnLogTrace = new javax.swing.JToggleButton();
         btnLogWarn = new javax.swing.JToggleButton();
@@ -747,7 +749,7 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn05mA);
-        btn05mA.setBounds(330, 90, 90, 25);
+        btn05mA.setBounds(280, 120, 90, 25);
 
         btn10mA.setText("1000 мкА");
         btn10mA.addActionListener(new java.awt.event.ActionListener() {
@@ -756,25 +758,25 @@ public class MainFrame3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn10mA);
-        btn10mA.setBounds(425, 90, 90, 25);
+        btn10mA.setBounds(430, 120, 90, 25);
 
-        btn15mA.setText("1500 мкА");
-        btn15mA.addActionListener(new java.awt.event.ActionListener() {
+        btn11mA.setText("1100 мкА");
+        btn11mA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn15mAActionPerformed(evt);
+                btn11mAActionPerformed(evt);
             }
         });
-        getContentPane().add(btn15mA);
-        btn15mA.setBounds(535, 90, 90, 25);
+        getContentPane().add(btn11mA);
+        btn11mA.setBounds(480, 90, 90, 25);
 
-        btn20mA.setText("2000 мкА");
-        btn20mA.addActionListener(new java.awt.event.ActionListener() {
+        btn12mA.setText("1200 мкА");
+        btn12mA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn20mAActionPerformed(evt);
+                btn12mAActionPerformed(evt);
             }
         });
-        getContentPane().add(btn20mA);
-        btn20mA.setBounds(645, 90, 90, 25);
+        getContentPane().add(btn12mA);
+        btn12mA.setBounds(530, 120, 90, 25);
 
         btn25mA.setText("2500 мкА");
         btn25mA.addActionListener(new java.awt.event.ActionListener() {
@@ -1720,6 +1722,24 @@ public class MainFrame3 extends javax.swing.JFrame {
         getContentPane().add(lblThreadWState);
         lblThreadWState.setBounds(50, 950, 40, 30);
 
+        btn04mA.setText("400 мкА");
+        btn04mA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn04mAActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn04mA);
+        btn04mA.setBounds(240, 90, 80, 25);
+
+        btn06mA.setText("600 мкА");
+        btn06mA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn06mAActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn06mA);
+        btn06mA.setBounds(340, 90, 90, 25);
+
         jLabel1.setFont(new java.awt.Font("Cantarell", 0, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("8");
@@ -1801,15 +1821,6 @@ public class MainFrame3 extends javax.swing.JFrame {
         lblThreadExecutor.setText("E");
         getContentPane().add(lblThreadExecutor);
         lblThreadExecutor.setBounds(130, 950, 40, 30);
-
-        btn04mA.setText("400 мкА");
-        btn04mA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn04mAActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn04mA);
-        btn04mA.setBounds(240, 90, 80, 25);
 
         btnGroupLogLevel.add(btnLogDebug);
         btnLogDebug.setFont(new java.awt.Font("Courier 10 Pitch", 0, 10)); // NOI18N
@@ -1941,19 +1952,19 @@ public class MainFrame3 extends javax.swing.JFrame {
      * Нажатие кнопки "1500мкА"
      * @param evt 
      */
-    private void btn15mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn15mAActionPerformed
-        theApp.SetOuterCurrent( 1500);
+    private void btn11mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn11mAActionPerformed
+        theApp.SetOuterCurrent( 1100);
         refreshControlsState();
-    }//GEN-LAST:event_btn15mAActionPerformed
+    }//GEN-LAST:event_btn11mAActionPerformed
 
     /**
      * Нажатие кнопки "2000мкА"
      * @param evt 
      */
-    private void btn20mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn20mAActionPerformed
-        theApp.SetOuterCurrent( 2000);
+    private void btn12mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn12mAActionPerformed
+        theApp.SetOuterCurrent( 1200);
         refreshControlsState();
-    }//GEN-LAST:event_btn20mAActionPerformed
+    }//GEN-LAST:event_btn12mAActionPerformed
 
     /**
      * Нажатие кнопки "2500мкА"
@@ -2453,8 +2464,8 @@ public class MainFrame3 extends javax.swing.JFrame {
 
         btn05mA.setEnabled( !btnToggleBlockScreen.isSelected());
         btn10mA.setEnabled( !btnToggleBlockScreen.isSelected());
-        btn15mA.setEnabled( !btnToggleBlockScreen.isSelected());
-        btn20mA.setEnabled( !btnToggleBlockScreen.isSelected());
+        btn11mA.setEnabled( !btnToggleBlockScreen.isSelected());
+        btn12mA.setEnabled( !btnToggleBlockScreen.isSelected());
         btn25mA.setEnabled( !btnToggleBlockScreen.isSelected());
         btn30mA.setEnabled( !btnToggleBlockScreen.isSelected());
 
@@ -3166,6 +3177,11 @@ public class MainFrame3 extends javax.swing.JFrame {
         Logger.getRootLogger().setLevel( Level.FATAL);
     }//GEN-LAST:event_btnLogFatalActionPerformed
 
+    private void btn06mAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn06mAActionPerformed
+        theApp.SetOuterCurrent( 600);
+        refreshControlsState();
+    }//GEN-LAST:event_btn06mAActionPerformed
+
     public void TurnFanOff() {
         //выключаем канал реле для вентилятора
         try {
@@ -3229,9 +3245,10 @@ public class MainFrame3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn04mA;
     private javax.swing.JButton btn05mA;
+    private javax.swing.JButton btn06mA;
     private javax.swing.JButton btn10mA;
-    private javax.swing.JButton btn15mA;
-    private javax.swing.JButton btn20mA;
+    private javax.swing.JButton btn11mA;
+    private javax.swing.JButton btn12mA;
     private javax.swing.JButton btn25mA;
     private javax.swing.JButton btn30mA;
     private javax.swing.JButton btnAllAnodesOff;
